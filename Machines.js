@@ -35,6 +35,10 @@ const machines =
         },
         // Tier 5
         {
+            name: "Manufacturer",
+            powerConsumption_mw: 55
+        },
+        {
             name: "Packager",
             powerConsumption_mw: 10
         },
@@ -43,4 +47,13 @@ const machines =
             name: "Blender",
             powerConsumption_mw: 75
         },
+        // Tier 8
+        {
+            name: "Particle Accelerator (Plutonium Pellet)",
+            powerConsumption_mw: 500
+        },
+        {
+            name: "Particle Accelerator (Nuclear Pasta)",
+            powerConsumption_mw: 1000
+        }
     ]

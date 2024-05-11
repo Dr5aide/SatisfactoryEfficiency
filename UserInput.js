@@ -1,5 +1,8 @@
+const resourceValueMultiplier = 1000;
+//
 var energySourceIndex = 0;
 var unlockedTiers = 8;
+var resourceValues = getDefaultResourceValue();
 // ToDo
 var upcyclingPolymerResin = false;
 var upcyclingHeavyOilResidue = false;
@@ -38,4 +41,29 @@ function saveAdvancedSettings() //write the adavanced Settings html fields into 
         dynamicInput.birdSpecies == "Turkey";
     }
     dynamicInput.feedFactor = document.getElementById("feedFactor").value;
+}
+
+function getDefaultResourceValue() {
+    var resourceValueArray = [];
+    for (let i = 0; i < materials.length; i++) {
+        if (materials[i].isResource) {
+            iValue = resourceValueMultiplier * materials[i].relativeNeed / materials[i].relativeNodeAmount;
+            resourceValueArray.push(
+                {
+                    name: materials[i].name,
+                    materialIndex: i,
+                    value: iValue
+                }
+            );
+        }
+    }
+    return resourceValueArray;
+}
+
+function getResourceValueForResourceIndex(wantedMaterialIndex) {
+    for (let i = 0; i < resourceValues.length; i++) {
+        if (resourceValues[i].materialIndex == wantedMaterialIndex) {
+            return resourceValues[i].value;
+        }
+    }
 }

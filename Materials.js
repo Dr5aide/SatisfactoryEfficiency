@@ -9,76 +9,116 @@ function getIDbyMaterialName(nameToLookUp) {
 }
 const materials =
     [
+        // Just for additional information
+        {
+            name: "MJ of Power",
+            isResource: true,
+            megawattSecondToExtract: 0,
+            //Dummy
+            relativeNodeAmount: 1,
+            relativeNeed: 0
+        },
         // Ores
         {
             name: "Limestone",
             isResource: true,
-            megawattSecondToExtract: 5
+            megawattSecondToExtract: 5,
+            //Impure: 12 Normal: 47 Pure: 27
+            relativeNodeAmount: 107,
+            // based on https://www.reddit.com/r/SatisfactoryGame/comments/poc898/alternate_recipes_indepth_analysis_an_objective/
+            relativeNeed: 0.3
         },
         {
-            name: "IronOre",
+            name: "Iron Ore",
             isResource: true,
-            megawattSecondToExtract: 5
+            megawattSecondToExtract: 5,
+            //Impure: 33 Normal: 41 Pure: 46
+            relativeNodeAmount: 149.5,
+            relativeNeed: 1
         },
         {
-            name: "CopperOre",
+            name: "Copper Ore",
             isResource: true,
-            megawattSecondToExtract: 5
+            megawattSecondToExtract: 5,
+            //Impure: 9 Normal: 28 Pure: 12
+            relativeNodeAmount: 56.5,
+            relativeNeed: 1
         },
         {
-            name: "CateriumOre",
+            name: "Caterium Ore",
             isResource: true,
-            megawattSecondToExtract: 5
+            megawattSecondToExtract: 5,
+            //Impure: 0 Normal: 8 Pure: 8
+            relativeNodeAmount: 24,
+            relativeNeed: 0.2
         },
         {
             name: "Coal",
             isResource: true,
-            megawattSecondToExtract: 5
+            megawattSecondToExtract: 5,
+            //Impure: 6 Normal: 29 Pure: 15
+            relativeNodeAmount: 62,
+            relativeNeed: 0.5
         },
         {
-            name: "RawQuartz",
+            name: "Raw Quartz",
             isResource: true,
-            megawattSecondToExtract: 5
+            megawattSecondToExtract: 5,
+            //Impure: 0 Normal: 11 Pure: 5
+            relativeNodeAmount: 21,
+            relativeNeed: 0.08
         },
         {
             name: "Sulfur",
             isResource: true,
-            megawattSecondToExtract: 5
+            megawattSecondToExtract: 5,
+            //Impure: 1 Normal: 7 Pure: 3
+            relativeNodeAmount: 14.5,
+            relativeNeed: 0.04
         },
         {
             name: "Bauxite",
             isResource: true,
-            megawattSecondToExtract: 5
+            megawattSecondToExtract: 5,
+            //Impure: 5 Normal: 6 Pure: 6
+            relativeNodeAmount: 20.5,
+            relativeNeed: 0.15
         },
         {
-            name: "S.A.M.Ore",
+            name: "S.A.M. Ore",
             isResource: true,
-            megawattSecondToExtract: 5
+            megawattSecondToExtract: 5,
+            //Impure: 8 Normal: 5 Pure: 0
+            relativeNodeAmount: 9,
+            relativeNeed: 0.01
         },
         {
             name: "Uranium",
             isResource: true,
-            megawattSecondToExtract: 5
+            megawattSecondToExtract: 5,
+            //Impure: 1 Normal: 3 Pure: 0
+            relativeNodeAmount: 3.5,
+            relativeNeed: 0.03
         },
         // Ingots
         {
-            name: "IronIngot",
+            name: "Iron Ingot",
             isResource: false
         },
         {
-            name: "CopperIngot",
+            name: "Copper Ingot",
             isResource: false
         },
         {
-            name: "CateriumIngot",
+            name: "Caterium Ingot",
             isResource: false
         },
         {
-            name: "SteelIngot",
+            name: "Steel Ingot",
             isResource: false
         },
         {
-            name: "AluminumIngot",
+            name: "Aluminum Ingot",
             isResource: false
         },
         // Minerals
@@ -87,7 +127,7 @@ const materials =
             isResource: false
         },
         {
-            name: "QuartzCrystal",
+            name: "Quartz Crystal",
             isResource: false
         },
         {
@@ -95,39 +135,45 @@ const materials =
             isResource: false
         },
         {
-            name: "CopperPowder",
+            name: "Copper Powder",
             isResource: false
         },
         {
-            name: "PolymerResin",
+            name: "Polymer Resin",
             isResource: false
         },
         {
-            name: "PetroleumCoke",
+            name: "Petroleum Coke",
             isResource: false
         },
         {
-            name: "AluminumScrap",
+            name: "Aluminum Scrap",
             isResource: false
         },
         //
         {
-            name: "CompactedCoal",
+            name: "Compacted Coal",
             isResource: false
         },
         // Fluids
         {
             name: "Water",
             isResource: true,
-            megawattSecondToExtract: 10
+            megawattSecondToExtract: 10,
+            //Dummy
+            relativeNodeAmount: 1000,
+            relativeNeed: 1
         },
         {
-            name: "CrudeOil",
+            name: "Crude Oil",
             isResource: true,
-            megawattSecondToExtract: 20
+            megawattSecondToExtract: 20,
+            //Impure: 10 Normal: 12 Pure: 8
+            relativeNodeAmount: 33,
+            relativeNeed: 0.5
         },
         {
-            name: "HeavyOilResidue",
+            name: "Heavy Oil Residue",
             isResource: false
         },
         {
@@ -135,7 +181,7 @@ const materials =
             isResource: false
         },
         {
-            name: "LiquidBiofuel",
+            name: "Liquid Biofuel",
             isResource: false
         },
         {
@@ -143,31 +189,34 @@ const materials =
             isResource: false
         },
         {
-            name: "AluminaSolution",
+            name: "Alumina Solution",
             isResource: false
         },
         {
-            name: "SulfuricAcid",
+            name: "Sulfuric Acid",
             isResource: false
         },
         {
-            name: "HeavyOilResidue",
+            name: "Heavy Oil Residue",
             isResource: false
         },
         {
-            name: "NitricAcid",
+            name: "Nitric Acid",
             isResource: false
         },
         // Gases
         {
-            name: "NitrogenGas",
+            name: "Nitrogen Gas",
             isResource: true,
-            // normal = 7 nodes -> 150 / (7*60)
-            megawattSecondToExtract: 0.357
+            // megawatt (150) / output (1)
+            megawattSecondToExtract: 150,
+            //Impure: 2 Normal: 7 Pure: 36
+            relativeNodeAmount: 80,
+            relativeNeed: 0.15
         },
         // Standard Parts
         {
-            name: "IronRod",
+            name: "Iron Rod",
             isResource: false
         },
         {
@@ -175,47 +224,47 @@ const materials =
             isResource: false
         },
         {
-            name: "IronPlate",
+            name: "Iron Plate",
             isResource: false
         },
         {
-            name: "ReinforcedIronPlate",
+            name: "Reinforced Iron Plate",
             isResource: false
         },
         {
-            name: "CopperSheet",
+            name: "Copper Sheet",
             isResource: false
         },
         {
-            name: "AlcladAluminumSheet",
+            name: "Alclad Aluminum Sheet",
             isResource: false
         },
         {
-            name: "AluminumCasing",
+            name: "Aluminum Casing",
             isResource: false
         },
         {
-            name: "SteelPipe",
+            name: "Steel Pipe",
             isResource: false
         },
         {
-            name: "SteelBeam",
+            name: "Steel Beam",
             isResource: false
         },
         {
-            name: "EncasedIndustrialBeam",
+            name: "Encased Industrial Beam",
             isResource: false
         },
         {
-            name: "ModularFrame",
+            name: "Modular Frame",
             isResource: false
         },
         {
-            name: "HeavyModularFrame",
+            name: "Heavy Modular Frame",
             isResource: false
         },
         {
-            name: "FusedModularFrame",
+            name: "Fused Modular Frame",
             isResource: false
         },
         {
@@ -248,15 +297,15 @@ const materials =
             isResource: false
         },
         {
-            name: "HeatSink",
+            name: "Heat Sink",
             isResource: false
         },
         {
-            name: "CoolingSystem",
+            name: "Cooling System",
             isResource: false
         },
         {
-            name: "TurboMotor",
+            name: "Turbo Motor",
             isResource: false
         },
         //Electronics
@@ -273,15 +322,15 @@ const materials =
             isResource: false
         },
         {
-            name: "CircuitBoard",
+            name: "Circuit Board",
             isResource: false
         },
         {
-            name: "AILimiter",
+            name: "AI Limiter",
             isResource: false
         },
         {
-            name: "HighSpeedConnector",
+            name: "High-Speed Connector",
             isResource: false
         },
         // Communications
@@ -290,134 +339,146 @@ const materials =
             isResource: false
         },
         {
-            name: "SuperComputer",
+            name: "Supercomputer",
             isResource: false
         },
         {
-            name: "QuantumComputer",
+            name: "Quantum Computer",
             isResource: false
         },
         {
-            name: "RadioControlUnit",
+            name: "Radio Control Unit",
             isResource: false
         },
         {
-            name: "CrystalOscillator",
+            name: "Crystal Oscillator",
             isResource: false
         },
         {
-            name: "SuperpositionOscillator",
+            name: "Superposition Oscillator",
             isResource: false
         },
         // Containers
         {
-            name: "EmptyCanister",
+            name: "Empty Canister",
             isResource: false
         },
         {
-            name: "EmptyFluidTank",
+            name: "Empty Fluid Tank",
             isResource: false
         },
         {
-            name: "PressureConversionCube",
+            name: "Pressure Conversion Cube",
             isResource: false
         },
         {
-            name: "PackagedWater",
+            name: "Packaged Water",
             isResource: false
         },
         {
-            name: "PackagedAluminaSolution",
+            name: "Packaged Alumina Solution",
             isResource: false
         },
         {
-            name: "PackagedSulfuricAcid",
+            name: "Packaged Sulfuric Acid",
             isResource: false
         },
         {
-            name: "PackagedNitricAcid",
+            name: "Packaged Nitric Acid",
             isResource: false
         },
         {
-            name: "PackagedNitrogenGas",
+            name: "Packaged Nitrogen Gas",
             isResource: false
         },
         //Fuels
         {
             name: "Leaves",
             isResource: true,
-            megawattSecondToExtract: 0
+            megawattSecondToExtract: 0,
+            //Dummy
+            relativeNodeAmount: 10,
+            relativeNeed: 1
         },
         {
             name: "Mycelia",
             isResource: true,
-            megawattSecondToExtract: 0
+            megawattSecondToExtract: 0,
+            //Dummy
+            relativeNodeAmount: 1,
+            relativeNeed: 1
         },
         {
-            name: "FlowerPetals",
+            name: "Flower Petals",
             isResource: true,
-            megawattSecondToExtract: 0
+            megawattSecondToExtract: 0,
+            //Dummy
+            relativeNodeAmount: 10,
+            relativeNeed: 1
         },
         {
             name: "Wood",
             isResource: true,
-            megawattSecondToExtract: 0
+            megawattSecondToExtract: 0,
+            //Dummy
+            relativeNodeAmount: 10,
+            relativeNeed: 1
         },
         {
             name: "Biomass",
             isResource: false
         },
         {
-            name: "CompactedCoal",
+            name: "Compacted Coal",
             isResource: false
         },
         {
-            name: "PackagedOil",
+            name: "Packaged Oil",
             isResource: false
         },
         {
-            name: "PackagedHeavyOilResidue",
+            name: "Packaged Heavy Oil Residue",
             isResource: false
         },
         {
-            name: "SolidBiofuel",
+            name: "Solid Biofuel",
             isResource: false
         },
         {
-            name: "PackagedFuel",
+            name: "Packaged Fuel",
             isResource: false
         },
         {
-            name: "PackagedLiquidBiofuel",
+            name: "Packaged Liquid Biofuel",
             isResource: false
         },
         {
-            name: "PackagedTurbofuel",
+            name: "Packaged Turbofuel",
             isResource: false
         },
         {
-            name: "UraniumFuelRod",
+            name: "Uranium Fuel Rod",
             isResource: false
         },
         {
-            name: "PlutoniumFuelRod",
+            name: "Plutonium Fuel Rod",
             isResource: false
         },
         // Consumed
         {
-            name: "BlackPowder",
+            name: "Black Powder",
             isResource: false
         },
         {
-            name: "SmokelessPowder",
+            name: "Smokeless Powder",
             isResource: false
         },
         {
-            name: "GasFilter",
+            name: "Gas Filter",
             isResource: false
         },
         {
-            name: "ColorCartridge",
+            name: "Color Cartridge",
             isResource: false
         },
         {
@@ -425,36 +486,36 @@ const materials =
             isResource: false
         },
         {
-            name: "IodineInfusedFilter",
+            name: "Iodine Infused Filter",
             isResource: false
         },
         // Ammos
         {
-            name: "IronRebar",
+            name: "Iron Rebar",
             isResource: false
         },
         {
-            name: "StunRebar",
+            name: "Stun Rebar",
             isResource: false
         },
         {
-            name: "ShatterRebar",
+            name: "Shatter Rebar",
             isResource: false
         },
         {
-            name: "ExplosiveRebar",
+            name: "Explosive Rebar",
             isResource: false
         },
         {
-            name: "RifleAmmo",
+            name: "Rifle Ammo",
             isResource: false
         },
         {
-            name: "HomingRifleAmmo",
+            name: "Homing Rifle Ammo",
             isResource: false
         },
         {
-            name: "TurboRifleAmmo",
+            name: "Turbo Rifle Ammo",
             isResource: false
         },
         {
@@ -462,19 +523,118 @@ const materials =
             isResource: false
         },
         {
-            name: "GasNobelisk",
+            name: "Gas Nobelisk",
             isResource: false
         },
         {
-            name: "PulseNobelisk",
+            name: "Pulse Nobelisk",
             isResource: false
         },
         {
-            name: "ClusterNobelisk",
+            name: "Cluster Nobelisk",
             isResource: false
         },
         {
-            name: "NukeNobelisk",
+            name: "Nuke Nobelisk",
+            isResource: false
+        },
+        // Nuclear
+        {
+            name: "Electromagnetic Control Rod",
+            isResource: false
+        },
+        {
+            name: "Encased Uranium Cell",
+            isResource: false
+        },
+        {
+            name: "Non-fissile Uranium",
+            isResource: false
+        },
+        {
+            name: "Plutonium Pellet",
+            isResource: false
+        },
+        {
+            name: "Encased Plutonium Cell",
+            isResource: false
+        },
+        // Waste
+        {
+            name: "Uranium Waste",
+            isResource: false
+        },
+        {
+            name: "Plutonium Waste",
+            isResource: false
+        },
+        // Special
+        {
+            name: "Blue Power Slug",
+            isResource: true,
+            megawattSecondToExtract: 0,
+            //Dummy
+            relativeNodeAmount: 1,
+            relativeNeed: 1
+        },
+        {
+            name: "Yellow Power Slug",
+            isResource: true,
+            megawattSecondToExtract: 0,
+            //Dummy
+            relativeNodeAmount: 0.5,
+            relativeNeed: 1
+        },
+        {
+            name: "Purple Power Slug",
+            isResource: true,
+            megawattSecondToExtract: 0,
+            //Dummy
+            relativeNodeAmount: 0.2,
+            relativeNeed: 1
+        },
+        {
+            name: "Power Shard",
+            isResource: false
+        },
+        {
+            name: "FICSIT Coupon",
+            isResource: false
+        },
+        {
+            name: "Smart Plating",
+            isResource: false
+        },
+        {
+            name: "Versatile Framework",
+            isResource: false
+        },
+        {
+            name: "Automated Wiring",
+            isResource: false
+        },
+        {
+            name: "Modular Engine",
+            isResource: false
+        },
+        {
+            name: "Adaptive Control Unit",
+            isResource: false
+        },
+        {
+            name: "Assembly Director System",
+            isResource: false
+        },
+        {
+            name: "Magnetic Field Generator",
+            isResource: false
+        },
+        {
+            name: "Thermal Propulsion Rocket",
+            isResource: false
+        },
+        {
+            name: "Nuclear Pasta",
             isResource: false
         }
     ]
