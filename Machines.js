@@ -10,7 +10,7 @@ function getIDbyMachineName(nameToLookUp) {
 
 const machines =
     [
-        // Tier 1
+        // Tier 0
         {
             name: "Smeltery",
             powerConsumption_mw: 4
@@ -20,8 +20,8 @@ const machines =
             powerConsumption_mw: 4
         },
         {
-            name: "Foundry",
-            powerConsumption_mw: 16
+            name: "Biomass Burner",
+            powerConsumption_mw: 0
         },
         // Tier 2
         {
@@ -30,8 +30,12 @@ const machines =
         },
         // Tier 3
         {
-            name: "Refinery",
-            powerConsumption_mw: 30
+            name: "Foundry",
+            powerConsumption_mw: 16
+        },
+        {
+            name: "Coal Generator",
+            powerConsumption_mw: 0
         },
         // Tier 5
         {
@@ -39,8 +43,17 @@ const machines =
             powerConsumption_mw: 55
         },
         {
+            name: "Refinery",
+            powerConsumption_mw: 30
+        },
+        {
             name: "Packager",
             powerConsumption_mw: 10
+        },
+        // Tier 6
+        {
+            name: "Fuel Generator",
+            powerConsumption_mw: 0
         },
         // Tier 7
         {
@@ -55,5 +68,9 @@ const machines =
         {
             name: "Particle Accelerator (Nuclear Pasta)",
             powerConsumption_mw: 1000
+        },
+        {
+            name: "Nuclear Power Plant",
+            powerConsumption_mw: 0
         }
     ]

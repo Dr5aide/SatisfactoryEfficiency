@@ -1,7 +1,7 @@
 // Refering to Update 8
 function getIDbyMaterialName(nameToLookUp) {
     for (let i = 0; i < materials.length; i++) {
-        if (materials[i].name == nameToLookUp) {
+        if (materials[i].name === nameToLookUp) {
             return i;
         }
     }
@@ -142,6 +142,7 @@ const materials =
             name: "Polymer Resin",
             isResource: false
         },
+
         {
             name: "Petroleum Coke",
             isResource: false
@@ -150,7 +151,6 @@ const materials =
             name: "Aluminum Scrap",
             isResource: false
         },
-        //
         {
             name: "Compacted Coal",
             isResource: false

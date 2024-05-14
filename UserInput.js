@@ -1,8 +1,16 @@
 const resourceValueMultiplier = 1000;
-//
-var energySourceIndex = 0;
+//##
 var unlockedTiers = 8;
+const selectableUnlockedTiers = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+//
+var selectedEnergySourceIndex = 2;
+var selectableEnergySourceIndeces = getSelectableEnergySourceIndeces();
+//
 var resourceValues = getDefaultResourceValue();
+//
+var selectedDefaultRecipeEfficiency = 1;
+const selectableDefaultRecipeEfficiencies = [1, 2, 3];
+//##
 // ToDo
 var upcyclingPolymerResin = false;
 var upcyclingHeavyOilResidue = false;

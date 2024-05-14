@@ -57,7 +57,7 @@ const recipes =
 			tier: 5,
 			output: [getIDbyMaterialName("Copper Ingot")],
 			outputQuantity: [13],
-			input: [getIDbyMaterialName("Iron Ore"), getIDbyMaterialName("Water")],
+			input: [getIDbyMaterialName("Copper Ore"), getIDbyMaterialName("Water")],
 			inputQuantity: [7, 4],
 			machine: getIDbyMachineName("Refinery"),
 			craftingTime_s: 24

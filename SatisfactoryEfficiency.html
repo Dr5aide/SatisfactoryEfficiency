@@ -6,6 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="bootstrap.css">
+  <script src="MyLibary.js"></script>
   <script src="Calculations.js"></script>
   <script src="Materials.js"></script>
   <script src="Machines.js"></script>
@@ -25,11 +26,8 @@
 
 <body onload="
     unlockedTiers = 8;
-    //
-    //console.log('');
-    //
-    console.log('Values of Resources:');
-    console.log(resourceValues);
+    //console.log('Values of Resources:');
+    //console.log(resourceValues);
     console.log('Cost of Electromagnetic Control Rod without Power Usage');
     var resourceCostForElectromagneticControlRod = calculateResourceCostPerMaterial(getIDbyMaterialName('Electromagnetic Control Rod'), false);
     console.log(resourceCostForElectromagneticControlRod);
