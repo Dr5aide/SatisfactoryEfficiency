@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Climate Data</title>
+  <title>Satisfactory Efficiency</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="bootstrap.css">
@@ -28,110 +28,110 @@
     unlockedTiers = 8;
     //console.log('Values of Resources:');
     //console.log(resourceValues);
-    console.log('Cost of Electromagnetic Control Rod without Power Usage');
-    var resourceCostForElectromagneticControlRod = calculateResourceCostPerMaterial(getIDbyMaterialName('Electromagnetic Control Rod'), false);
-    console.log(resourceCostForElectromagneticControlRod);
-    console.log('With a value of '+getResourceValueForCostArray(resourceCostForElectromagneticControlRod));
+    var materialToTry = 'Electromagnetic Control Rod';
+    console.log('Cost of '+materialToTry+' without Power Usage');
+    var resourceCostFormaterialToTry = calculateResourceCostPerMaterial(getIDbyMaterialName(materialToTry), false);
+    console.log(resourceCostFormaterialToTry);
+    console.log('With a value of '+getResourceValueForCostArray(resourceCostFormaterialToTry));
+    //
+    instantiateElements();
   ">
 
 
   <h2 class="p-3 bg-primary text-white text-left">
-    BigDutchman Climate Datasheet
+    Satisfactory Efficiency Calculator
   </h2>
-  <div style="margin-left: 20px">
-    <div class="row">
-      <!-- left side -->
-      <div class="col-md-2 float-left">
-        <!-- Button triggering the modal -->
-        <button class="float-right btn btn-primary p-1" data-bs-toggle="modal" data-bs-target="#advancedSettingsModal"
-          title="Advanced/Quick Settings" onclick="showCurrentAdvancedSettings()">&#x2699</button>
-
-        <!-- Settings -->
-        <form>
-          <h3 class="text-secondary text-left">
-            Birds
+  <div class="row">
+    <!-- left side -->
+    <div class="col-md-2 float-left">
+      <!-- Settings -->
+      <form class="btn-secondary">
+        <div style="margin-left: 15px; margin-right: 10px; margin-top: -8px; padding-bottom: 10px">
+          <h3 class="text-left" style="padding-top: 20px">
+            Development
           </h3>
           <div class="form-group" style="margin-bottom: 12px">
-            <label for="finalWeight" title="in kg">Final Weight</label>
-            <input type="number" class="form-control" id="finalWeight" value="2.56" step="0.01" min="0"
-              onfocusout="validity.valid||(value='');">
+            <label for="unlockedTiers">Unlocked Tiers</label>
+            <select type="number" class="form-control" id="unlockedTiers" value="8"
+              onfocusout="updateVariablesFromInput();">
+              <option value=8>8</option>
+              <option value=7>7</option>
+              <option value=6>6</option>
+              <option value=5>5</option>
+              <option value=4>4</option>
+              <option value=3>3</option>
+              <option value=2>2</option>
+              <option value=1>1</option>
+            </select>
           </div>
           <div class="form-group" style="margin-bottom: 12px">
-            <label for="numberOfBirds">Number of Birds</label>
-            <input type="number" class="form-control" id="numberOfBirds" value="40000" min="0"
-              onfocusout="validity.valid||(value='');">
+            <label for="energySource">Energy Source</label>
+            <select type="number" class="form-control" id="energySource" value="2"
+              onfocusout="updateVariablesFromInput();">
+            </select>
           </div>
-
-          <h3 class="text-secondary text-left">
-            Outside Climate
+          <h3 class="text-left">
+            Wanted Material
           </h3>
+          <label for="wantedMaterial">Name</label>
           <div class="form-group" style="margin-bottom: 12px">
-            <label for="outsideTemperature" title="in &#8451">Temperature</label>
-            <input type="number" class="form-control" id="outsideTemperature" value="10" min="-60" max="60"
-              onfocusout="validity.valid||(value='');">
+            <select type="number" class="form-control" id="wantedMaterial" onfocusout="updateVariablesFromInput();">
+            </select>
           </div>
+          <label for="wantedMaterialAmount">Amount per Minute</label>
           <div class="form-group" style="margin-bottom: 12px">
-            <label for="minOutsideTemperature" title="in &#8451">Minimal Temperature</label>
-            <input type="number" class="form-control" id="minOutsideTemperature" value="-20" min="-80" max="40"
-              onfocusout="validity.valid||(value='');">
+            <input type="number" class="form-control" id="wantedMaterialAmount" value="10" min="0" max="10000"
+              onfocusout="validity.valid||(value='');
+              updateVariablesFromInput();">
+            </input>
           </div>
-          <div class="form-group" style="margin-bottom: 12px">
-            <label for="outsideHumidity" title="in %">Humidity</label>
-            <input type="number" class="form-control" id="outsideHumidity" value="80" min="0" max="100"
-              onfocusout="validity.valid||(value='');">
-          </div>
-
-          <h3 class="text-secondary text-left">
-            Nominell Ventilation
+          <h3 class="text-left">
+            Resource Values
           </h3>
-          <div class="form-group" style="margin-bottom: 10px">
-            <label for="totalNominellAirFlow" title="in m&#179/h">100% Ventilation</label>
-            <input type="number" class="form-control" id="totalNominellAirFlow" value="160000" readonly>
+          <div style="border: 2px; margin-top: 20px">
+            <table class="table table-sm table-striped table-bordered table-hover" id="resourceValueTable"
+              onfocusout="updateVariablesFromInput();">
+              <thead>
+                <tr>
+                  <th>Resource</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody id="tableContent" class="table-group-divider"></tbody>
+            </table>
           </div>
-          <div class="form-group" style="margin-bottom: 10px">
-            <label for="nominellAirFlowPerBird" title="in m&#179/h/bird">Nominell Ventilation per Bird</label>
-            <input type="number" class="form-control" id="nominellAirFlowPerBird" value="3.9" min="0">
-          </div>
-          <div class="form-group" style="margin-bottom: 10px">
-            <label for="calculatedNominellAirFlowPerBird" title="in m&#179/h/bird">calculated Nominell
-              Ventilation</label>
-            <input type="number" class="form-control" id="calculatedNominellAirFlowPerBird" value="4.88" readonly>
-          </div>
-          <br>
-          <button type="button" class="btn btn-secondary" onclick="overrideData()">Override Table</button>
-          <button type="button" class="float-right btn btn-primary" onclick="updateData()">Calculate Graph</button>
-        </form>
-      </div>
-      <!-- right side -->
-      <div class="col-lg" style="margin-right: 10px;">
-        <!-- Graph -->
-        <div>
-          <canvas id="ChartCanvas" width="512" height="156"
-            style="display: block; width: 512px; height: 156px;"></canvas>
         </div>
-        <!-- Table -->
-        <div style="border: 2px; margin-top: 20px">
-          <table class="table table-sm table-striped table-bordered table-hover" id="table">
-            <thead>
-              <tr>
-                <th>Day</th>
-                <th>Coop Temperature</th>
-                <th>Heating Delta</th>
-                <th>Upper limit Coop Humidity</th>
-                <th>Upper limit Coop CO<sub>2</sub></th>
-                <th>Minimum Ventilation by CO<sub>2</sub></th>
-                <th>Relative Ventilation</th>
-                <th>Minimum Ventilation by H<sub>2</sub>O</th>
-                <th>Relative Ventilation</th>
-                <th>Minimum Ventilation by Feed Factor</th>
-                <th>Relative Ventilation</th>
-                <th>Maximum Ventilation at heat threshold</th>
-              </tr>
-            </thead>
-            <tbody id="tableContent" class="table-group-divider"></tbody>
-          </table>
-        </div>
+      </form>
+    </div>
+    <!-- right side -->
+    <div class="col-lg" style="margin-right: 10px;">
+      <!-- Graph -->
+      <div>
+        <canvas id="ChartCanvas" width="512" height="156" style="display: block; width: 512px; height: 156px;"></canvas>
       </div>
+      <!-- Table -->
+      <div style="border: 2px; margin-top: 20px">
+        <table class="table table-sm table-striped table-bordered table-hover" id="table">
+          <thead>
+            <tr>
+              <th>Day</th>
+              <th>Coop Temperature</th>
+              <th>Heating Delta</th>
+              <th>Upper limit Coop Humidity</th>
+              <th>Upper limit Coop CO<sub>2</sub></th>
+              <th>Minimum Ventilation by CO<sub>2</sub></th>
+              <th>Relative Ventilation</th>
+              <th>Minimum Ventilation by H<sub>2</sub>O</th>
+              <th>Relative Ventilation</th>
+              <th>Minimum Ventilation by Feed Factor</th>
+              <th>Relative Ventilation</th>
+              <th>Maximum Ventilation at heat threshold</th>
+            </tr>
+          </thead>
+          <tbody id="tableContent" class="table-group-divider"></tbody>
+        </table>
+      </div>
+
     </div>
   </div>
   <!-- Advanced Settings Modal -->
@@ -211,16 +211,6 @@
             <input type="number" class="form-control  form-control-sm" style="margin-bottom: 12px"
               id="heatingDeltaBreakpoint" min="0" onfocusout="validity.valid||(value='');">
           </div>
-          <!--
-        <div class="form-group" style="margin-bottom: 10px">
-          <label for="deltaTmaxHeat" style="margin-bottom: 4px" title="Delta at which the Fans start running max HeatVentilation">DeltaT max Heat</label>
-          <input type="number" class="form-control form-control-sm" id="deltaTmaxHeat" min="0" onfocusout="validity.valid||(value='');">
-        </div>
-        <div class="form-group" style="margin-bottom: 10px">
-          <label for="fanThroughputPerHour" style="margin-bottom: 4px" title="in m&#179/h">Airflow per Hour of a Fan</label>
-          <input type="number" class="form-control form-control-sm" id="fanThroughputPerHour" min="0" onfocusout="validity.valid||(value='');">
-        </div>
-        -->
           <div class="form-group" style="margin-bottom: 10px">
             <label for="airPressure" style="margin-bottom: 4px" itle="in Pa">Air Pressure</label>
             <input type="number" class="form-control form-control-sm" id="airPressure" min="0"

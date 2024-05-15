@@ -7,11 +7,33 @@ function getIDbyMaterialName(nameToLookUp) {
     }
     throw new Error('MaterialName not found: ' + nameToLookUp);
 }
+
+function getAvailableMaterialsIndeces() {
+    var availableMaterialIndeces = [];
+    for (let i = 1; i < materials.length; i++) {
+        if (materials[i].tier <= unlockedTiers) {
+            availableMaterialIndeces.push(i);
+        }
+    }
+    return availableMaterialIndeces;
+}
+
+function getAvailableResourceIndeces() {
+    var availableResourceIndeces = [];
+    for (let i = 1; i < materials.length; i++) {
+        if (materials[i].tier <= unlockedTiers && materials[i].isResource) {
+            availableResourceIndeces.push(i);
+        }
+    }
+    return availableResourceIndeces;
+}
+
 const materials =
     [
         // Just for additional information
         {
             name: "MJ of Power",
+            tier: 0,
             isResource: true,
             megawattSecondToExtract: 0,
             //Dummy
@@ -21,6 +43,7 @@ const materials =
         // Ores
         {
             name: "Limestone",
+            tier: 0,
             isResource: true,
             megawattSecondToExtract: 5,
             //Impure: 12 Normal: 47 Pure: 27
@@ -30,6 +53,7 @@ const materials =
         },
         {
             name: "Iron Ore",
+            tier: 0,
             isResource: true,
             megawattSecondToExtract: 5,
             //Impure: 33 Normal: 41 Pure: 46
@@ -38,6 +62,7 @@ const materials =
         },
         {
             name: "Copper Ore",
+            tier: 0,
             isResource: true,
             megawattSecondToExtract: 5,
             //Impure: 9 Normal: 28 Pure: 12
@@ -46,6 +71,7 @@ const materials =
         },
         {
             name: "Caterium Ore",
+            tier: 0,
             isResource: true,
             megawattSecondToExtract: 5,
             //Impure: 0 Normal: 8 Pure: 8
@@ -54,6 +80,7 @@ const materials =
         },
         {
             name: "Coal",
+            tier: 0,
             isResource: true,
             megawattSecondToExtract: 5,
             //Impure: 6 Normal: 29 Pure: 15
@@ -62,6 +89,7 @@ const materials =
         },
         {
             name: "Raw Quartz",
+            tier: 0,
             isResource: true,
             megawattSecondToExtract: 5,
             //Impure: 0 Normal: 11 Pure: 5
@@ -70,6 +98,7 @@ const materials =
         },
         {
             name: "Sulfur",
+            tier: 0,
             isResource: true,
             megawattSecondToExtract: 5,
             //Impure: 1 Normal: 7 Pure: 3
@@ -78,6 +107,7 @@ const materials =
         },
         {
             name: "Bauxite",
+            tier: 0,
             isResource: true,
             megawattSecondToExtract: 5,
             //Impure: 5 Normal: 6 Pure: 6
@@ -86,14 +116,16 @@ const materials =
         },
         {
             name: "S.A.M. Ore",
+            tier: 0,
             isResource: true,
             megawattSecondToExtract: 5,
             //Impure: 8 Normal: 5 Pure: 0
             relativeNodeAmount: 9,
-            relativeNeed: 0.01
+            relativeNeed: 0
         },
         {
             name: "Uranium",
+            tier: 0,
             isResource: true,
             megawattSecondToExtract: 5,
             //Impure: 1 Normal: 3 Pure: 0
@@ -103,69 +135,83 @@ const materials =
         // Ingots
         {
             name: "Iron Ingot",
+            tier: 0,
             isResource: false
         },
         {
             name: "Copper Ingot",
+            tier: 0,
             isResource: false
         },
         {
             name: "Caterium Ingot",
+            tier: 0,
             isResource: false
         },
         {
             name: "Steel Ingot",
+            tier: 3,
             isResource: false
         },
         {
             name: "Aluminum Ingot",
+            tier: 7,
             isResource: false
         },
         // Minerals
         {
             name: "Concrete",
+            tier: 0,
             isResource: false
         },
         {
             name: "Quartz Crystal",
+            tier: 0,
             isResource: false
         },
         {
             name: "Silica",
+            tier: 0,
             isResource: false
         },
         {
             name: "Copper Powder",
+            tier: 8,
             isResource: false
         },
         {
             name: "Polymer Resin",
+            tier: 5,
             isResource: false
         },
-
         {
             name: "Petroleum Coke",
+            tier: 5,
             isResource: false
         },
         {
             name: "Aluminum Scrap",
+            tier: 7,
             isResource: false
         },
         {
             name: "Compacted Coal",
+            tier: 0,
             isResource: false
         },
         // Fluids
         {
             name: "Water",
+            tier: 3,
             isResource: true,
             megawattSecondToExtract: 10,
             //Dummy
-            relativeNodeAmount: 1000,
+            relativeNodeAmount: 10000,
             relativeNeed: 1
         },
         {
             name: "Crude Oil",
+            tier: 5,
             isResource: true,
             megawattSecondToExtract: 20,
             //Impure: 10 Normal: 12 Pure: 8
@@ -174,39 +220,48 @@ const materials =
         },
         {
             name: "Heavy Oil Residue",
+            tier: 5,
             isResource: false
         },
         {
             name: "Fuel",
+            tier: 5,
             isResource: false
         },
         {
             name: "Liquid Biofuel",
+            tier: 5,
             isResource: false
         },
         {
             name: "Turbofuel",
+            tier: 5,
             isResource: false
         },
         {
             name: "Alumina Solution",
+            tier: 7,
             isResource: false
         },
         {
             name: "Sulfuric Acid",
+            tier: 7,
             isResource: false
         },
         {
             name: "Heavy Oil Residue",
+            tier: 5,
             isResource: false
         },
         {
             name: "Nitric Acid",
+            tier: 8,
             isResource: false
         },
         // Gases
         {
             name: "Nitrogen Gas",
+            tier: 8,
             isResource: true,
             // megawatt (150) / output (1)
             megawattSecondToExtract: 150,
@@ -217,183 +272,227 @@ const materials =
         // Standard Parts
         {
             name: "Iron Rod",
+            tier: 0,
             isResource: false
         },
         {
             name: "Screw",
+            tier: 0,
             isResource: false
         },
         {
             name: "Iron Plate",
+            tier: 0,
             isResource: false
         },
         {
             name: "Reinforced Iron Plate",
+            tier: 0,
             isResource: false
         },
         {
             name: "Copper Sheet",
+            tier: 2,
             isResource: false
         },
         {
             name: "Alclad Aluminum Sheet",
+            tier: 7,
             isResource: false
         },
         {
             name: "Aluminum Casing",
+            tier: 7,
             isResource: false
         },
         {
             name: "Steel Pipe",
+            tier: 3,
             isResource: false
         },
         {
             name: "Steel Beam",
+            tier: 3,
             isResource: false
         },
         {
             name: "Encased Industrial Beam",
+            tier: 4,
             isResource: false
         },
         {
             name: "Modular Frame",
+            tier: 2,
             isResource: false
         },
         {
             name: "Heavy Modular Frame",
+            tier: 4,
             isResource: false
         },
         {
             name: "Fused Modular Frame",
+            tier: 8,
             isResource: false
         },
         {
             name: "Fabric",
+            tier: 0,
             isResource: false
         },
         {
             name: "Plastic",
+            tier: 5,
             isResource: false
         },
         {
             name: "Rubber",
+            tier: 5,
             isResource: false
         },
         // Industrial Parts
         {
             name: "Rotor",
+            tier: 2,
             isResource: false
         },
         {
             name: "Stator",
+            tier: 4,
             isResource: false
         },
         {
             name: "Battery",
+            tier: 7,
             isResource: false
         },
         {
             name: "Motor",
+            tier: 4,
             isResource: false
         },
         {
             name: "Heat Sink",
+            tier: 8,
             isResource: false
         },
         {
             name: "Cooling System",
+            tier: 8,
             isResource: false
         },
         {
             name: "Turbo Motor",
+            tier: 8,
             isResource: false
         },
         //Electronics
         {
             name: "Wire",
+            tier: 0,
             isResource: false
         },
         {
             name: "Cable",
+            tier: 0,
             isResource: false
         },
         {
             name: "Quickwire",
+            tier: 0,
             isResource: false
         },
         {
             name: "Circuit Board",
+            tier: 5,
             isResource: false
         },
         {
             name: "AI Limiter",
+            tier: 7,
             isResource: false
         },
         {
             name: "High-Speed Connector",
+            tier: 7,
             isResource: false
         },
         // Communications
         {
             name: "Computer",
+            tier: 5,
             isResource: false
         },
         {
             name: "Supercomputer",
+            tier: 7,
             isResource: false
         },
         {
             name: "Quantum Computer",
+            tier: 9,
             isResource: false
         },
         {
             name: "Radio Control Unit",
+            tier: 7,
             isResource: false
         },
         {
             name: "Crystal Oscillator",
+            tier: 0,
             isResource: false
         },
         {
             name: "Superposition Oscillator",
+            tier: 9,
             isResource: false
         },
         // Containers
         {
             name: "Empty Canister",
+            tier: 5,
             isResource: false
         },
         {
             name: "Empty Fluid Tank",
+            tier: 8,
             isResource: false
         },
         {
             name: "Pressure Conversion Cube",
+            tier: 8,
             isResource: false
         },
         {
             name: "Packaged Water",
+            tier: 5,
             isResource: false
         },
         {
             name: "Packaged Alumina Solution",
+            tier: 7,
             isResource: false
         },
         {
             name: "Packaged Sulfuric Acid",
+            tier: 7,
             isResource: false
         },
         {
             name: "Packaged Nitric Acid",
+            tier: 8,
             isResource: false
         },
         {
             name: "Packaged Nitrogen Gas",
+            tier: 8,
             isResource: false
         },
         //Fuels
         {
             name: "Leaves",
+            tier: 0,
             isResource: true,
             megawattSecondToExtract: 0,
             //Dummy
@@ -402,6 +501,7 @@ const materials =
         },
         {
             name: "Mycelia",
+            tier: 0,
             isResource: true,
             megawattSecondToExtract: 0,
             //Dummy
@@ -410,6 +510,7 @@ const materials =
         },
         {
             name: "Flower Petals",
+            tier: 0,
             isResource: true,
             megawattSecondToExtract: 0,
             //Dummy
@@ -418,6 +519,7 @@ const materials =
         },
         {
             name: "Wood",
+            tier: 0,
             isResource: true,
             megawattSecondToExtract: 0,
             //Dummy
@@ -426,151 +528,187 @@ const materials =
         },
         {
             name: "Biomass",
+            tier: 0,
             isResource: false
         },
         {
             name: "Compacted Coal",
+            tier: 0,
             isResource: false
         },
         {
             name: "Packaged Oil",
+            tier: 5,
             isResource: false
         },
         {
             name: "Packaged Heavy Oil Residue",
+            tier: 5,
             isResource: false
         },
         {
             name: "Solid Biofuel",
+            tier: 5,
             isResource: false
         },
         {
             name: "Packaged Fuel",
+            tier: 5,
             isResource: false
         },
         {
             name: "Packaged Liquid Biofuel",
+            tier: 5,
             isResource: false
         },
         {
             name: "Packaged Turbofuel",
+            tier: 5,
             isResource: false
         },
         {
             name: "Uranium Fuel Rod",
+            tier: 8,
             isResource: false
         },
         {
             name: "Plutonium Fuel Rod",
+            tier: 8,
             isResource: false
         },
         // Consumed
         {
             name: "Black Powder",
+            tier: 0,
             isResource: false
         },
         {
             name: "Smokeless Powder",
+            tier: 5,
             isResource: false
         },
         {
             name: "Gas Filter",
+            tier: 7,
             isResource: false
         },
         {
             name: "Color Cartridge",
+            tier: 2,
             isResource: false
         },
         {
             name: "Beacon",
+            tier: 1,
             isResource: false
         },
         {
             name: "Iodine Infused Filter",
+            tier: 7,
             isResource: false
         },
         // Ammos
         {
             name: "Iron Rebar",
+            tier: 0,
             isResource: false
         },
         {
             name: "Stun Rebar",
+            tier: 2,
             isResource: false
         },
         {
             name: "Shatter Rebar",
+            tier: 2,
             isResource: false
         },
         {
             name: "Explosive Rebar",
+            tier: 5,
             isResource: false
         },
         {
             name: "Rifle Ammo",
+            tier: 5,
             isResource: false
         },
         {
             name: "Homing Rifle Ammo",
+            tier: 5,
             isResource: false
         },
         {
             name: "Turbo Rifle Ammo",
+            tier: 5,
             isResource: false
         },
         {
             name: "Nobelisk",
+            tier: 3,
             isResource: false
         },
         {
             name: "Gas Nobelisk",
+            tier: 3,
             isResource: false
         },
         {
             name: "Pulse Nobelisk",
+            tier: 5,
             isResource: false
         },
         {
             name: "Cluster Nobelisk",
+            tier: 5,
             isResource: false
         },
         {
             name: "Nuke Nobelisk",
+            tier: 8,
             isResource: false
         },
         // Nuclear
         {
             name: "Electromagnetic Control Rod",
+            tier: 8,
             isResource: false
         },
         {
             name: "Encased Uranium Cell",
+            tier: 8,
             isResource: false
         },
         {
             name: "Non-fissile Uranium",
+            tier: 8,
             isResource: false
         },
         {
             name: "Plutonium Pellet",
+            tier: 8,
             isResource: false
         },
         {
             name: "Encased Plutonium Cell",
+            tier: 8,
             isResource: false
         },
         // Waste
         {
             name: "Uranium Waste",
+            tier: 8,
             isResource: false
         },
         {
             name: "Plutonium Waste",
+            tier: 8,
             isResource: false
         },
         // Special
         {
             name: "Blue Power Slug",
+            tier: 0,
             isResource: true,
             megawattSecondToExtract: 0,
             //Dummy
@@ -579,6 +717,7 @@ const materials =
         },
         {
             name: "Yellow Power Slug",
+            tier: 0,
             isResource: true,
             megawattSecondToExtract: 0,
             //Dummy
@@ -587,6 +726,7 @@ const materials =
         },
         {
             name: "Purple Power Slug",
+            tier: 0,
             isResource: true,
             megawattSecondToExtract: 0,
             //Dummy
@@ -595,46 +735,57 @@ const materials =
         },
         {
             name: "Power Shard",
+            tier: 0,
             isResource: false
         },
         {
             name: "FICSIT Coupon",
+            tier: 2,
             isResource: false
         },
         {
             name: "Smart Plating",
+            tier: 2,
             isResource: false
         },
         {
             name: "Versatile Framework",
+            tier: 3,
             isResource: false
         },
         {
             name: "Automated Wiring",
+            tier: 4,
             isResource: false
         },
         {
             name: "Modular Engine",
+            tier: 5,
             isResource: false
         },
         {
             name: "Adaptive Control Unit",
+            tier: 5,
             isResource: false
         },
         {
             name: "Assembly Director System",
+            tier: 7,
             isResource: false
         },
         {
             name: "Magnetic Field Generator",
+            tier: 8,
             isResource: false
         },
         {
             name: "Thermal Propulsion Rocket",
+            tier: 8,
             isResource: false
         },
         {
             name: "Nuclear Pasta",
+            tier: 8,
             isResource: false
         }
     ]

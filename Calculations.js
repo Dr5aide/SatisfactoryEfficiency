@@ -121,6 +121,8 @@ function addRecipeForMaterial(recipeArrayToStore, materialToStore) {
         materialIndex: materialToStore,
         recipeIndeces: recipeArrayToStore
     })
+    //console.log('recipeCache');
+    //console.log(recipeCacheForMaterial);
 }
 function lookUpCachedRecipeForMaterialNumber(materialIndex, recipeEfficiencyLevel) {
     for (let i = 0; i < recipeCacheForMaterial.length; i++) {
@@ -140,11 +142,11 @@ function getRecipeIndexFor(materialIndex) {
         return cachedRecipe;
     }
     // look up all recipes
-    var potentialRecipeIndeces = [];
+    var potentialRecipes = [];
     for (let i = 0; i < recipes.length; i++) {
         for (let j = 0; j < recipes[i].output.length; j++) {
             if (recipes[i].output[j] == materialIndex) {
-                potentialRecipeIndeces.push({
+                potentialRecipes.push({
                     index: i,
                     name: recipes[i].name
                 });
@@ -152,60 +154,37 @@ function getRecipeIndexFor(materialIndex) {
             }
         }
     }
-    if (potentialRecipeIndeces.length < 1) {
+    if (potentialRecipes.length < 1) {
         throw new Error('No recipe found for material: ' + materialIndex + ' ' + materials[materialIndex].name);
     }
     // determine their efficiency
-    var chosenRecipeIndex = potentialRecipeIndeces[0].index;
-    var number1EfficientRecipeIndex;
-    var number1EfficientRecipeValueCost = 1000000;
-    var number2EfficientRecipeIndex;
-    var number2EfficientRecipeValueCost = 1000000;
-    var number3EfficientRecipeIndex;
-    var number3EfficientRecipeValueCost = 1000000;
-    for (let i = 0; i < potentialRecipeIndeces.length; i++) {
-        // add to recipe log against circular reference
-        //addRecipeIndexToRecipeLog(potentialRecipeIndeces[i].index);
-        //
-        iResourceCostArray = calculateResourceCostPerMaterialForRecipe(materialIndex, potentialRecipeIndeces[i].index, true);
-
+    var chosenRecipeIndex = potentialRecipes[0].index;
+    var efficiencyRecipeIndeces = [];
+    var efficiencyRecipeValueCosts = [];
+    for (let i = 0; i < potentialRecipes.length; i++) {
+        iResourceCostArray = calculateResourceCostPerMaterialForRecipe(materialIndex, potentialRecipes[i].index, true);
         iResourceValue = getResourceValueForCostArray(iResourceCostArray)
-        if (iResourceValue < number1EfficientRecipeValueCost) {
-            number3EfficientRecipeIndex = number2EfficientRecipeIndex;
-            number3EfficientRecipeValueCost = number2EfficientRecipeValueCost;
-            number2EfficientRecipeIndex = number1EfficientRecipeIndex;
-            number2EfficientRecipeValueCost = number1EfficientRecipeValueCost;
-            number1EfficientRecipeIndex = potentialRecipeIndeces[i].index;
-            number1EfficientRecipeValueCost = iResourceValue;
-            continue;
+        //
+        var whereToAddiRecipe = efficiencyRecipeIndeces.length;
+        for (let j = efficiencyRecipeIndeces.length - 1; j >= 0; j--) {
+            if (efficiencyRecipeValueCosts[j] > iResourceValue) {
+                whereToAddiRecipe = j;
+                efficiencyRecipeIndeces[j + 1] = efficiencyRecipeIndeces[j];
+                efficiencyRecipeValueCosts[j + 1] = efficiencyRecipeValueCosts[j];
+            }
+            else {
+                break;
+            }
         }
-        if (iResourceValue < number2EfficientRecipeValueCost) {
-            number3EfficientRecipeIndex = number2EfficientRecipeIndex;
-            number3EfficientRecipeValueCost = number2EfficientRecipeValueCost;
-            number2EfficientRecipeIndex = potentialRecipeIndeces[i].index;
-            number2EfficientRecipeValueCost = iResourceValue;
-            continue;
-        }
-        if (iResourceValue < number3EfficientRecipeValueCost) {
-            number3EfficientRecipeIndex = potentialRecipeIndeces[i].index;
-            number3EfficientRecipeValueCost = iResourceValue;
-            continue;
-        }
+        efficiencyRecipeIndeces[whereToAddiRecipe] = potentialRecipes[i].index;
+        efficiencyRecipeValueCosts[whereToAddiRecipe] = iResourceValue;
     }
     //Store in cache
-    addRecipeForMaterial([number1EfficientRecipeIndex, number2EfficientRecipeIndex, number3EfficientRecipeIndex], materialIndex);
+    addRecipeForMaterial(efficiencyRecipeIndeces, materialIndex);
     //determine which one should be used by default
-    if (selectedDefaultRecipeEfficiency == 1) {
-        chosenRecipeIndex = number1EfficientRecipeIndex;
-    }
-    if (selectedDefaultRecipeEfficiency == 2) {
-        chosenRecipeIndex = number2EfficientRecipeIndex;
-    }
-    if (selectedDefaultRecipeEfficiency == 3) {
-        chosenRecipeIndex = number3EfficientRecipeIndex;
-    }
+    chosenRecipeIndex = efficiencyRecipeIndeces[selectedDefaultRecipeEfficiency - 1];
     if (!(typeof chosenRecipeIndex === 'number')) {
-        throw new Error('Couldn\'t determine recipe for materialIndex ' + materialIndex);
+        throw new Error('Couldn\'t determine recipe for materialIndex ' + materialIndex + materials[materialIndex].name);
     }
     // returns index of the recipe used to craft
     return chosenRecipeIndex;

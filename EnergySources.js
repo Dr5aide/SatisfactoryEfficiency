@@ -7,14 +7,23 @@ function getIDbyEnergySourceName(nameToLookUp) {
     }
 }
 
-function getSelectableEnergySourceIndeces() {
+function getAvailableEnergySourceIndeces() {
     var energySourceIndeces = [];
     for (let i = 0; i < energySources.length; i++) {
-        if (energySources[i].tier > unlockedTiers) {
-            return energySourceIndeces;
+        if (energySources[i].tier <= unlockedTiers) {
+            energySourceIndeces.push(i);
         }
-        energySourceIndeces.push(i);
     }
+    return energySourceIndeces;
+}
+function getAvailableEnergySourceNames() {
+    var energySourceNames = [];
+    for (let i = 0; i < energySources.length; i++) {
+        if (energySources[i].tier <= unlockedTiers) {
+            energySourceNames.push(energySources[i].name);
+        }
+    }
+    return energySourceNames;
 }
 
 const energySources =
