@@ -1,7 +1,10 @@
-function getResourceValueForCostArray(costArray) {
+function getResourceValueForResourceArray(resourceArray) {
     var resourceValue = 0;
-    for (let i = 0; i < costArray.length; i++) {
-        resourceValue += getResourceValueForResourceIndex(costArray[i].materialIndex)
+    for (let i = 0; i < resourceArray.length; i++) {
+        //console.log('Trying to get resource value for: ' + resourceArray[i].materialIndex);
+        iResourceValue = getResourceValueForResourceIndex(resourceArray[i].materialIndex);
+        //console.log('Value is: ' + iResourceValue);
+        resourceValue += iResourceValue * resourceArray[i].quantity;
     }
     return resourceValue;
 }
@@ -10,6 +13,7 @@ function getResourceValueForCostArray(costArray) {
 const recipeLogSize = 8;
 var recipeLog = [];
 var currentRecipeCallStackSize = 0;
+var highestRecipeCallStack = 0;
 function addRecipeIndexToRecipeLog(recipeIndexToAdd) {
     //console.log('RecipeIndex put to stack: ' + recipeIndexToAdd + ' ' + recipes[recipeIndexToAdd].name + ' at stackSize ' + currentRecipeCallStackSize);
     for (let i = recipeLogSize - 1; i > 0; i--) {
@@ -19,6 +23,10 @@ function addRecipeIndexToRecipeLog(recipeIndexToAdd) {
         recipeIndex: recipeIndexToAdd,
         recipeCallStackSize: currentRecipeCallStackSize
     };
+    //
+    if (highestRecipeCallStack < currentRecipeCallStackSize) {
+        highestRecipeCallStack = currentRecipeCallStackSize;
+    }
 }
 function lookUpInputOverlapForCostArray(recipeIndex, costArrays) {
     var InputOverlap = [];
@@ -121,8 +129,8 @@ function addRecipeForMaterial(recipeArrayToStore, materialToStore) {
         materialIndex: materialToStore,
         recipeIndeces: recipeArrayToStore
     })
-    //console.log('recipeCache');
-    //console.log(recipeCacheForMaterial);
+    // console.log('recipeCache');
+    // console.log(recipeCacheForMaterial);
 }
 function lookUpCachedRecipeForMaterialNumber(materialIndex, recipeEfficiencyLevel) {
     for (let i = 0; i < recipeCacheForMaterial.length; i++) {
@@ -135,7 +143,7 @@ function lookUpCachedRecipeForMaterialNumber(materialIndex, recipeEfficiencyLeve
     return -1;
 }
 
-function getRecipeIndexFor(materialIndex) {
+function getRecipeIndexFor(materialIndex, calculatePowerCost) {
     // look through cache
     var cachedRecipe = lookUpCachedRecipeForMaterialNumber(materialIndex, selectedDefaultRecipeEfficiency)
     if (cachedRecipe >= 0) {
@@ -145,7 +153,7 @@ function getRecipeIndexFor(materialIndex) {
     var potentialRecipes = [];
     for (let i = 0; i < recipes.length; i++) {
         for (let j = 0; j < recipes[i].output.length; j++) {
-            if (recipes[i].output[j] == materialIndex) {
+            if (recipes[i].output[j] == materialIndex && recipes[i].tier <= unlockedTiers) {
                 potentialRecipes.push({
                     index: i,
                     name: recipes[i].name
@@ -157,19 +165,23 @@ function getRecipeIndexFor(materialIndex) {
     if (potentialRecipes.length < 1) {
         throw new Error('No recipe found for material: ' + materialIndex + ' ' + materials[materialIndex].name);
     }
+    //console.log('Potential recipes: ');
+    //console.log(potentialRecipes);
     // determine their efficiency
     var chosenRecipeIndex = potentialRecipes[0].index;
     var efficiencyRecipeIndeces = [];
+    var efficiencyRecipeMaterialCost = [];
     var efficiencyRecipeValueCosts = [];
     for (let i = 0; i < potentialRecipes.length; i++) {
-        iResourceCostArray = calculateResourceCostPerMaterialForRecipe(materialIndex, potentialRecipes[i].index, true);
-        iResourceValue = getResourceValueForCostArray(iResourceCostArray)
+        iResourceCostArray = calculateResourceCostPerMaterialForRecipe(materialIndex, potentialRecipes[i].index, calculatePowerCost);
+        iResourceValue = getResourceValueForResourceArray(iResourceCostArray)
         //
         var whereToAddiRecipe = efficiencyRecipeIndeces.length;
         for (let j = efficiencyRecipeIndeces.length - 1; j >= 0; j--) {
             if (efficiencyRecipeValueCosts[j] > iResourceValue) {
                 whereToAddiRecipe = j;
                 efficiencyRecipeIndeces[j + 1] = efficiencyRecipeIndeces[j];
+                efficiencyRecipeMaterialCost[j + 1] = efficiencyRecipeMaterialCost[j];
                 efficiencyRecipeValueCosts[j + 1] = efficiencyRecipeValueCosts[j];
             }
             else {
@@ -177,8 +189,13 @@ function getRecipeIndexFor(materialIndex) {
             }
         }
         efficiencyRecipeIndeces[whereToAddiRecipe] = potentialRecipes[i].index;
+        efficiencyRecipeMaterialCost[whereToAddiRecipe] = iResourceCostArray;
         efficiencyRecipeValueCosts[whereToAddiRecipe] = iResourceValue;
     }
+    //console.log('efficiencyRecipeIndeces = ' + efficiencyRecipeIndeces);
+    //console.log('efficiencyRecipeMaterialCost = ');
+    //console.log(efficiencyRecipeMaterialCost);
+    //console.log('efficiencyRecipeValueCosts = ' + efficiencyRecipeValueCosts);
     //Store in cache
     addRecipeForMaterial(efficiencyRecipeIndeces, materialIndex);
     //determine which one should be used by default
@@ -209,10 +226,11 @@ function calculateResourceCostPerRecipe(recipeIndex, calculatePowerCost, inputTo
                 }
             }
         }
+        // Material if resource
         if (materials[iInputMaterialIndex].isResource) {
             // Power
             if (calculatePowerCost) {
-                cost = addCosts(cost, calculateEnergyCost(materials[iInputMaterialIndex].megawattSecondToExtract));
+                cost = addCosts(cost, calculateEnergyResourceCost(materials[iInputMaterialIndex].megawattSecondToExtract));
             }
             else {
                 var costToAdd = [{
@@ -232,10 +250,9 @@ function calculateResourceCostPerRecipe(recipeIndex, calculatePowerCost, inputTo
 
         }
         else {
-            // Material if resource
             addRecipeIndexToRecipeLog(recipeIndex);
             //console.log('Calculating Resource cost of ' + iInputMaterialIndex + ' ' + materials[iInputMaterialIndex].name + ' for ' + recipes[recipeIndex].name);
-            var costToAdd = calculateResourceCostPerMaterial(iInputMaterialIndex);
+            var costToAdd = calculateResourceCostPerMaterial(iInputMaterialIndex, calculatePowerCost);
             for (let i = 0; i < costToAdd.length; i++) {
                 costToAdd[i].quantity *= iInputQuantity;
             }
@@ -246,6 +263,37 @@ function calculateResourceCostPerRecipe(recipeIndex, calculatePowerCost, inputTo
     var megawattSecondsPerCraft = calculatePowerUsagePerRecipe(recipeIndex);
     if (calculatePowerCost) {
         cost = addCosts(cost, calculateEnergyCost(megawattSecondsPerCraft));
+    }
+    // returns list of data objects with type and amount per 1 recipe craft
+    return cost;
+};
+
+//copy of calculateResourceCostPerRecipe
+function calculateCostPerRecipe(recipeIndex, calculatePowerCost, inputToRemoveCircularReference) {
+    var cost = []
+    //
+    for (let i = 0; i < recipes[recipeIndex].input.length; i++) {
+        var iInputMaterialIndex = recipes[recipeIndex].input[i];
+        var iInputQuantity = recipes[recipeIndex].inputQuantity[i];
+        // Remove input cost from circular reference
+        if (inputToRemoveCircularReference) {
+            if (inputToRemoveCircularReference.length > 0) {
+                for (let j = 0; j < inputToRemoveCircularReference.length; j++) {
+                    if (inputToRemoveCircularReference[j].materialIndex == iInputMaterialIndex) {
+                        iInputQuantity -= inputToRemoveCircularReference[j].quantity;
+                    }
+                }
+                if (iInputQuantity == 0) {
+                    continue;
+                }
+            }
+        }
+        var costToAdd = [{
+            name: materials[iInputMaterialIndex].name,
+            materialIndex: iInputMaterialIndex,
+            quantity: iInputQuantity
+        }]
+        cost = addCosts(cost, costToAdd);
     }
     // returns list of data objects with type and amount per 1 recipe craft
     return cost;
@@ -276,6 +324,33 @@ function calculatePowerUsagePerRecipe(recipeIndex) {
     // returns megawatt seconds (I know thats a damn cursed unit) per 1 recipe craft
     return megawattSeconds;
 };
+
+function calculateEnergyResourceCost(megawattSeconds) {
+    var costForMegawattSeconds = [];
+    var materialCostArray = calculateEnergyCost(megawattSeconds);
+    for (let i = 0; i < materialCostArray.length; i++) {
+        var iMaterialIndex = materialCostArray[i].materialIndex;
+        var iMaterialAmount = materialCostArray[i].quantity;
+        //
+        var iResourceCostPerMaterial;
+        if (!(materials[iMaterialIndex].isResource)) {
+            iResourceCostPerMaterial = calculateResourceCostPerMaterial(iMaterialIndex, false); // can't calc power cost or else goes endless
+        }
+        else {
+            iResourceCostPerMaterial = {
+                name: materials[iMaterialIndex].name,
+                materialIndex: iMaterialIndex,
+                quantity: iMaterialAmount
+            }
+        }
+        //
+        for (let i = 0; i < iResourceCostPerMaterial.length; i++) {
+            iResourceCostPerMaterial[i].quantity = iResourceCostPerMaterial[i].quantity * iMaterialAmount;
+        }
+        addCosts(costForMegawattSeconds, iResourceCostPerMaterial);
+    }
+    return costForMegawattSeconds;
+}
 
 function calculateEnergyCost(megawattSeconds) {
     var cost = []

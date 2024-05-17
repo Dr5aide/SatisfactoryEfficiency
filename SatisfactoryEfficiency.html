@@ -25,16 +25,18 @@
 </head>
 
 <body onload="
+/*
     unlockedTiers = 8;
-    //console.log('Values of Resources:');
-    //console.log(resourceValues);
     var materialToTry = 'Electromagnetic Control Rod';
     console.log('Cost of '+materialToTry+' without Power Usage');
-    var resourceCostFormaterialToTry = calculateResourceCostPerMaterial(getIDbyMaterialName(materialToTry), false);
-    console.log(resourceCostFormaterialToTry);
-    console.log('With a value of '+getResourceValueForCostArray(resourceCostFormaterialToTry));
+    var resourceCostForMaterialToTry = calculateResourceCostPerMaterial(getIDbyMaterialName(materialToTry), true);
+    console.log(resourceCostForMaterialToTry);
+    console.log('With a value of '+ getResourceValueForResourceArray(resourceCostForMaterialToTry));
+    console.log('highestRecipeCallStack: '+ highestRecipeCallStack);
+    */
     //
     instantiateElements();
+    updateVariablesFromInput();
   ">
 
 
@@ -45,7 +47,7 @@
     <!-- left side -->
     <div class="col-md-2 float-left">
       <!-- Settings -->
-      <form class="btn-secondary">
+      <form class="text-white bg-secondary">
         <div style="margin-left: 15px; margin-right: 10px; margin-top: -8px; padding-bottom: 10px">
           <h3 class="text-left" style="padding-top: 20px">
             Development
@@ -89,7 +91,7 @@
             Resource Values
           </h3>
           <div style="border: 2px; margin-top: 20px">
-            <table class="table table-sm table-striped table-bordered table-hover" id="resourceValueTable"
+            <table class="table table-sm table-striped table-bordered table-hover text-white" id="resourceValueTable"
               onfocusout="updateVariablesFromInput();">
               <thead>
                 <tr>
@@ -105,29 +107,9 @@
     </div>
     <!-- right side -->
     <div class="col-lg" style="margin-right: 10px;">
-      <!-- Graph -->
-      <div>
-        <canvas id="ChartCanvas" width="512" height="156" style="display: block; width: 512px; height: 156px;"></canvas>
-      </div>
       <!-- Table -->
       <div style="border: 2px; margin-top: 20px">
-        <table class="table table-sm table-striped table-bordered table-hover" id="table">
-          <thead>
-            <tr>
-              <th>Day</th>
-              <th>Coop Temperature</th>
-              <th>Heating Delta</th>
-              <th>Upper limit Coop Humidity</th>
-              <th>Upper limit Coop CO<sub>2</sub></th>
-              <th>Minimum Ventilation by CO<sub>2</sub></th>
-              <th>Relative Ventilation</th>
-              <th>Minimum Ventilation by H<sub>2</sub>O</th>
-              <th>Relative Ventilation</th>
-              <th>Minimum Ventilation by Feed Factor</th>
-              <th>Relative Ventilation</th>
-              <th>Maximum Ventilation at heat threshold</th>
-            </tr>
-          </thead>
+        <table class="table table-sm table-striped table-bordered table-hover text-white" id="craftingTreeTable">
           <tbody id="tableContent" class="table-group-divider"></tbody>
         </table>
       </div>

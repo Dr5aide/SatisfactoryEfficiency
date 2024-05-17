@@ -8,7 +8,7 @@ var selectableEnergySourceNames = getAvailableEnergySourceNames();
 //
 var wantedMaterial;
 var amountOfWantedMaterialPerMinute;
-var selectableMaterials = getAvailableMaterialsIndeces();
+var selectableProducts = getAvailableProductsIndeces();
 //
 var resourceValues = getDefaultResourceValue();
 var availableResources = getAvailableResourceIndeces();
@@ -22,10 +22,154 @@ var upcyclingHeavyOilResidue = false;
 
 function updateVariablesFromInput() {
     console.log('Updating Input');
-    unlockedTiers = document.getElementById("unlockedTiers").value;
-    selectedEnergySourceIndex = document.getElementById("energySource").value;
-    wantedMaterial = document.getElementById("wantedMaterial").value;
-    amountOfWantedMaterialPerMinute = document.getElementById("wantedMaterialAmount").value;
+    unlockedTiers = parseInt(document.getElementById("unlockedTiers").value);
+    selectedEnergySourceIndex = parseInt(document.getElementById("energySource").value);
+    wantedMaterial = parseInt(document.getElementById("wantedMaterial").value);
+    amountOfWantedMaterialPerMinute = parseInt(document.getElementById("wantedMaterialAmount").value);
+    //
+    var table = document.getElementById("resourceValueTable");
+    for (let i = 0; i < availableResources.length; i++) {
+        iResourceIndex = getIDbyMaterialName(table.rows[i].cells[0].innerHTML);
+        iResourceValue = parseInt(table.rows[i].cells[1].innerHTML);
+        resourceValues[i] = {
+            materialIndex: iResourceIndex,
+            value: iResourceValue
+        }
+    }
+    //
+    fillCraftingTree();
+}
+
+function fillCraftingTree() {
+    // clear cache
+    highestRecipeCallStack = 0;
+    recipeCacheForMaterial = [];
+    // clear out
+    var table = document.getElementById("craftingTreeTable");
+    table.innerHTML = '';
+    // calculate once to fill cache
+    calculateResourceCostPerMaterial(wantedMaterial, true);
+    //
+    let row = table.insertRow();
+    for (let i = 0; i <= highestRecipeCallStack; i++) {
+        let cell = row.insertCell(i);
+    }
+    //
+    recipeLog = [];
+    fillCraftingTreeColumn(highestRecipeCallStack, wantedMaterial, amountOfWantedMaterialPerMinute)
+}
+
+function fillCraftingTreeColumn(columnIndex, materialIndexToCraft, amountPerMinute) {
+    if (materials[materialIndexToCraft].isResource) {
+        return;
+    }
+    //
+    var table = document.getElementById("craftingTreeTable");
+    var offset = 0;
+    for (let j = 1; j < table.rows.length; j++) {
+        if (table.rows[j].cells[columnIndex].innerHTML) {
+            offset = j + 2;
+        }
+    }
+    //
+    var recipeIndex = lookUpCachedRecipeForMaterialNumber(materialIndexToCraft, selectedDefaultRecipeEfficiency);
+    var recipe = recipes[recipeIndex];
+    var craftsPerMinute;
+    for (let i = 0; i < recipe.output.length; i++) {
+        if (recipe.output[i] == materialIndexToCraft) {
+            craftsPerMinute = amountPerMinute / recipe.outputQuantity[i];
+        }
+    }
+    //
+    if (!table.rows[offset]) {
+        for (let j = 0; j < 3; j++) {
+            let row = table.insertRow();
+            for (let k = 0; k <= highestRecipeCallStack; k++) {
+                row.insertCell(k);
+            }
+        }
+    }
+    //
+    table.rows[offset].cells[columnIndex].innerHTML = '<b>' + recipe.name + '</b>';
+    // Output
+    var detailsAboutCraftingStep = '<b>Output</b>: ';
+    for (let j = 0; j < recipe.output.length; j++) {
+        detailsAboutCraftingStep = detailsAboutCraftingStep + (recipe.outputQuantity[j] * craftsPerMinute) + '/min ' + materials[recipe.output[j]].name + ', ';
+    }
+    detailsAboutCraftingStep = detailsAboutCraftingStep + '\n';
+    // Input
+    ///////////////
+    // check for circular reference
+    var circularReferenceDetected = false;
+    var outputToRemoveCircularReference = [];
+    var inputToRemoveCircularReference = [];
+    if (!(recipeLog[0] === undefined || recipeLog[1] === undefined || recipeLog[2] === undefined || recipeLog[3] === undefined)) {
+        // RecipeLog is only updated in getRecipeIndexFor()
+        var materialInRecipeLog = false;
+        for (let i = 0; i < recipes[recipeLog[1].recipeIndex].output.length; i++) {
+            if (recipes[recipeLog[1].recipeIndex].output[i] == materialIndexToCraft) {
+                materialInRecipeLog = true;
+            }
+        }
+        var log0 = recipeLog[0].recipeIndex;
+        var log1 = recipeLog[1].recipeIndex;
+        var log2 = recipeLog[2].recipeIndex;
+        var log3 = recipeLog[3].recipeIndex;
+        if (materialInRecipeLog && log0 === log2 && log1 === log3 && recipeLog[0].recipeCallStackSize > recipeLog[2].recipeCallStackSize) {
+            console.log('Recognized circular reference between recipeNo ' + recipeLog[0].recipeIndex + ' ' + recipes[recipeLog[0].recipeIndex].name + ' and recipeNo ' + recipeLog[1].recipeIndex + ' ' + recipes[recipeLog[1].recipeIndex].name);
+            circularReferenceDetected = true;
+            outputToRemoveCircularReference = lookUpInputOverlapForCostArray(recipeLog[1].recipeIndex, {
+                materialIndex: recipes[recipeLog[0].recipeIndex].input,
+                quantity: recipes[recipeLog[0].recipeIndex].inputQuantity
+            });
+            inputToRemoveCircularReference = lookUpOutputOverlapForCostArray(recipeLog[1].recipeIndex, {
+                materialIndex: recipes[recipeLog[0].recipeIndex].output,
+                quantity: recipes[recipeLog[0].recipeIndex].outputQuantity
+            });
+            //Fallback if breaks apart
+            if (inputToRemoveCircularReference.length == 0) {
+                outputToRemoveCircularReference = [];
+            }
+        }
+    }
+    //
+    var costPerRecipe = calculateCostPerRecipe(recipeIndex, false, inputToRemoveCircularReference);
+    //
+    addRecipeIndexToRecipeLog(recipeIndex);
+    ///////////////
+    detailsAboutCraftingStep = detailsAboutCraftingStep + '<b>Input</b>: ';
+    for (let j = 0; j < costPerRecipe.length; j++) {
+        var jAmountPerMinute = Math.round(costPerRecipe[j].quantity * craftsPerMinute * 100) / 100;
+        detailsAboutCraftingStep = detailsAboutCraftingStep + jAmountPerMinute + '/min ' + materials[costPerRecipe[j].materialIndex].name + ', ';
+        if (materials[costPerRecipe[j].materialIndex].isResource) {
+            continue;
+        }
+        // increment currentRecipeCallStackSize
+        currentRecipeCallStackSize++;
+        fillCraftingTreeColumn(columnIndex - 1, costPerRecipe[j].materialIndex, jAmountPerMinute);
+        // decrement currentRecipeCallStackSize
+        currentRecipeCallStackSize--;
+    }
+    detailsAboutCraftingStep = detailsAboutCraftingStep + '\n';
+    // Machines
+    var numberOfMachines = Math.round(craftsPerMinute / (60 / recipe.craftingTime_s) * 100) / 100;
+    detailsAboutCraftingStep = detailsAboutCraftingStep + '<b>Machines</b>: ';
+    detailsAboutCraftingStep = detailsAboutCraftingStep + numberOfMachines + 'x ' + machines[recipe.machine].name;
+    detailsAboutCraftingStep = detailsAboutCraftingStep + '\n';
+    // Power
+    var power_mw = Math.round(numberOfMachines * machines[recipe.machine].powerConsumption_mw * 100) / 100;
+    detailsAboutCraftingStep = detailsAboutCraftingStep + '<b>Power</b>: ';
+    detailsAboutCraftingStep = detailsAboutCraftingStep + power_mw + 'MW ';
+    detailsAboutCraftingStep = detailsAboutCraftingStep + '\n';
+    //
+    let row;
+    if (!table.rows[offset + 1]) {
+        row = table.insertRow();
+        for (let k = 0; k <= highestRecipeCallStack; k++) {
+            row.insertCell(k);
+        }
+    }
+    table.rows[offset + 1].cells[columnIndex].innerHTML = detailsAboutCraftingStep;
 }
 
 function instantiateElements() {
@@ -42,10 +186,10 @@ function loadSelectOptions() {
         selectElement.remove(i);
     }
     // populate new options
-    for (let i = 0; i < selectableMaterials.length; i++) {
+    for (let i = 0; i < selectableProducts.length; i++) {
         var option = document.createElement("option");
-        option.value = selectableMaterials[i];
-        option.text = materials[selectableMaterials[i]].name;
+        option.value = selectableProducts[i];
+        option.text = materials[selectableProducts[i]].name;
         // then append it to the select element
         selectElement.appendChild(option);
     }
@@ -68,11 +212,7 @@ function loadSelectOptions() {
 
 function loadResourceValueTable() {
     var table = document.getElementById("resourceValueTable");
-    console.log('Instantiating resource value');
     table.innerHTML = ""; //clear the table
-
-    var i = 0;
-
     for (let i = 0; i < availableResources.length; i++) {
         let row = table.insertRow();
 
@@ -83,8 +223,8 @@ function loadResourceValueTable() {
         let value = row.insertCell(1);
         value.innerHTML = resourceValues[i].value;
         value.contentEditable = true;
-        value.setAttribute("onfocusout", "updateRow(" + i + ");");
-        value.setAttribute("onKeyPress", "onEnter(event," + i + ")");
+        //value.setAttribute("onfocusout", "updateVariablesFromInput();");
+        //value.setAttribute("onKeyPress", "updateVariablesFromInput();");
     }
 }
 ///////////////

@@ -8,10 +8,10 @@ function getIDbyMaterialName(nameToLookUp) {
     throw new Error('MaterialName not found: ' + nameToLookUp);
 }
 
-function getAvailableMaterialsIndeces() {
+function getAvailableProductsIndeces() {
     var availableMaterialIndeces = [];
     for (let i = 1; i < materials.length; i++) {
-        if (materials[i].tier <= unlockedTiers) {
+        if (materials[i].tier <= unlockedTiers && !materials[i].isResource) {
             availableMaterialIndeces.push(i);
         }
     }
