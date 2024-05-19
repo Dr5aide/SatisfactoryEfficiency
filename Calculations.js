@@ -115,7 +115,7 @@ function calculateResourceCostPerMaterial(materialIndex, calculatePowerCost) {
             name: costPerRecipe[i].name,
             materialIndex: costPerRecipe[i].materialIndex,
             quantity: costPerRecipe[i].quantity / outputPerRecipe
-        })
+        });
     }
     // decrement currentRecipeCallStackSize
     currentRecipeCallStackSize--;
@@ -126,6 +126,7 @@ function calculateResourceCostPerMaterial(materialIndex, calculatePowerCost) {
 var recipeCacheForMaterial = [];
 function addRecipeForMaterial(recipeArrayToStore, materialToStore, valueCostArray) {
     recipeCacheForMaterial.push({
+        name: materials[materialToStore].name,
         materialIndex: materialToStore,
         recipeIndeces: recipeArrayToStore,
         valueCost: valueCostArray
@@ -143,10 +144,18 @@ function lookUpCachedRecipeForMaterialNumber(materialIndex, recipeEfficiencyLeve
     }
     return -1;
 }
+function lookUpRecipeCacheObjectForMaterialNumber(materialIndex) {
+    for (let i = 0; i < recipeCacheForMaterial.length; i++) {
+        if (recipeCacheForMaterial[i].materialIndex === materialIndex) {
+            return recipeCacheForMaterial[i];
+        }
+    }
+}
+
 
 function getRecipeIndexFor(materialIndex, calculatePowerCost) {
     // look through cache
-    var cachedRecipe = lookUpCachedRecipeForMaterialNumber(materialIndex, selectedDefaultRecipeEfficiency)
+    var cachedRecipe = lookUpCachedRecipeForMaterialNumber(materialIndex, selectedDefaultRecipeEfficiencyLevel)
     if (cachedRecipe >= 0) {
         return cachedRecipe;
     }
@@ -200,7 +209,7 @@ function getRecipeIndexFor(materialIndex, calculatePowerCost) {
     //Store in cache
     addRecipeForMaterial(efficiencyRecipeIndeces, materialIndex, efficiencyRecipeValueCosts);
     //determine which one should be used by default
-    chosenRecipeIndex = efficiencyRecipeIndeces[selectedDefaultRecipeEfficiency - 1];
+    chosenRecipeIndex = efficiencyRecipeIndeces[selectedDefaultRecipeEfficiencyLevel - 1];
     if (!(typeof chosenRecipeIndex === 'number')) {
         throw new Error('Couldn\'t determine recipe for materialIndex ' + materialIndex + materials[materialIndex].name);
     }
@@ -270,7 +279,7 @@ function calculateResourceCostPerRecipe(recipeIndex, calculatePowerCost, inputTo
 };
 
 //copy of calculateResourceCostPerRecipe
-function calculateCostPerRecipe(recipeIndex, calculatePowerCost, inputToRemoveCircularReference) {
+function calculateCostPerRecipe(recipeIndex, inputToRemoveCircularReference) {
     var cost = []
     //
     for (let i = 0; i < recipes[recipeIndex].input.length; i++) {

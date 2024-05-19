@@ -13,12 +13,45 @@ var selectableProducts = getAvailableProductsIndeces();
 var resourceValues = getDefaultResourceValue();
 var availableResources = getAvailableResourceIndeces();
 //
-var selectedDefaultRecipeEfficiency = 1;
+var selectedDefaultRecipeEfficiencyLevel = 1;
 const selectableDefaultRecipeEfficiencies = [1, 2, 3];
 //##
 // ToDo
 var upcyclingPolymerResin = false;
 var upcyclingHeavyOilResidue = false;
+//
+var selectedEfficiencyIndexPerMaterial = [];
+function getEfficiencyIndexPerMaterial(materialIndex) {
+    console.log("getEfficiencyIndexPerMaterial for: " + materialIndex);
+    console.log("selectedEfficiencyIndexPerMaterial Array:");
+    console.log(selectedEfficiencyIndexPerMaterial);
+    for (let i = 0; i < selectedEfficiencyIndexPerMaterial.length; i++) {
+        if (selectedEfficiencyIndexPerMaterial[i].materialIndex == materialIndex) {
+            console.log("returning " + selectedEfficiencyIndexPerMaterial[i].efficiencyIndex);
+            return selectedEfficiencyIndexPerMaterial[i].efficiencyIndex;
+        }
+    }
+    return 0;
+}
+function updateSelectedEfficiencyIndexFor(materialIndex, selectElement) {
+    var materialIndexAlreadyAdded = false;
+    for (let i = 0; i < selectedEfficiencyIndexPerMaterial.length; i++) {
+        if (selectedEfficiencyIndexPerMaterial[i].materialIndex == materialIndex) {
+            selectedEfficiencyIndexPerMaterial[i].efficiencyIndex = parseInt(selectElement.value);
+            materialIndexAlreadyAdded = true;
+        }
+    }
+    //
+    if (!materialIndexAlreadyAdded) {
+        selectedEfficiencyIndexPerMaterial.push({
+            materialIndex: materialIndex,
+            efficiencyIndex: parseInt(selectElement.value)
+        });
+    }
+    //
+    fillCraftingTree()
+}
+
 
 function updateVariablesFromInput() {
     console.log('Updating Input');
@@ -36,6 +69,8 @@ function updateVariablesFromInput() {
             value: iResourceValue
         }
     }
+    // when unlockedTier is changed selectedEfficiencyIndexPerMaterial becomes desynced
+    selectedEfficiencyIndexPerMaterial = [];
     //
     fillCraftingTree();
 }
@@ -56,13 +91,13 @@ function fillCraftingTree() {
     }
     //
     recipeLog = [];
-    fillCraftingTreeColumn(highestRecipeCallStack, wantedMaterial, amountOfWantedMaterialPerMinute)
+    addMaterialToCraftingTreeColumn(highestRecipeCallStack, wantedMaterial, amountOfWantedMaterialPerMinute)
     //
     console.log('RecipeCache:');
     console.log(recipeCacheForMaterial);
 }
 
-function fillCraftingTreeColumn(columnIndex, materialIndexToCraft, amountPerMinute) {
+function addMaterialToCraftingTreeColumn(columnIndex, materialIndexToCraft, amountPerMinute) {
     if (materials[materialIndexToCraft].isResource) {
         return;
     }
@@ -75,8 +110,16 @@ function fillCraftingTreeColumn(columnIndex, materialIndexToCraft, amountPerMinu
         }
     }
     //
-    var recipeIndex = lookUpCachedRecipeForMaterialNumber(materialIndexToCraft, selectedDefaultRecipeEfficiency);
+    var recipeCacheObject = lookUpRecipeCacheObjectForMaterialNumber(materialIndexToCraft);
+    console.log("recipeCacheObject:");
+    console.log(recipeCacheObject);
+    var recipeIndexArray = recipeCacheObject.recipeIndeces;
+    var recipeValueCostArray = recipeCacheObject.valueCost;
+    var recipeIndex = recipeIndexArray[getEfficiencyIndexPerMaterial(materialIndexToCraft)];
+    console.log("recipeIndex:");
+    console.log(recipeIndex);
     var recipe = recipes[recipeIndex];
+    //
     var craftsPerMinute;
     for (let i = 0; i < recipe.output.length; i++) {
         if (recipe.output[i] == materialIndexToCraft) {
@@ -92,8 +135,28 @@ function fillCraftingTreeColumn(columnIndex, materialIndexToCraft, amountPerMinu
             }
         }
     }
+    // Title
+    var titleCell = table.rows[offset].cells[columnIndex];
     //
-    table.rows[offset].cells[columnIndex].innerHTML = '<b>' + recipe.name + '</b>';
+    var selectElement = document.createElement("select");
+    selectElement.type = "number";
+    selectElement.class = "form-control";
+    //
+    titleCell.appendChild(selectElement);
+    // populate new options
+    for (let i = 0; i < recipeIndexArray.length; i++) {
+        var option = document.createElement("option");
+        option.value = i;
+        var valueCost = Math.round(recipeValueCostArray[i] * 100) / 100;
+        var relativeValueEfficiency = Math.round(recipeValueCostArray[0] / recipeValueCostArray[i] * 1000) / 10;
+        option.text = recipes[recipeIndexArray[i]].name + " (" + valueCost + " | " + relativeValueEfficiency + "%)";
+        // then append it to the select element
+        selectElement.appendChild(option);
+    }
+    //
+    selectElement.value = getEfficiencyIndexPerMaterial(materialIndexToCraft);
+    selectElement.onchange = function () { updateSelectedEfficiencyIndexFor(materialIndexToCraft, selectElement); };
+    //
     // Output
     var detailsAboutCraftingStep = '<b>Output</b>: ';
     for (let j = 0; j < recipe.output.length; j++) {
@@ -137,7 +200,7 @@ function fillCraftingTreeColumn(columnIndex, materialIndexToCraft, amountPerMinu
         }
     }
     //
-    var costPerRecipe = calculateCostPerRecipe(recipeIndex, false, inputToRemoveCircularReference);
+    var costPerRecipe = calculateCostPerRecipe(recipeIndex, inputToRemoveCircularReference);
     //
     addRecipeIndexToRecipeLog(recipeIndex);
     ///////////////
@@ -150,7 +213,7 @@ function fillCraftingTreeColumn(columnIndex, materialIndexToCraft, amountPerMinu
         }
         // increment currentRecipeCallStackSize
         currentRecipeCallStackSize++;
-        fillCraftingTreeColumn(columnIndex - 1, costPerRecipe[j].materialIndex, jAmountPerMinute);
+        addMaterialToCraftingTreeColumn(columnIndex - 1, costPerRecipe[j].materialIndex, jAmountPerMinute);
         // decrement currentRecipeCallStackSize
         currentRecipeCallStackSize--;
     }
@@ -179,6 +242,7 @@ function fillCraftingTreeColumn(columnIndex, materialIndexToCraft, amountPerMinu
 function instantiateElements() {
     console.log('Instantiate Elemets');
     loadSelectOptions();
+    loadPreSelect();
     loadResourceValueTable();
 }
 
@@ -215,6 +279,11 @@ function loadSelectOptions() {
     }
 }
 
+function loadPreSelect() {
+    var selectElement = document.getElementById('energySource');
+    selectElement.value = "2";
+}
+
 function loadResourceValueTable() {
     var table = document.getElementById("resourceValueTable");
     table.innerHTML = ""; //clear the table
@@ -228,46 +297,8 @@ function loadResourceValueTable() {
         let value = row.insertCell(1);
         value.innerHTML = resourceValues[i].value;
         value.contentEditable = true;
-        //value.setAttribute("onfocusout", "updateVariablesFromInput();");
-        //value.setAttribute("onKeyPress", "updateVariablesFromInput();");
     }
 }
-///////////////
-function onEnter(event, i) {
-    var code = 0;
-    code = event.keyCode;
-    if (code == 13) {
-
-    }
-}
-
-function updateReadOnlyFields() //set the values of the read only input fields
-{
-    document.getElementById("calculatedNominellAirFlowPerBird").value = getCalculatedNominellAirFlowPerBird();
-}
-
-function showCurrentAdvancedSettings() //fill the advanced Settings html fields with the js object values
-{
-    if (dynamicInput.birdSpecies == "Broiler") {
-        document.getElementById("birdSpecies").value = 1;
-    }
-    if (dynamicInput.birdSpecies == "Turkey") {
-        document.getElementById("birdSpecies").value = 2;
-    }
-    document.getElementById("feedFactor").value = dynamicInput.feedFactor;
-}
-
-function saveAdvancedSettings() //write the adavanced Settings html fields into the js object
-{
-    if (document.getElementById("birdSpecies").value == 1) {
-        dynamicInput.birdSpecies = "Broiler";
-    }
-    if (document.getElementById("birdSpecies").value == 2) {
-        dynamicInput.birdSpecies == "Turkey";
-    }
-    dynamicInput.feedFactor = document.getElementById("feedFactor").value;
-}
-////////////////////////////////////
 
 function getDefaultResourceValue() {
     var resourceValueArray = [];
