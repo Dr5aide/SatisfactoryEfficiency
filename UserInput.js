@@ -19,12 +19,32 @@ const selectableDefaultRecipeEfficiencies = [1, 2, 3];
 // ToDo
 var upcyclingPolymerResin = false;
 var upcyclingHeavyOilResidue = false;
-//
+
+
+function updateVariablesFromInput() {
+    console.log('Updating Input');
+    unlockedTiers = parseInt(document.getElementById("unlockedTiers").value);
+    selectedEnergySourceIndex = parseInt(document.getElementById("energySource").value);
+    wantedMaterial = parseInt(document.getElementById("wantedMaterial").value);
+    amountOfWantedMaterialPerMinute = parseInt(document.getElementById("wantedMaterialAmount").value);
+    //
+    var table = document.getElementById("resourceValueTable");
+    for (let i = 0; i < availableResources.length; i++) {
+        iResourceIndex = getMaterialIndexbyName(table.rows[i].cells[0].innerHTML);
+        iResourceValue = parseInt(table.rows[i].cells[1].innerHTML);
+        resourceValues[i] = {
+            materialIndex: iResourceIndex,
+            value: iResourceValue
+        }
+    }
+    // when unlockedTier is changed selectedEfficiencyIndexPerMaterial becomes desynced
+    selectedEfficiencyIndexPerMaterial = [];
+    //
+    fillCraftingTree();
+}
+
 var selectedEfficiencyIndexPerMaterial = [];
 function getEfficiencyIndexPerMaterial(materialIndex) {
-    console.log("getEfficiencyIndexPerMaterial for: " + materialIndex);
-    console.log("selectedEfficiencyIndexPerMaterial Array:");
-    console.log(selectedEfficiencyIndexPerMaterial);
     for (let i = 0; i < selectedEfficiencyIndexPerMaterial.length; i++) {
         if (selectedEfficiencyIndexPerMaterial[i].materialIndex == materialIndex) {
             console.log("returning " + selectedEfficiencyIndexPerMaterial[i].efficiencyIndex);
@@ -50,29 +70,6 @@ function updateSelectedEfficiencyIndexFor(materialIndex, selectElement) {
     }
     //
     fillCraftingTree()
-}
-
-
-function updateVariablesFromInput() {
-    console.log('Updating Input');
-    unlockedTiers = parseInt(document.getElementById("unlockedTiers").value);
-    selectedEnergySourceIndex = parseInt(document.getElementById("energySource").value);
-    wantedMaterial = parseInt(document.getElementById("wantedMaterial").value);
-    amountOfWantedMaterialPerMinute = parseInt(document.getElementById("wantedMaterialAmount").value);
-    //
-    var table = document.getElementById("resourceValueTable");
-    for (let i = 0; i < availableResources.length; i++) {
-        iResourceIndex = getIDbyMaterialName(table.rows[i].cells[0].innerHTML);
-        iResourceValue = parseInt(table.rows[i].cells[1].innerHTML);
-        resourceValues[i] = {
-            materialIndex: iResourceIndex,
-            value: iResourceValue
-        }
-    }
-    // when unlockedTier is changed selectedEfficiencyIndexPerMaterial becomes desynced
-    selectedEfficiencyIndexPerMaterial = [];
-    //
-    fillCraftingTree();
 }
 
 function fillCraftingTree() {
@@ -111,13 +108,9 @@ function addMaterialToCraftingTreeColumn(columnIndex, materialIndexToCraft, amou
     }
     //
     var recipeCacheObject = lookUpRecipeCacheObjectForMaterialNumber(materialIndexToCraft);
-    console.log("recipeCacheObject:");
-    console.log(recipeCacheObject);
     var recipeIndexArray = recipeCacheObject.recipeIndeces;
     var recipeValueCostArray = recipeCacheObject.valueCost;
     var recipeIndex = recipeIndexArray[getEfficiencyIndexPerMaterial(materialIndexToCraft)];
-    console.log("recipeIndex:");
-    console.log(recipeIndex);
     var recipe = recipes[recipeIndex];
     //
     var craftsPerMinute;
@@ -240,7 +233,6 @@ function addMaterialToCraftingTreeColumn(columnIndex, materialIndexToCraft, amou
 }
 
 function instantiateElements() {
-    console.log('Instantiate Elemets');
     loadSelectOptions();
     loadPreSelect();
     loadResourceValueTable();
@@ -295,7 +287,7 @@ function loadResourceValueTable() {
         resource.contentEditable = false;
 
         let value = row.insertCell(1);
-        value.innerHTML = resourceValues[i].value;
+        value.innerHTML = Math.round(resourceValues[i].value * 100) / 100;
         value.contentEditable = true;
     }
 }

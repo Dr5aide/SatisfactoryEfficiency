@@ -245,7 +245,7 @@ function calculateResourceCostPerRecipe(recipeIndex, calculatePowerCost, inputTo
             else {
                 var costToAdd = [{
                     name: 'MJ of Power',
-                    materialIndex: getIDbyMaterialName('MJ of Power'),
+                    materialIndex: getMaterialIndexbyName('MJ of Power'),
                     quantity: materials[iInputMaterialIndex].megawattSecondToExtract
                 }]
                 cost = addCosts(cost, costToAdd);

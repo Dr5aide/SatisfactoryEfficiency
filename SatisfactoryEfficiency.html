@@ -29,7 +29,7 @@
     unlockedTiers = 8;
     var materialToTry = 'Electromagnetic Control Rod';
     console.log('Cost of '+materialToTry+' without Power Usage');
-    var resourceCostForMaterialToTry = calculateResourceCostPerMaterial(getIDbyMaterialName(materialToTry), true);
+    var resourceCostForMaterialToTry = calculateResourceCostPerMaterial(getMaterialIndexbyName(materialToTry), true);
     console.log(resourceCostForMaterialToTry);
     console.log('With a value of '+ getResourceValueForResourceArray(resourceCostForMaterialToTry));
     console.log('highestRecipeCallStack: '+ highestRecipeCallStack);
@@ -48,7 +48,7 @@
     <div class="col-md-2 float-left">
       <!-- Settings -->
       <form class="text-white bg-secondary" onSubmit="return false;">
-        <div style="margin-left: 15px; margin-right: 10px; margin-top: -8px; padding-bottom: 10px">
+        <div style="margin-left: 15px; margin-right: 15px; margin-top: -8px; padding-bottom: 10px">
           <h3 class="text-left" style="padding-top: 20px">
             Development
           </h3>

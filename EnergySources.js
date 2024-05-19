@@ -32,11 +32,11 @@ const energySources =
         {
             name: "Biomass (Biomass)",
             tier: 0,
-            output: [getIDbyMaterialName("MJ of Power")],
+            output: [getMaterialIndexbyName("MJ of Power")],
             outputQuantity: [180],
-            input: [getIDbyMaterialName("Biomass")],
+            input: [getMaterialIndexbyName("Biomass")],
             inputQuantity: [1],
-            machine: getIDbyMachineName("Biomass Burner"),
+            machine: getMachineIndexbyName("Biomass Burner"),
             // energyOutput (180) / powerOutput (30)
             burnTime: 6
         },
@@ -44,11 +44,11 @@ const energySources =
         {
             name: "Biomass (Solid Biofuel)",
             tier: 2,
-            output: [getIDbyMaterialName("MJ of Power")],
+            output: [getMaterialIndexbyName("MJ of Power")],
             outputQuantity: [450],
-            input: [getIDbyMaterialName("Solid Biofuel")],
+            input: [getMaterialIndexbyName("Solid Biofuel")],
             inputQuantity: [1],
-            machine: getIDbyMachineName("Biomass Burner"),
+            machine: getMachineIndexbyName("Biomass Burner"),
             // energyOutput (450) / powerOutput (30)
             burnTime: 15
         },
@@ -56,33 +56,33 @@ const energySources =
         {
             name: "Coal (Coal)",
             tier: 3,
-            output: [getIDbyMaterialName("MJ of Power")],
+            output: [getMaterialIndexbyName("MJ of Power")],
             outputQuantity: [300],
-            input: [getIDbyMaterialName("Coal"), getIDbyMaterialName("Water")],
+            input: [getMaterialIndexbyName("Coal"), getMaterialIndexbyName("Water")],
             inputQuantity: [1, 3],
-            machine: getIDbyMachineName("Coal Generator"),
+            machine: getMachineIndexbyName("Coal Generator"),
             // energyOutput (300) / powerOutput (75)
             burnTime: 4
         },
         {
             name: "Coal (Compacted Coal)",
             tier: 3,
-            output: [getIDbyMaterialName("MJ of Power")],
+            output: [getMaterialIndexbyName("MJ of Power")],
             outputQuantity: [630],
-            input: [getIDbyMaterialName("Compacted Coal"), getIDbyMaterialName("Water")],
+            input: [getMaterialIndexbyName("Compacted Coal"), getMaterialIndexbyName("Water")],
             inputQuantity: [1, 6.3],
-            machine: getIDbyMachineName("Coal Generator"),
+            machine: getMachineIndexbyName("Coal Generator"),
             // energyOutput (300) / powerOutput (75)
             burnTime: 8.4
         },
         {
             name: "Coal (Petroleum Coke)",
             tier: 5,
-            output: [getIDbyMaterialName("MJ of Power")],
+            output: [getMaterialIndexbyName("MJ of Power")],
             outputQuantity: [180],
-            input: [getIDbyMaterialName("Petroleum Coke"), getIDbyMaterialName("Water")],
+            input: [getMaterialIndexbyName("Petroleum Coke"), getMaterialIndexbyName("Water")],
             inputQuantity: [1, 1.8],
-            machine: getIDbyMachineName("Coal Generator"),
+            machine: getMachineIndexbyName("Coal Generator"),
             // energyOutput (300) / powerOutput (75)
             burnTime: 2.4
         },
@@ -90,33 +90,33 @@ const energySources =
         {
             name: "Fuel (Fuel)",
             tier: 6,
-            output: [getIDbyMaterialName("MJ of Power")],
+            output: [getMaterialIndexbyName("MJ of Power")],
             outputQuantity: [750],
-            input: [getIDbyMaterialName("Fuel")],
+            input: [getMaterialIndexbyName("Fuel")],
             inputQuantity: [1],
-            machine: getIDbyMachineName("Fuel Generator"),
+            machine: getMachineIndexbyName("Fuel Generator"),
             // energyOutput (750) / powerOutput (150)
             burnTime: 5
         },
         {
             name: "Fuel (Liquid Biofuel)",
             tier: 6,
-            output: [getIDbyMaterialName("MJ of Power")],
+            output: [getMaterialIndexbyName("MJ of Power")],
             outputQuantity: [750],
-            input: [getIDbyMaterialName("Liquid Biofuel")],
+            input: [getMaterialIndexbyName("Liquid Biofuel")],
             inputQuantity: [1],
-            machine: getIDbyMachineName("Fuel Generator"),
+            machine: getMachineIndexbyName("Fuel Generator"),
             // energyOutput (750) / powerOutput (150)
             burnTime: 5
         },
         {
             name: "Fuel (Turbofuel)",
             tier: 6,
-            output: [getIDbyMaterialName("MJ of Power")],
+            output: [getMaterialIndexbyName("MJ of Power")],
             outputQuantity: [2000],
-            input: [getIDbyMaterialName("Turbofuel")],
+            input: [getMaterialIndexbyName("Turbofuel")],
             inputQuantity: [1],
-            machine: getIDbyMachineName("Fuel Generator"),
+            machine: getMachineIndexbyName("Fuel Generator"),
             // energyOutput (2000) / powerOutput (150)
             burnTime: 13.33333333
         },
@@ -124,22 +124,22 @@ const energySources =
         {
             name: "Nuclear (Uranium Fuel Rod)",
             tier: 8,
-            output: [getIDbyMaterialName("MJ of Power"), getIDbyMaterialName("Uranium Waste")],
+            output: [getMaterialIndexbyName("MJ of Power"), getMaterialIndexbyName("Uranium Waste")],
             outputQuantity: [750000, 50],
-            input: [getIDbyMaterialName("Uranium Fuel Rod"), getIDbyMaterialName("Water")],
+            input: [getMaterialIndexbyName("Uranium Fuel Rod"), getMaterialIndexbyName("Water")],
             inputQuantity: [1, 1200],
-            machine: getIDbyMachineName("Nuclear Power Plant"),
+            machine: getMachineIndexbyName("Nuclear Power Plant"),
             // energyOutput (750000) / powerOutput (2500)
             burnTime: 300
         },
         {
             name: "Nuclear (Plutonium Fuel Rod)",
             tier: 8,
-            output: [getIDbyMaterialName("MJ of Power"), getIDbyMaterialName("Plutonium Waste")],
+            output: [getMaterialIndexbyName("MJ of Power"), getMaterialIndexbyName("Plutonium Waste")],
             outputQuantity: [1500000, 10],
-            input: [getIDbyMaterialName("Plutonium Fuel Rod"), getIDbyMaterialName("Water")],
+            input: [getMaterialIndexbyName("Plutonium Fuel Rod"), getMaterialIndexbyName("Water")],
             inputQuantity: [1, 2400],
-            machine: getIDbyMachineName("Nuclear Power Plant"),
+            machine: getMachineIndexbyName("Nuclear Power Plant"),
             // energyOutput (1500000) / powerOutput (2500)
             burnTime: 600
         },

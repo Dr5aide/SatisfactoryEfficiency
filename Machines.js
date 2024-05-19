@@ -1,5 +1,5 @@
 // Refering to Update 8
-function getIDbyMachineName(nameToLookUp) {
+function getMachineIndexbyName(nameToLookUp) {
     for (let i = 0; i < machines.length; i++) {
         if (machines[i].name == nameToLookUp) {
             return i;

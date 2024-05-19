@@ -1,5 +1,5 @@
 // Refering to Update 8
-function getIDbyMaterialName(nameToLookUp) {
+function getMaterialIndexbyName(nameToLookUp) {
     for (let i = 0; i < materials.length; i++) {
         if (materials[i].name === nameToLookUp) {
             return i;
