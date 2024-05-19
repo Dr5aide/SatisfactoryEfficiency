@@ -37,8 +37,6 @@ function updateVariablesFromInput() {
             value: iResourceValue
         }
     }
-    // when unlockedTier is changed selectedEfficiencyIndexPerMaterial becomes desynced
-    selectedEfficiencyIndexPerMaterial = [];
     //
     fillCraftingTree();
 }
