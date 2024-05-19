@@ -69,7 +69,7 @@ const recipes =
 			outputQuantity: [1],
 			input: [getIDbyMaterialName("Caterium Ore")],
 			inputQuantity: [3],
-			machine: getIDbyMachineName("Foundry"),
+			machine: getIDbyMachineName("Smeltery"),
 			craftingTime_s: 4
 		},
 		{
@@ -487,7 +487,7 @@ const recipes =
 		},
 		{
 			name: "Bolted Iron Plate",
-			tier: 2,
+			tier: 5,
 			output: [getIDbyMaterialName("Reinforced Iron Plate")],
 			outputQuantity: [3],
 			input: [getIDbyMaterialName("Iron Plate"), getIDbyMaterialName("Rubber")],

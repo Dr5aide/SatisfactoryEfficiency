@@ -67,7 +67,7 @@ const materials =
             megawattSecondToExtract: 5,
             //Impure: 9 Normal: 28 Pure: 12
             relativeNodeAmount: 56.5,
-            relativeNeed: 1
+            relativeNeed: 0.8
         },
         {
             name: "Caterium Ore",
@@ -76,7 +76,7 @@ const materials =
             megawattSecondToExtract: 5,
             //Impure: 0 Normal: 8 Pure: 8
             relativeNodeAmount: 24,
-            relativeNeed: 0.2
+            relativeNeed: 0.3
         },
         {
             name: "Coal",
@@ -103,7 +103,7 @@ const materials =
             megawattSecondToExtract: 5,
             //Impure: 1 Normal: 7 Pure: 3
             relativeNodeAmount: 14.5,
-            relativeNeed: 0.04
+            relativeNeed: 0.16
         },
         {
             name: "Bauxite",

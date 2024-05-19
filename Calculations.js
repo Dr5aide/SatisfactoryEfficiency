@@ -124,10 +124,11 @@ function calculateResourceCostPerMaterial(materialIndex, calculatePowerCost) {
 };
 
 var recipeCacheForMaterial = [];
-function addRecipeForMaterial(recipeArrayToStore, materialToStore) {
+function addRecipeForMaterial(recipeArrayToStore, materialToStore, valueCostArray) {
     recipeCacheForMaterial.push({
         materialIndex: materialToStore,
-        recipeIndeces: recipeArrayToStore
+        recipeIndeces: recipeArrayToStore,
+        valueCost: valueCostArray
     })
     // console.log('recipeCache');
     // console.log(recipeCacheForMaterial);
@@ -197,7 +198,7 @@ function getRecipeIndexFor(materialIndex, calculatePowerCost) {
     //console.log(efficiencyRecipeMaterialCost);
     //console.log('efficiencyRecipeValueCosts = ' + efficiencyRecipeValueCosts);
     //Store in cache
-    addRecipeForMaterial(efficiencyRecipeIndeces, materialIndex);
+    addRecipeForMaterial(efficiencyRecipeIndeces, materialIndex, efficiencyRecipeValueCosts);
     //determine which one should be used by default
     chosenRecipeIndex = efficiencyRecipeIndeces[selectedDefaultRecipeEfficiency - 1];
     if (!(typeof chosenRecipeIndex === 'number')) {

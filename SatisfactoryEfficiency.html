@@ -47,7 +47,7 @@
     <!-- left side -->
     <div class="col-md-2 float-left">
       <!-- Settings -->
-      <form class="text-white bg-secondary">
+      <form class="text-white bg-secondary" onSubmit="return false;">
         <div style="margin-left: 15px; margin-right: 10px; margin-top: -8px; padding-bottom: 10px">
           <h3 class="text-left" style="padding-top: 20px">
             Development
@@ -55,7 +55,7 @@
           <div class="form-group" style="margin-bottom: 12px">
             <label for="unlockedTiers">Unlocked Tiers</label>
             <select type="number" class="form-control" id="unlockedTiers" value="8"
-              onfocusout="updateVariablesFromInput();">
+              onchange="updateVariablesFromInput();">
               <option value=8>8</option>
               <option value=7>7</option>
               <option value=6>6</option>
@@ -69,7 +69,7 @@
           <div class="form-group" style="margin-bottom: 12px">
             <label for="energySource">Energy Source</label>
             <select type="number" class="form-control" id="energySource" value="2"
-              onfocusout="updateVariablesFromInput();">
+              onchange="updateVariablesFromInput();">
             </select>
           </div>
           <h3 class="text-left">
@@ -77,13 +77,12 @@
           </h3>
           <label for="wantedMaterial">Name</label>
           <div class="form-group" style="margin-bottom: 12px">
-            <select type="number" class="form-control" id="wantedMaterial" onfocusout="updateVariablesFromInput();">
+            <select type="number" class="form-control" id="wantedMaterial" onchange="updateVariablesFromInput();">
             </select>
           </div>
           <label for="wantedMaterialAmount">Amount per Minute</label>
           <div class="form-group" style="margin-bottom: 12px">
-            <input type="number" class="form-control" id="wantedMaterialAmount" value="10" min="0" max="10000"
-              onfocusout="validity.valid||(value='');
+            <input type="number" class="form-control" id="wantedMaterialAmount" value="10" min="0" max="10000" onchange="validity.valid||(value='');
               updateVariablesFromInput();">
             </input>
           </div>
@@ -92,7 +91,7 @@
           </h3>
           <div style="border: 2px; margin-top: 20px">
             <table class="table table-sm table-striped table-bordered table-hover text-white" id="resourceValueTable"
-              onfocusout="updateVariablesFromInput();">
+              onchange="updateVariablesFromInput();">
               <thead>
                 <tr>
                   <th>Resource</th>

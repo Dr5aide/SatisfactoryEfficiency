@@ -57,6 +57,9 @@ function fillCraftingTree() {
     //
     recipeLog = [];
     fillCraftingTreeColumn(highestRecipeCallStack, wantedMaterial, amountOfWantedMaterialPerMinute)
+    //
+    console.log('RecipeCache:');
+    console.log(recipeCacheForMaterial);
 }
 
 function fillCraftingTreeColumn(columnIndex, materialIndexToCraft, amountPerMinute) {
@@ -94,7 +97,8 @@ function fillCraftingTreeColumn(columnIndex, materialIndexToCraft, amountPerMinu
     // Output
     var detailsAboutCraftingStep = '<b>Output</b>: ';
     for (let j = 0; j < recipe.output.length; j++) {
-        detailsAboutCraftingStep = detailsAboutCraftingStep + (recipe.outputQuantity[j] * craftsPerMinute) + '/min ' + materials[recipe.output[j]].name + ', ';
+        var outputAmount = Math.round(recipe.outputQuantity[j] * craftsPerMinute * 100) / 100;
+        detailsAboutCraftingStep = detailsAboutCraftingStep + outputAmount + '/min ' + materials[recipe.output[j]].name + ', ';
     }
     detailsAboutCraftingStep = detailsAboutCraftingStep + '\n';
     // Input
@@ -173,6 +177,7 @@ function fillCraftingTreeColumn(columnIndex, materialIndexToCraft, amountPerMinu
 }
 
 function instantiateElements() {
+    console.log('Instantiate Elemets');
     loadSelectOptions();
     loadResourceValueTable();
 }
