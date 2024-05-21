@@ -45,7 +45,6 @@ var selectedEfficiencyIndexPerMaterial = [];
 function getEfficiencyIndexPerMaterial(materialIndex) {
     for (let i = 0; i < selectedEfficiencyIndexPerMaterial.length; i++) {
         if (selectedEfficiencyIndexPerMaterial[i].materialIndex == materialIndex) {
-            console.log("returning " + selectedEfficiencyIndexPerMaterial[i].efficiencyIndex);
             return selectedEfficiencyIndexPerMaterial[i].efficiencyIndex;
         }
     }
@@ -78,7 +77,7 @@ function fillCraftingTree() {
     var table = document.getElementById("craftingTreeTable");
     table.innerHTML = '';
     // calculate once to fill cache
-    calculateResourceCostPerMaterial(wantedMaterial, true);
+    calculateResourceCostPerMaterial(wantedMaterial, true, false);  // withPowerCalc <= true, add recipes to energy calc log, not material calc log <= false
     //
     let row = table.insertRow();
     for (let i = 0; i <= highestRecipeCallStack; i++) {
@@ -193,7 +192,7 @@ function addMaterialToCraftingTreeColumn(columnIndex, materialIndexToCraft, amou
     //
     var costPerRecipe = calculateCostPerRecipe(recipeIndex, inputToRemoveCircularReference);
     //
-    addRecipeIndexToRecipeLog(recipeIndex);
+    addRecipeIndexToRecipeLog(recipeIndex, false); //addToEnergyRecipeLog <= false
     ///////////////
     detailsAboutCraftingStep = detailsAboutCraftingStep + '<b>Input</b>: ';
     for (let j = 0; j < costPerRecipe.length; j++) {

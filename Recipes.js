@@ -838,7 +838,7 @@ const recipes =
 		},
 		{
 			name: "Rigour Motor",
-			tier: 4,
+			tier: 5,
 			output: [getMaterialIndexbyName("Motor")],
 			outputQuantity: [6],
 			input: [getMaterialIndexbyName("Rotor"), getMaterialIndexbyName("Stator"), getMaterialIndexbyName("Crystal Oscillator")],
@@ -1666,10 +1666,10 @@ const recipes =
 		{
 			name: "Encased Uranium Cell",
 			tier: 8,
-			output: [getMaterialIndexbyName("Encased Uranium Cell"), getMaterialIndexbyName("Sulfuric Acid")],
-			outputQuantity: [5, 2],
-			input: [getMaterialIndexbyName("Uranium"), getMaterialIndexbyName("Concrete"), getMaterialIndexbyName("Sulfuric Acid")],
-			inputQuantity: [10, 3, 8],
+			output: [getMaterialIndexbyName("Sulfuric Acid"), getMaterialIndexbyName("Encased Uranium Cell")],
+			outputQuantity: [2, 5],
+			input: [getMaterialIndexbyName("Sulfuric Acid"), getMaterialIndexbyName("Uranium"), getMaterialIndexbyName("Concrete")],
+			inputQuantity: [8, 10, 3],
 			machine: getMachineIndexbyName("Blender"),
 			craftingTime_s: 12
 		},
@@ -1732,6 +1732,16 @@ const recipes =
 			inputQuantity: [150, 20],
 			machine: getMachineIndexbyName("Particle Accelerator (Plutonium Pellet)"),
 			craftingTime_s: 120
+		},
+		{
+			name: "Nuclear (Uranium Fuel Rod)",
+			tier: 8,
+			output: [getMaterialIndexbyName("MJ of Power"), getMaterialIndexbyName("Uranium Waste")],
+			outputQuantity: [750000, 50],
+			input: [getMaterialIndexbyName("Uranium Fuel Rod"), getMaterialIndexbyName("Water")],
+			inputQuantity: [1, 1200],
+			machine: getMachineIndexbyName("Nuclear Power Plant"),
+			craftingTime_s: 300
 		},
 		// Special
 		{

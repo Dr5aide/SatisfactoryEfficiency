@@ -48,7 +48,7 @@ const materials =
             megawattSecondToExtract: 5,
             //Impure: 12 Normal: 47 Pure: 27
             relativeNodeAmount: 107,
-            // based on https://www.reddit.com/r/SatisfactoryGame/comments/poc898/alternate_recipes_indepth_analysis_an_objective/
+            // based on https://www.reddit.com/r/SatisfactoryGame/comments/poc898/alternate_recipes_indepth_analysis_an_objective/ then refined by try and error
             relativeNeed: 0.3
         },
         {
@@ -67,7 +67,7 @@ const materials =
             megawattSecondToExtract: 5,
             //Impure: 9 Normal: 28 Pure: 12
             relativeNodeAmount: 56.5,
-            relativeNeed: 0.8
+            relativeNeed: 0.75
         },
         {
             name: "Caterium Ore",
@@ -496,7 +496,7 @@ const materials =
             isResource: true,
             megawattSecondToExtract: 0,
             //Dummy
-            relativeNodeAmount: 10,
+            relativeNodeAmount: 1,
             relativeNeed: 1
         },
         {
@@ -505,7 +505,7 @@ const materials =
             isResource: true,
             megawattSecondToExtract: 0,
             //Dummy
-            relativeNodeAmount: 1,
+            relativeNodeAmount: 0.1,
             relativeNeed: 1
         },
         {
@@ -514,7 +514,7 @@ const materials =
             isResource: true,
             megawattSecondToExtract: 0,
             //Dummy
-            relativeNodeAmount: 10,
+            relativeNodeAmount: 1,
             relativeNeed: 1
         },
         {
@@ -523,7 +523,7 @@ const materials =
             isResource: true,
             megawattSecondToExtract: 0,
             //Dummy
-            relativeNodeAmount: 10,
+            relativeNodeAmount: 1,
             relativeNeed: 1
         },
         {
@@ -712,7 +712,7 @@ const materials =
             isResource: true,
             megawattSecondToExtract: 0,
             //Dummy
-            relativeNodeAmount: 1,
+            relativeNodeAmount: 0.1,
             relativeNeed: 1
         },
         {
@@ -721,7 +721,7 @@ const materials =
             isResource: true,
             megawattSecondToExtract: 0,
             //Dummy
-            relativeNodeAmount: 0.5,
+            relativeNodeAmount: 0.05,
             relativeNeed: 1
         },
         {
@@ -730,7 +730,7 @@ const materials =
             isResource: true,
             megawattSecondToExtract: 0,
             //Dummy
-            relativeNodeAmount: 0.2,
+            relativeNodeAmount: 0.02,
             relativeNeed: 1
         },
         {
