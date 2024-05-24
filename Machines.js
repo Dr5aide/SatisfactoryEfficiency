@@ -28,6 +28,10 @@ const machines =
             name: "Assembler",
             powerConsumption_mw: 15
         },
+        {
+            name: "AWESOME Sink",
+            powerConsumption_mw: 30
+        },
         // Tier 3
         {
             name: "Foundry",

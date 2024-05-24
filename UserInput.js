@@ -20,17 +20,28 @@ const selectableDefaultRecipeEfficiencies = [1, 2, 3];
 var upcyclingPolymerResin = false;
 var upcyclingHeavyOilResidue = false;
 
+function updateTierDependentVariables() {
+    unlockedTiers = parseInt(document.getElementById("unlockedTiers").value);
+    // since more crafting recipes may have been unlocked selectedEfficiencyIndexPerMaterial would be desynched
+    selectedEfficiencyIndexPerMaterial = [];
+    selectableProducts = getAvailableProductsIndeces();
+    selectableEnergySourceIndeces = getAvailableEnergySourceIndeces();
+    selectableEnergySourceNames = getAvailableEnergySourceNames();
+    //
+    console.log('Reloading select options');
+    loadSelectOptions();
+    loadPreSets();
+}
 
 function updateVariablesFromInput() {
     console.log('Updating Input');
-    unlockedTiers = parseInt(document.getElementById("unlockedTiers").value);
     selectedEnergySourceIndex = parseInt(document.getElementById("energySource").value);
     wantedMaterial = parseInt(document.getElementById("wantedMaterial").value);
     amountOfWantedMaterialPerMinute = parseInt(document.getElementById("wantedMaterialAmount").value);
     //
     var table = document.getElementById("resourceValueTable");
     for (let i = 0; i < availableResources.length; i++) {
-        iResourceIndex = getMaterialIndexbyName(table.rows[i].cells[0].innerHTML);
+        iResourceIndex = getMaterialIndexByName(table.rows[i].cells[0].innerHTML);
         iResourceValue = parseInt(table.rows[i].cells[1].innerHTML);
         resourceValues[i] = {
             materialIndex: iResourceIndex,
@@ -92,11 +103,11 @@ function fillCraftingTree() {
 }
 
 function addMaterialToCraftingTreeColumn(columnIndex, materialIndexToCraft, amountPerMinute) {
-    if (materials[materialIndexToCraft].isResource) {
+    var table = document.getElementById("craftingTreeTable");
+    if (materials[materialIndexToCraft].isResource || !table.rows[0].cells[columnIndex]) {
         return;
     }
     //
-    var table = document.getElementById("craftingTreeTable");
     var offset = 0;
     for (let j = 1; j < table.rows.length; j++) {
         if (table.rows[j].cells[columnIndex].innerHTML) {
@@ -231,7 +242,7 @@ function addMaterialToCraftingTreeColumn(columnIndex, materialIndexToCraft, amou
 
 function instantiateElements() {
     loadSelectOptions();
-    loadPreSelect();
+    loadPreSets();
     loadResourceValueTable();
 }
 
@@ -268,9 +279,11 @@ function loadSelectOptions() {
     }
 }
 
-function loadPreSelect() {
-    var selectElement = document.getElementById('energySource');
-    selectElement.value = "2";
+function loadPreSets() {
+    if (unlockedTiers > 2) {
+        var selectElement = document.getElementById('energySource');
+        selectElement.value = "2";
+    }
 }
 
 function loadResourceValueTable() {
