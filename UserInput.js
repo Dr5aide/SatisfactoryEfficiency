@@ -185,6 +185,7 @@ function addMaterialToCraftingTreeColumn(columnIndex, materialIndexToCraft, amou
     var circularReferenceDetected = false;
     var outputToRemoveCircularReference = [];
     var inputToRemoveCircularReference = [];
+    var recipeLog = craftingRecipeLog;
     if (!(recipeLog[0] === undefined || recipeLog[1] === undefined || recipeLog[2] === undefined || recipeLog[3] === undefined)) {
         // RecipeLog is only updated in getRecipeIndexFor()
         var materialInRecipeLog = false;
