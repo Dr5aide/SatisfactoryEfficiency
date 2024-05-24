@@ -12,6 +12,7 @@ var selectableProducts = getAvailableProductsIndeces();
 //
 var resourceValues = getDefaultResourceValue();
 var availableResources = getAvailableResourceIndeces();
+var neededResourcesAmounts = [];
 //
 var selectedDefaultRecipeEfficiencyLevel = 1;
 const selectableDefaultRecipeEfficiencies = [1, 2, 3];
@@ -84,6 +85,7 @@ function fillCraftingTree() {
     // clear cache
     highestRecipeCallStack = 0;
     recipeCacheForMaterial = [];
+    neededResourcesAmounts = [];
     // clear out
     var table = document.getElementById("craftingTreeTable");
     table.innerHTML = '';
@@ -98,13 +100,25 @@ function fillCraftingTree() {
     recipeLog = [];
     addMaterialToCraftingTreeColumn(highestRecipeCallStack, wantedMaterial, amountOfWantedMaterialPerMinute)
     //
+    fillNeededResourcesTable();
+    //
     console.log('RecipeCache:');
     console.log(recipeCacheForMaterial);
 }
 
 function addMaterialToCraftingTreeColumn(columnIndex, materialIndexToCraft, amountPerMinute) {
+    if (materials[materialIndexToCraft].isResource) {
+        var resourceQuantityToAdd = [{
+            name: materials[materialIndexToCraft].name,
+            materialIndex: materialIndexToCraft,
+            quantity: amountPerMinute
+        }]
+        neededResourcesAmounts = addCosts(neededResourcesAmounts, resourceQuantityToAdd);
+        return;
+    }
+    //
     var table = document.getElementById("craftingTreeTable");
-    if (materials[materialIndexToCraft].isResource || !table.rows[0].cells[columnIndex]) {
+    if (!table.rows[0].cells[columnIndex]) {
         return;
     }
     //
@@ -209,9 +223,9 @@ function addMaterialToCraftingTreeColumn(columnIndex, materialIndexToCraft, amou
     for (let j = 0; j < costPerRecipe.length; j++) {
         var jAmountPerMinute = Math.round(costPerRecipe[j].quantity * craftsPerMinute * 100) / 100;
         detailsAboutCraftingStep = detailsAboutCraftingStep + jAmountPerMinute + '/min ' + materials[costPerRecipe[j].materialIndex].name + ', ';
-        if (materials[costPerRecipe[j].materialIndex].isResource) {
+        /*if (materials[costPerRecipe[j].materialIndex].isResource) {
             continue;
-        }
+        }*/
         // increment currentRecipeCallStackSize
         currentRecipeCallStackSize++;
         addMaterialToCraftingTreeColumn(columnIndex - 1, costPerRecipe[j].materialIndex, jAmountPerMinute);
@@ -244,6 +258,7 @@ function instantiateElements() {
     loadSelectOptions();
     loadPreSets();
     loadResourceValueTable();
+    instantiateNeededResourcesTable();
 }
 
 function loadSelectOptions() {
@@ -327,4 +342,31 @@ function getResourceValueForResourceIndex(wantedMaterialIndex) {
     }
     //Fallback
     return 0;
+}
+
+function instantiateNeededResourcesTable() {
+    var table = document.getElementById("neededResourcesTable");
+    table.innerHTML = "";
+    for (let i = 0; i < availableResources.length; i++) {
+        let row = table.insertRow();
+        let resourceName = row.insertCell(0);
+        resourceName.innerHTML = materials[availableResources[i]].name;
+        resourceName.contentEditable = false;
+        let amount = row.insertCell(1);
+        amount.contentEditable = false;
+    }
+}
+
+function fillNeededResourcesTable() {
+    instantiateNeededResourcesTable();
+    //
+    var table = document.getElementById("neededResourcesTable");
+    for (let i = 0; i < neededResourcesAmounts.length; i++) {
+        for (let j = 0; j < availableResources.length; j++) {
+            if (neededResourcesAmounts[i].materialIndex == availableResources[j]) {
+                let amountCell = table.rows[j].cells[1];
+                amountCell.innerHTML = (Math.round(neededResourcesAmounts[i].quantity * 100) / 100) + "/min";
+            }
+        }
+    }
 }

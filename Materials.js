@@ -101,7 +101,7 @@ const materials =
             megawattSecondToExtract: 5,
             //Impure: 0 Normal: 11 Pure: 5
             relativeNodeAmount: 21,
-            relativeNeed: 0.08
+            relativeNeed: 0.1
         },
         {
             name: "Sulfur",
