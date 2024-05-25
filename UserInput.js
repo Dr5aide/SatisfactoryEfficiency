@@ -354,6 +354,7 @@ function instantiateNeededResourcesTable() {
         resourceName.innerHTML = materials[availableResources[i]].name;
         resourceName.contentEditable = false;
         let amount = row.insertCell(1);
+        amount.innerHTML = 0;
         amount.contentEditable = false;
     }
 }

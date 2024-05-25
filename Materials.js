@@ -61,7 +61,7 @@ const materials =
             megawattSecondToExtract: 5,
             //Impure: 33 Normal: 41 Pure: 46
             relativeNodeAmount: 149.5,
-            relativeNeed: 1
+            relativeNeed: 0.8
         },
         {
             name: "Copper Ore",
@@ -81,7 +81,7 @@ const materials =
             megawattSecondToExtract: 5,
             //Impure: 0 Normal: 8 Pure: 8
             relativeNodeAmount: 24,
-            relativeNeed: 0.3
+            relativeNeed: 0.30
         },
         {
             name: "Coal",
@@ -101,7 +101,7 @@ const materials =
             megawattSecondToExtract: 5,
             //Impure: 0 Normal: 11 Pure: 5
             relativeNodeAmount: 21,
-            relativeNeed: 0.1
+            relativeNeed: 0.25
         },
         {
             name: "Sulfur",
@@ -141,7 +141,7 @@ const materials =
             megawattSecondToExtract: 5,
             //Impure: 1 Normal: 3 Pure: 0
             relativeNodeAmount: 3.5,
-            relativeNeed: 0.03
+            relativeNeed: 0.05
         },
         // Ingots
         {
@@ -242,7 +242,7 @@ const materials =
             megawattSecondToExtract: 20,
             //Impure: 10 Normal: 12 Pure: 8
             relativeNodeAmount: 33,
-            relativeNeed: 0.5
+            relativeNeed: 0.52
         },
         {
             name: "Heavy Oil Residue",
