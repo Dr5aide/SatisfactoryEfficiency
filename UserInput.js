@@ -97,7 +97,7 @@ function fillCraftingTree() {
     }
     //
     recipeLog = [];
-    addMaterialToCraftingTreeColumn(highestRecipeCallStack, wantedMaterial, amountOfWantedMaterialPerMinute)
+    addMaterialToCraftingTreeColumn(0, wantedMaterial, amountOfWantedMaterialPerMinute)
     //
     fillNeededResourcesTable();
     //
@@ -228,7 +228,7 @@ function addMaterialToCraftingTreeColumn(columnIndex, materialIndexToCraft, amou
         }*/
         // increment currentRecipeCallStackSize
         currentRecipeCallStackSize++;
-        addMaterialToCraftingTreeColumn(columnIndex - 1, costPerRecipe[j].materialIndex, jAmountPerMinute);
+        addMaterialToCraftingTreeColumn(columnIndex + 1, costPerRecipe[j].materialIndex, jAmountPerMinute);
         // decrement currentRecipeCallStackSize
         currentRecipeCallStackSize--;
     }
