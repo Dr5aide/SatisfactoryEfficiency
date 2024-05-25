@@ -29,7 +29,6 @@ function updateTierDependentVariables() {
     selectableEnergySourceIndeces = getAvailableEnergySourceIndeces();
     selectableEnergySourceNames = getAvailableEnergySourceNames();
     //
-    console.log('Reloading select options');
     loadSelectOptions();
     loadPreSets();
 }
@@ -299,6 +298,12 @@ function loadPreSets() {
     if (unlockedTiers > 2) {
         var selectElement = document.getElementById('energySource');
         selectElement.value = "2";
+    }
+    for (let i = 0; i < selectableProducts.length; i++) {
+        if (selectableProducts[i] == wantedMaterial) {
+            var wantedMaterialSelect = document.getElementById('wantedMaterial');
+            wantedMaterialSelect.value = wantedMaterial;
+        }
     }
 }
 
