@@ -75,6 +75,6 @@ const machines =
         },
         {
             name: "Nuclear Power Plant",
-            powerConsumption_mw: -2500
+            powerConsumption_mw: 0//-2500
         }
     ]

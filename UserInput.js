@@ -316,6 +316,9 @@ function loadResourceValueTable() {
         let valueCell = row.insertCell(1);
         var input = document.createElement("input");
         input.type = "number";
+        input.min = "0";
+        input.max = "100000000";
+        input.step = "any";
         input.style = "width: 84px"
         input.value = Math.round(resourceValues[i].value * 100) / 100;
         valueCell.appendChild(input);

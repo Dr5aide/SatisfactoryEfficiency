@@ -1852,7 +1852,7 @@ const recipes =
 			craftingTime_s: 120
 		},
 		{
-			name: "Nuclear (Uranium Fuel Rod)",
+			name: "Uranium Fuel Rod Power",
 			tier: 8,
 			output: [getMaterialIndexByName("MJ of Power"), getMaterialIndexByName("Uranium Waste")],
 			outputQuantity: [750000, 50],
