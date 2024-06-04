@@ -300,6 +300,238 @@ const recipes =
 			machine: getMachineIndexbyName("Blender"),
 			craftingTime_s: 6
 		},
+		// (Un)packaging liquids need to be at the top for circular reference detection
+		// Containers
+		{
+			name: "Empty Canister",
+			tier: 5,
+			output: [getMaterialIndexByName("Empty Canister")],
+			outputQuantity: [4],
+			input: [getMaterialIndexByName("Plastic")],
+			inputQuantity: [2],
+			machine: getMachineIndexbyName("Constructor"),
+			craftingTime_s: 4
+		},
+		{
+			name: "Empty Fluid Tank",
+			tier: 8,
+			output: [getMaterialIndexByName("Empty Fluid Tank")],
+			outputQuantity: [1],
+			input: [getMaterialIndexByName("Aluminum Ingot")],
+			inputQuantity: [1],
+			machine: getMachineIndexbyName("Constructor"),
+			craftingTime_s: 1
+		},
+		{
+			name: "Pressure Conversion Cube",
+			tier: 8,
+			output: [getMaterialIndexByName("Pressure Conversion Cube")],
+			outputQuantity: [1],
+			input: [getMaterialIndexByName("Fused Modular Frame"), getMaterialIndexByName("Radio Control Unit")],
+			inputQuantity: [1, 2],
+			machine: getMachineIndexbyName("Assembler"),
+			craftingTime_s: 60
+		},
+		{
+			name: "Packaged Water",
+			tier: 5,
+			output: [getMaterialIndexByName("Packaged Water")],
+			outputQuantity: [2],
+			input: [getMaterialIndexByName("Water")],// getMaterialIndexByName("Empty Canister")],
+			inputQuantity: [2],// 2],
+			machine: getMachineIndexbyName("Packager"),
+			craftingTime_s: 2
+		},
+		{
+			name: "Unpackage Water",
+			tier: 5,
+			output: [getMaterialIndexByName("Water")],// getMaterialIndexByName("Empty Canister")],
+			outputQuantity: [2],// 2],
+			input: [getMaterialIndexByName("Packaged Water")],
+			inputQuantity: [2],
+			machine: getMachineIndexbyName("Packager"),
+			craftingTime_s: 2
+		},
+		{
+			name: "Packaged Oil",
+			tier: 5,
+			output: [getMaterialIndexByName("Packaged Oil")],
+			outputQuantity: [2],
+			input: [getMaterialIndexByName("Crude Oil")],// getMaterialIndexByName("Empty Canister")],
+			inputQuantity: [2],// 2],
+			machine: getMachineIndexbyName("Packager"),
+			craftingTime_s: 4
+		},
+		{
+			name: "Unpackage Oil",
+			tier: 5,
+			output: [getMaterialIndexByName("Crude Oil")],// getMaterialIndexByName("Empty Canister")],
+			outputQuantity: [2],// 2],
+			input: [getMaterialIndexByName("Packaged Oil")],
+			inputQuantity: [2],
+			machine: getMachineIndexbyName("Packager"),
+			craftingTime_s: 4
+		},
+		{
+			name: "Packaged Heavy Oil Residue",
+			tier: 5,
+			output: [getMaterialIndexByName("Packaged Heavy Oil Residue")],
+			outputQuantity: [2],
+			input: [getMaterialIndexByName("Heavy Oil Residue")],// getMaterialIndexByName("Empty Canister")],
+			inputQuantity: [2],// 2],
+			machine: getMachineIndexbyName("Packager"),
+			craftingTime_s: 4
+		},
+		{
+			name: "Unpackage Heavy Oil Residue",
+			tier: 5,
+			output: [getMaterialIndexByName("Heavy Oil Residue")],// getMaterialIndexByName("Empty Canister")],
+			outputQuantity: [2],// 2],
+			input: [getMaterialIndexByName("Packaged Heavy Oil Residue")],
+			inputQuantity: [2],
+			machine: getMachineIndexbyName("Packager"),
+			craftingTime_s: 4
+		},
+		{
+			name: "Packaged Fuel",
+			tier: 5,
+			output: [getMaterialIndexByName("Packaged Fuel")],
+			outputQuantity: [2],
+			input: [getMaterialIndexByName("Fuel")],// getMaterialIndexByName("Empty Canister")],
+			inputQuantity: [2],// 2],
+			machine: getMachineIndexbyName("Packager"),
+			craftingTime_s: 3
+		},
+		{
+			name: "Unpackage Fuel",
+			tier: 5,
+			output: [getMaterialIndexByName("Fuel")],// getMaterialIndexByName("Empty Canister")],
+			outputQuantity: [2],// 2],
+			input: [getMaterialIndexByName("Packaged Fuel")],
+			inputQuantity: [2],
+			machine: getMachineIndexbyName("Packager"),
+			craftingTime_s: 3
+		},
+		{
+			name: "Packaged Liquid Biofuel",
+			tier: 5,
+			output: [getMaterialIndexByName("Packaged Liquid Biofuel")],
+			outputQuantity: [2],
+			input: [getMaterialIndexByName("Liquid Biofuel")],// getMaterialIndexByName("Empty Canister")],
+			inputQuantity: [2],// 2],
+			machine: getMachineIndexbyName("Packager"),
+			craftingTime_s: 3
+		},
+		{
+			name: "Unpackage Liquid Biofuel",
+			tier: 5,
+			output: [getMaterialIndexByName("Liquid Biofuel")],// getMaterialIndexByName("Empty Canister")],
+			outputQuantity: [2],// 2],
+			input: [getMaterialIndexByName("Packaged Liquid Biofuel")],
+			inputQuantity: [2],
+			machine: getMachineIndexbyName("Packager"),
+			craftingTime_s: 3
+		},
+		{
+			name: "Packaged Turbofuel",
+			tier: 5,
+			output: [getMaterialIndexByName("Packaged Turbofuel")],
+			outputQuantity: [2],
+			input: [getMaterialIndexByName("Liquid Biofuel")],// getMaterialIndexByName("Empty Canister")],
+			inputQuantity: [2],// 2],
+			machine: getMachineIndexbyName("Packager"),
+			craftingTime_s: 6
+		},
+		{
+			name: "Unpackage Turbofuel",
+			tier: 5,
+			output: [getMaterialIndexByName("Turbofuel")],// getMaterialIndexByName("Empty Canister")],
+			outputQuantity: [2],// 2],
+			input: [getMaterialIndexByName("Packaged Turbofuel")],
+			inputQuantity: [2],
+			machine: getMachineIndexbyName("Packager"),
+			craftingTime_s: 6
+		},
+		{
+			name: "Packaged Alumina Solution",
+			tier: 7,
+			output: [getMaterialIndexByName("Packaged Alumina Solution")],
+			outputQuantity: [2],
+			input: [getMaterialIndexByName("Alumina Solution")],// getMaterialIndexByName("Empty Canister")],
+			inputQuantity: [2],// 2],
+			machine: getMachineIndexbyName("Packager"),
+			craftingTime_s: 1
+		},
+		{
+			name: "Unpackage Alumina Solution",
+			tier: 7,
+			output: [getMaterialIndexByName("Alumina Solution")],// getMaterialIndexByName("Empty Canister")],
+			outputQuantity: [2],// 2],
+			input: [getMaterialIndexByName("Packaged Alumina Solution")],
+			inputQuantity: [2],
+			machine: getMachineIndexbyName("Packager"),
+			craftingTime_s: 1
+		},
+		{
+			name: "Packaged Sulfuric Acid",
+			tier: 7,
+			output: [getMaterialIndexByName("Packaged Sulfuric Acid")],
+			outputQuantity: [2],
+			input: [getMaterialIndexByName("Sulfuric Acid")],// getMaterialIndexByName("Empty Canister")],
+			inputQuantity: [2],// 2],
+			machine: getMachineIndexbyName("Packager"),
+			craftingTime_s: 3
+		},
+		{
+			name: "Unpackage Sulfuric Acid",
+			tier: 7,
+			output: [getMaterialIndexByName("Sulfuric Acid")],// getMaterialIndexByName("Empty Canister")],
+			outputQuantity: [2],// 2],
+			input: [getMaterialIndexByName("Packaged Sulfuric Acid")],
+			inputQuantity: [2],
+			machine: getMachineIndexbyName("Packager"),
+			craftingTime_s: 3
+		},
+		{
+			name: "Packaged Nitric Acid",
+			tier: 8,
+			output: [getMaterialIndexByName("Packaged Nitric Acid")],
+			outputQuantity: [1],
+			input: [getMaterialIndexByName("Nitric Acid")],// getMaterialIndexByName("Empty Fluid Tank")],
+			inputQuantity: [1],// 1],
+			machine: getMachineIndexbyName("Packager"),
+			craftingTime_s: 2
+		},
+		{
+			name: "Unpackage Nitric Acid",
+			tier: 8,
+			output: [getMaterialIndexByName("Nitric Acid")],// getMaterialIndexByName("Empty Fluid Tank")],
+			outputQuantity: [1],// 2],
+			input: [getMaterialIndexByName("Packaged Nitric Acid")],
+			inputQuantity: [1],
+			machine: getMachineIndexbyName("Packager"),
+			craftingTime_s: 2
+		},
+		{
+			name: "Packaged Nitrogen Gas",
+			tier: 8,
+			output: [getMaterialIndexByName("Packaged Nitrogen Gas")],
+			outputQuantity: [1],
+			input: [getMaterialIndexByName("Nitrogen Gas")],// getMaterialIndexByName("Empty Fluid Tank")],
+			inputQuantity: [4],// 1],
+			machine: getMachineIndexbyName("Packager"),
+			craftingTime_s: 1
+		},
+		{
+			name: "Unpackage Nitrogen Gas",
+			tier: 8,
+			output: [getMaterialIndexByName("Nitrogen Gas")],// getMaterialIndexByName("Empty Fluid Tank")],
+			outputQuantity: [4],// 2],
+			input: [getMaterialIndexByName("Packaged Nitrogen Gas")],
+			inputQuantity: [1],
+			machine: getMachineIndexbyName("Packager"),
+			craftingTime_s: 1
+		},
 		// Liquids
 		{
 			name: "Heavy Oil Residue",
@@ -1215,87 +1447,6 @@ const recipes =
 			machine: getMachineIndexbyName("Manufacturer"),
 			craftingTime_s: 32
 		},
-		// Containers
-		{
-			name: "Empty Canister",
-			tier: 5,
-			output: [getMaterialIndexByName("Empty Canister")],
-			outputQuantity: [4],
-			input: [getMaterialIndexByName("Plastic")],
-			inputQuantity: [2],
-			machine: getMachineIndexbyName("Constructor"),
-			craftingTime_s: 4
-		},
-		{
-			name: "Empty Fluid Tank",
-			tier: 8,
-			output: [getMaterialIndexByName("Empty Fluid Tank")],
-			outputQuantity: [1],
-			input: [getMaterialIndexByName("Aluminum Ingot")],
-			inputQuantity: [1],
-			machine: getMachineIndexbyName("Constructor"),
-			craftingTime_s: 1
-		},
-		{
-			name: "Pressure Conversion Cube",
-			tier: 8,
-			output: [getMaterialIndexByName("Pressure Conversion Cube")],
-			outputQuantity: [1],
-			input: [getMaterialIndexByName("Fused Modular Frame"), getMaterialIndexByName("Radio Control Unit")],
-			inputQuantity: [1, 2],
-			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 60
-		},
-		{
-			name: "Packaged Water",
-			tier: 5,
-			output: [getMaterialIndexByName("Packaged Water")],
-			outputQuantity: [2],
-			input: [getMaterialIndexByName("Water"), getMaterialIndexByName("Empty Canister")],
-			inputQuantity: [2, 2],
-			machine: getMachineIndexbyName("Packager"),
-			craftingTime_s: 2
-		},
-		{
-			name: "Packaged Alumina Solution",
-			tier: 7,
-			output: [getMaterialIndexByName("Packaged Alumina Solution")],
-			outputQuantity: [2],
-			input: [getMaterialIndexByName("Alumina Solution"), getMaterialIndexByName("Empty Canister")],
-			inputQuantity: [2, 2],
-			machine: getMachineIndexbyName("Packager"),
-			craftingTime_s: 1
-		},
-		{
-			name: "Packaged Sulfuric Acid",
-			tier: 7,
-			output: [getMaterialIndexByName("Packaged Sulfuric Acid")],
-			outputQuantity: [2],
-			input: [getMaterialIndexByName("Sulfuric Acid"), getMaterialIndexByName("Empty Canister")],
-			inputQuantity: [2, 2],
-			machine: getMachineIndexbyName("Packager"),
-			craftingTime_s: 3
-		},
-		{
-			name: "Packaged Nitric Acid",
-			tier: 8,
-			output: [getMaterialIndexByName("Packaged Nitric Acid")],
-			outputQuantity: [1],
-			input: [getMaterialIndexByName("Nitric Acid"), getMaterialIndexByName("Empty Fluid Tank")],
-			inputQuantity: [1, 1],
-			machine: getMachineIndexbyName("Packager"),
-			craftingTime_s: 2
-		},
-		{
-			name: "Packaged Nitrogen Gas",
-			tier: 8,
-			output: [getMaterialIndexByName("Packaged Nitrogen Gas")],
-			outputQuantity: [1],
-			input: [getMaterialIndexByName("Nitrogen Gas"), getMaterialIndexByName("Empty Fluid Tank")],
-			inputQuantity: [4, 1],
-			machine: getMachineIndexbyName("Packager"),
-			craftingTime_s: 1
-		},
 		//Fuels
 		{
 			name: "Biomass (Leaves)",
@@ -1338,26 +1489,6 @@ const recipes =
 			craftingTime_s: 12
 		},
 		{
-			name: "Packaged Oil",
-			tier: 5,
-			output: [getMaterialIndexByName("Packaged Oil")],
-			outputQuantity: [2],
-			input: [getMaterialIndexByName("Crude Oil"), getMaterialIndexByName("Empty Canister")],
-			inputQuantity: [2, 2],
-			machine: getMachineIndexbyName("Packager"),
-			craftingTime_s: 4
-		},
-		{
-			name: "Packaged Heavy Oil Residue",
-			tier: 5,
-			output: [getMaterialIndexByName("Packaged Heavy Oil Residue")],
-			outputQuantity: [2],
-			input: [getMaterialIndexByName("Heavy Oil Residue"), getMaterialIndexByName("Empty Canister")],
-			inputQuantity: [2, 2],
-			machine: getMachineIndexbyName("Packager"),
-			craftingTime_s: 4
-		},
-		{
 			name: "Solid Biofuel",
 			tier: 0,
 			output: [getMaterialIndexByName("Solid Biofuel")],
@@ -1368,16 +1499,6 @@ const recipes =
 			craftingTime_s: 4
 		},
 		{
-			name: "Packaged Fuel",
-			tier: 5,
-			output: [getMaterialIndexByName("Packaged Fuel")],
-			outputQuantity: [2],
-			input: [getMaterialIndexByName("Fuel"), getMaterialIndexByName("Empty Canister")],
-			inputQuantity: [2, 2],
-			machine: getMachineIndexbyName("Packager"),
-			craftingTime_s: 3
-		},
-		{
 			name: "Diluted Packaged Fuel",
 			tier: 5,
 			output: [getMaterialIndexByName("Packaged Fuel")],
@@ -1386,26 +1507,6 @@ const recipes =
 			inputQuantity: [1, 2],
 			machine: getMachineIndexbyName("Refinery"),
 			craftingTime_s: 2
-		},
-		{
-			name: "Packaged Liquid Biofuel",
-			tier: 5,
-			output: [getMaterialIndexByName("Packaged Liquid Biofuel")],
-			outputQuantity: [2],
-			input: [getMaterialIndexByName("Liquid Biofuel"), getMaterialIndexByName("Empty Canister")],
-			inputQuantity: [2, 2],
-			machine: getMachineIndexbyName("Packager"),
-			craftingTime_s: 3
-		},
-		{
-			name: "Packaged Turbofuel",
-			tier: 5,
-			output: [getMaterialIndexByName("Packaged Turbofuel")],
-			outputQuantity: [2],
-			input: [getMaterialIndexByName("Liquid Biofuel"), getMaterialIndexByName("Empty Canister")],
-			inputQuantity: [2, 2],
-			machine: getMachineIndexbyName("Packager"),
-			craftingTime_s: 6
 		},
 		{
 			name: "Uranium Fuel Rod",
@@ -1683,10 +1784,10 @@ const recipes =
 		{
 			name: "Encased Uranium Cell",
 			tier: 8,
-			output: [getMaterialIndexByName("Sulfuric Acid"), getMaterialIndexByName("Encased Uranium Cell")],
-			outputQuantity: [2, 5],
+			output: [/*getMaterialIndexByName("Sulfuric Acid"),*/ getMaterialIndexByName("Encased Uranium Cell")],
+			outputQuantity: [/*2,*/ 5],
 			input: [getMaterialIndexByName("Sulfuric Acid"), getMaterialIndexByName("Uranium"), getMaterialIndexByName("Concrete")],
-			inputQuantity: [8, 10, 3],
+			inputQuantity: [6, 10, 3],
 			machine: getMachineIndexbyName("Blender"),
 			craftingTime_s: 12
 		},

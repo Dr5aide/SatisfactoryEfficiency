@@ -41,6 +41,17 @@ const materials =
             relativeNodeAmount: 1,
             relativeNeed: 0
         },
+        // Not a Resource
+        {
+            name: "NaR",
+            tier: 0,
+            isResource: true,
+            ficsitCouponValue: 0,
+            megawattSecondToExtract: 0,
+            //Dummy
+            relativeNodeAmount: 1,
+            relativeNeed: 100000//Number.POSITIVE_INFINITY
+        },
         // Ores
         {
             name: "Limestone",

@@ -42,7 +42,7 @@ function updateVariablesFromInput() {
     var table = document.getElementById("resourceValueTable");
     for (let i = 0; i < availableResources.length; i++) {
         iResourceIndex = getMaterialIndexByName(table.rows[i].cells[0].innerHTML);
-        iResourceValue = parseInt(table.rows[i].cells[1].innerHTML);
+        iResourceValue = table.rows[i].cells[1].children[0].value;
         resourceValues[i] = {
             materialIndex: iResourceIndex,
             value: iResourceValue
@@ -185,21 +185,14 @@ function addMaterialToCraftingTreeColumn(columnIndex, materialIndexToCraft, amou
     var outputToRemoveCircularReference = [];
     var inputToRemoveCircularReference = [];
     var recipeLog = craftingRecipeLog;
-    if (!(recipeLog[0] === undefined || recipeLog[1] === undefined || recipeLog[2] === undefined || recipeLog[3] === undefined)) {
-        // RecipeLog is only updated in getRecipeIndexFor()
+    if (!(recipeLog[0] === undefined || recipeLog[1] === undefined)) {
         var materialInRecipeLog = false;
         for (let i = 0; i < recipes[recipeLog[1].recipeIndex].output.length; i++) {
             if (recipes[recipeLog[1].recipeIndex].output[i] == materialIndexToCraft) {
                 materialInRecipeLog = true;
             }
         }
-        var log0 = recipeLog[0].recipeIndex;
-        var log1 = recipeLog[1].recipeIndex;
-        var log2 = recipeLog[2].recipeIndex;
-        var log3 = recipeLog[3].recipeIndex;
-        if (materialInRecipeLog && log0 === log2 && log1 === log3 && recipeLog[0].recipeCallStackSize > recipeLog[2].recipeCallStackSize) {
-            console.log('Recognized circular reference between recipeNo ' + recipeLog[0].recipeIndex + ' ' + recipes[recipeLog[0].recipeIndex].name + ' and recipeNo ' + recipeLog[1].recipeIndex + ' ' + recipes[recipeLog[1].recipeIndex].name);
-            circularReferenceDetected = true;
+        if (recipeLog[0].recipeCallStackSize > recipeLog[1].recipeCallStackSize && materialInRecipeLog) {
             outputToRemoveCircularReference = lookUpInputOverlapForCostArray(recipeLog[1].recipeIndex, {
                 materialIndex: recipes[recipeLog[0].recipeIndex].input,
                 quantity: recipes[recipeLog[0].recipeIndex].inputQuantity
@@ -208,11 +201,14 @@ function addMaterialToCraftingTreeColumn(columnIndex, materialIndexToCraft, amou
                 materialIndex: recipes[recipeLog[0].recipeIndex].output,
                 quantity: recipes[recipeLog[0].recipeIndex].outputQuantity
             });
-            //Fallback if breaks apart
-            if (inputToRemoveCircularReference.length == 0) {
-                outputToRemoveCircularReference = [];
+            if (outputToRemoveCircularReference.length > 0 && inputToRemoveCircularReference.length > 0) {
+                circularReferenceDetected = true;
             }
         }
+    }
+    //Fallback if check for circular reference breaks apart
+    if (inputToRemoveCircularReference.length == 0) {
+        outputToRemoveCircularReference = [];
     }
     //
     var costPerRecipe = calculateCostPerRecipe(recipeIndex, inputToRemoveCircularReference);
@@ -317,9 +313,12 @@ function loadResourceValueTable() {
         resource.innerHTML = materials[availableResources[i]].name;
         resource.contentEditable = false;
 
-        let value = row.insertCell(1);
-        value.innerHTML = Math.round(resourceValues[i].value * 100) / 100;
-        value.contentEditable = true;
+        let valueCell = row.insertCell(1);
+        var input = document.createElement("input");
+        input.type = "number";
+        input.style = "width: 84px"
+        input.value = Math.round(resourceValues[i].value * 100) / 100;
+        valueCell.appendChild(input);
     }
 }
 
