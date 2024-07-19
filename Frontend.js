@@ -96,7 +96,7 @@ function fillCraftingTree() {
         let cell = row.insertCell(i);
     }
     //
-    recipeLog = [];
+    recipeStack = [];
     addMaterialToCraftingTreeColumn(0, wantedMaterial, amountOfWantedMaterialPerMinute)
     //
     fillNeededResourcesTable();
@@ -184,22 +184,22 @@ function addMaterialToCraftingTreeColumn(columnIndex, materialIndexToCraft, amou
     var circularReferenceDetected = false;
     var outputToRemoveCircularReference = [];
     var inputToRemoveCircularReference = [];
-    var recipeLog = craftingRecipeLog;
-    if (!(recipeLog[0] === undefined || recipeLog[1] === undefined)) {
-        var materialInRecipeLog = false;
-        for (let i = 0; i < recipes[recipeLog[1].recipeIndex].output.length; i++) {
-            if (recipes[recipeLog[1].recipeIndex].output[i] == materialIndexToCraft) {
-                materialInRecipeLog = true;
+    var recipeStack = craftingRecipeStack;
+    if (!(recipeStack[currentRecipeCallStackSize] === undefined || recipeStack[currentRecipeCallStackSize - 1] === undefined)) {
+        var materialInRecipeStack = false;
+        for (let i = 0; i < recipes[recipeStack[currentRecipeCallStackSize - 1].recipeIndex].output.length; i++) {
+            if (recipes[recipeStack[currentRecipeCallStackSize - 1].recipeIndex].output[i] == materialIndexToCraft) {
+                materialInRecipeStack = true;
             }
         }
-        if (recipeLog[0].recipeCallStackSize > recipeLog[1].recipeCallStackSize && materialInRecipeLog) {
-            outputToRemoveCircularReference = lookUpInputOverlapForCostArray(recipeLog[1].recipeIndex, {
-                materialIndex: recipes[recipeLog[0].recipeIndex].input,
-                quantity: recipes[recipeLog[0].recipeIndex].inputQuantity
+        if (recipeStack[currentRecipeCallStackSize].recipeCallStackSize > recipeStack[currentRecipeCallStackSize - 1].recipeCallStackSize && materialInRecipeStack) {
+            outputToRemoveCircularReference = lookUpInputOverlapForCostArray(recipeStack[currentRecipeCallStackSize - 1].recipeIndex, {
+                materialIndex: recipes[recipeStack[currentRecipeCallStackSize].recipeIndex].input,
+                quantity: recipes[recipeStack[currentRecipeCallStackSize].recipeIndex].inputQuantity
             });
-            inputToRemoveCircularReference = lookUpOutputOverlapForCostArray(recipeLog[1].recipeIndex, {
-                materialIndex: recipes[recipeLog[0].recipeIndex].output,
-                quantity: recipes[recipeLog[0].recipeIndex].outputQuantity
+            inputToRemoveCircularReference = lookUpOutputOverlapForCostArray(recipeStack[currentRecipeCallStackSize - 1].recipeIndex, {
+                materialIndex: recipes[recipeStack[currentRecipeCallStackSize].recipeIndex].output,
+                quantity: recipes[recipeStack[currentRecipeCallStackSize].recipeIndex].outputQuantity
             });
             if (outputToRemoveCircularReference.length > 0 && inputToRemoveCircularReference.length > 0) {
                 circularReferenceDetected = true;
@@ -213,7 +213,7 @@ function addMaterialToCraftingTreeColumn(columnIndex, materialIndexToCraft, amou
     //
     var costPerRecipe = calculateCostPerRecipe(recipeIndex, inputToRemoveCircularReference);
     //
-    addRecipeIndexToRecipeLog(recipeIndex, false); //addToEnergyRecipeLog <= false
+    addRecipeIndexToRecipeStack(recipeIndex, false); //addToEnergyRecipeStack <= false
     ///////////////
     detailsAboutCraftingStep = detailsAboutCraftingStep + '<b>Input</b>: ';
     for (let j = 0; j < costPerRecipe.length; j++) {
