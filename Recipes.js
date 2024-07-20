@@ -1854,7 +1854,7 @@ const recipes =
 		{
 			name: "Uranium Fuel Rod Power",
 			tier: 8,
-			output: [getMaterialIndexByName("MJ of Power"), getMaterialIndexByName("Uranium Waste")],
+			output: [getMaterialIndexByName("Uranium Waste"), getMaterialIndexByName("MJ of Power")],
 			outputQuantity: [750000, 50],
 			input: [getMaterialIndexByName("Uranium Fuel Rod"), getMaterialIndexByName("Water")],
 			inputQuantity: [1, 1200],

@@ -86,7 +86,7 @@ function lookUpInputOverlapForCostArray(recipeIndex, costArrays) {
 
 // Calcuate Resources per Material
 function calculateResourceCostPerMaterial(materialIndexToCalc, calculatePowerCost, addToEnergyRecipeStack) {
-    //console.log("calculateResourceCostPerMaterial for " + materialIndexToCalc + " " + materials[materialIndexToCalc].name + " at " + currentRecipeCallStackSize);
+    console.log("calculateResourceCostPerMaterial for " + materialIndexToCalc + " " + materials[materialIndexToCalc].name + " at " + currentRecipeCallStackSize);
     // check for circular reference
     var circularReferenceDetected = 0; // 0 = false, while 1,2,3... are circularReference of size 2,3,4...
     var outputToRemoveCircularReference = [];
@@ -230,34 +230,51 @@ function calculateResourceCostPerMaterial(materialIndexToCalc, calculatePowerCos
 
 // Recipe cache for currently saved efficiency ranking
 var recipeCacheForMaterial = [];
-function addRecipeForMaterial(recipeArrayToStore, materialToStore, valueCostArray) {
+function addRecipesForMaterialToCache(recipeArrayToStore, materialToStore, valueCostArray, circularReferenceDetectedToStore) {
+    // Is this recipe already included?
+    for (let i = 0; i < recipeCacheForMaterial.length; i++) {
+        if (recipeCacheForMaterial[i].materialIndex == materialToStore && recipeCacheForMaterial[i].circularReferenceDetected == circularReferenceDetectedToStore) {
+            return;
+        }
+    }
+    // Else store it
     recipeCacheForMaterial.push({
         name: materials[materialToStore].name,
         materialIndex: materialToStore,
         recipeIndeces: recipeArrayToStore,
-        valueCost: valueCostArray
+        valueCost: valueCostArray,
+        circularReferenceDetected: circularReferenceDetectedToStore
     });
 }
-function lookUpCachedRecipeForMaterialNumber(materialIndex, recipeEfficiencyLevel) {
+function lookUpCachedRecipeForMaterialNumber(materialIndex, recipeEfficiencyLevel, dontAcceptCircularReference) {
+    var cacheObject = lookUpRecipeCacheObjectForMaterialNumber(materialIndex, dontAcceptCircularReference)
+    if (cacheObject == -1) {
+        return -1;
+    }
+    else {
+        return cacheObject.recipeIndeces[recipeEfficiencyLevel - 1];
+    }
+}
+function lookUpRecipeCacheObjectForMaterialNumber(materialIndex, dontAcceptCircularReference) {
     for (let i = 0; i < recipeCacheForMaterial.length; i++) {
-        if (recipeCacheForMaterial[i].materialIndex === materialIndex) {
-            return recipeCacheForMaterial[i].recipeIndeces[recipeEfficiencyLevel - 1];
+        if (dontAcceptCircularReference) {
+            if (recipeCacheForMaterial[i].materialIndex === materialIndex && !recipeCacheForMaterial[i].circularReferenceDetected) {
+                return recipeCacheForMaterial[i];
+            }
+        }
+        else {
+            if (recipeCacheForMaterial[i].materialIndex === materialIndex) {
+                return recipeCacheForMaterial[i];
+            }
         }
     }
     return -1;
-}
-function lookUpRecipeCacheObjectForMaterialNumber(materialIndex) {
-    for (let i = 0; i < recipeCacheForMaterial.length; i++) {
-        if (recipeCacheForMaterial[i].materialIndex === materialIndex) {
-            return recipeCacheForMaterial[i];
-        }
-    }
 }
 
 
 function getRecipeIndexFor(materialIndex, calculatePowerCost, addToEnergyRecipeStack, outputToRemoveCircularReference, circularReferenceIsPrimary) {
     // look through cache
-    var cachedRecipe = lookUpCachedRecipeForMaterialNumber(materialIndex, selectedDefaultRecipeEfficiencyLevel)
+    var cachedRecipe = lookUpCachedRecipeForMaterialNumber(materialIndex, selectedDefaultRecipeEfficiencyLevel, true); //Don't include circular reference <- true
     if (cachedRecipe >= 0) {
         var arrayOfOutput = [];
         var recipe = recipes[cachedRecipe];
@@ -346,8 +363,14 @@ function getRecipeIndexFor(materialIndex, calculatePowerCost, addToEnergyRecipeS
         efficiencyRecipeMaterialCost[whereToAddiRecipe] = iResourceCostArray;
         efficiencyRecipeValueCosts[whereToAddiRecipe] = iResourceValue;
     }
-    //Store in cache
-    addRecipeForMaterial(efficiencyRecipeIndeces, materialIndex, efficiencyRecipeValueCosts);
+    //Store in cache, and add wether this efficiency calculatio includes a circular reference (valueCost > 10000000)
+    efficiencyCalculationWasPartOfCircularReference = false;
+    for (let i = 0; i < efficiencyRecipeValueCosts.length; i++) {
+        if (efficiencyRecipeValueCosts[i] > 10000000) {
+            efficiencyCalculationWasPartOfCircularReference = true;
+        }
+    }
+    addRecipesForMaterialToCache(efficiencyRecipeIndeces, materialIndex, efficiencyRecipeValueCosts, efficiencyCalculationWasPartOfCircularReference);
     //determine which one should be used by default
     chosenRecipeIndex = efficiencyRecipeIndeces[selectedDefaultRecipeEfficiencyLevel - 1];
     if (!(typeof chosenRecipeIndex === 'number')) {
