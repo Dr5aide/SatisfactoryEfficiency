@@ -1675,7 +1675,7 @@ const recipes =
 			tier: 5,
 			output: [getMaterialIndexByName("Rifle Ammo")],
 			outputQuantity: [15],
-			input: [getMaterialIndexByName("Copper Sheet"), getMaterialIndexByName("Smokeless Powder"), getMaterialIndexByName("Steel Pipe")],
+			input: [getMaterialIndexByName("Copper Sheet"), getMaterialIndexByName("Smokeless Powder")],
 			inputQuantity: [3, 2],
 			machine: getMachineIndexbyName("Manufacturer"),
 			craftingTime_s: 12

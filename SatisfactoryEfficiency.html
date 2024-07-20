@@ -73,6 +73,9 @@
             <select type="number" class="form-control" id="energySource" onchange="updateVariablesFromInput();">
             </select>
           </div>
+          <!-- Dummy Button to catch onEnter-->
+          <button class="float-right btn btn-primary p-1" style="margin-left: -2000px" title="Dummy Button"
+            onclick=""></button>
           <!-- Keep in line with Following Crafting Steps-->
           <button class="float-right btn btn-primary p-1" title="Keep recipes in line with following recipe steps"
             onclick="switchKeepInLineWithFollowingCraftingSteps()">&#x2500&#x2500</button>
@@ -90,9 +93,6 @@
               updateVariablesFromInput();">
             </input>
           </div>
-          <!-- Dummy Button to catch onEnter-->
-          <button class="float-right btn btn-primary p-1" style="margin-left: -2000px" title="Dummy Button"
-            onclick=""></button>
           <!-- Needed resources pop-up-->
           <button class="float-right btn btn-primary p-1" data-bs-toggle="modal" data-bs-target="#neededResourcesModal"
             title="Needed Resources" onclick="fillNeededResourcesTable()">&#x1F4CB</button>
