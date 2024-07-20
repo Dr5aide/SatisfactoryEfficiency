@@ -16,10 +16,9 @@ var neededResourcesAmounts = [];
 //
 var selectedDefaultRecipeEfficiencyLevel = 1;
 const selectableDefaultRecipeEfficiencies = [1, 2, 3];
-//##
-// ToDo
-var upcyclingPolymerResin = false;
-var upcyclingHeavyOilResidue = false;
+//
+var keepInLineWithFollowingCraftingSteps = false;
+var maxCraftingTreeColumn = 0;
 
 function updateTierDependentVariables() {
     unlockedTiers = parseInt(document.getElementById("unlockedTiers").value);
@@ -86,11 +85,12 @@ function fillCraftingTree() {
     highestRecipeCallStack = 0;
     recipeCacheForMaterial = [];
     neededResourcesAmounts = [];
+    maxCraftingTreeColumn = 0;
     // clear out
     var table = document.getElementById("craftingTreeTable");
     table.innerHTML = '';
     // calculate once to fill cache
-    calculateResourceCostPerMaterial(wantedMaterial, true, false);  // withPowerCalc <= true, add recipes to energy calc log, not material calc log <= false
+    calculateResourceCostPerMaterial(wantedMaterial, true, false);  // withPowerCalc <= true; add recipes to energy calc log, not material calc log <= false
     //
     let row = table.insertRow();
     for (let i = 0; i <= highestRecipeCallStack; i++) {
@@ -98,7 +98,7 @@ function fillCraftingTree() {
     }
     //
     recipeStack = [];
-    addMaterialToCraftingTreeColumn(0, wantedMaterial, amountOfWantedMaterialPerMinute)
+    addMaterialToCraftingTreeColumn(0, 0, wantedMaterial, amountOfWantedMaterialPerMinute)
     //
     fillNeededResourcesTable();
     //
@@ -106,7 +106,8 @@ function fillCraftingTree() {
     console.log(recipeCacheForMaterial);
 }
 
-function addMaterialToCraftingTreeColumn(columnIndex, materialIndexToCraft, amountPerMinute) {
+function addMaterialToCraftingTreeColumn(columnIndex, offset, materialIndexToCraft, amountPerMinute) {
+    // If the requested material is a ressource no crafting recipe is needed
     if (materials[materialIndexToCraft].isResource) {
         var resourceQuantityToAdd = [{
             name: materials[materialIndexToCraft].name,
@@ -116,24 +117,42 @@ function addMaterialToCraftingTreeColumn(columnIndex, materialIndexToCraft, amou
         neededResourcesAmounts = addCosts(neededResourcesAmounts, resourceQuantityToAdd);
         return;
     }
-    //
+    // Check, if there is is a column to fill (To keep it from breaking)
     var table = document.getElementById("craftingTreeTable");
     if (!table.rows[0].cells[columnIndex]) {
         return;
     }
-    //
-    var offset = 0;
-    for (let j = 1; j < table.rows.length; j++) {
-        if (table.rows[j].cells[columnIndex].innerHTML) {
-            offset = j + 2;
+    // Save maxCraftingTableColumn
+    if (maxCraftingTreeColumn < columnIndex) {
+        maxCraftingTreeColumn = columnIndex;
+    }
+    // Calculate needed Offset
+    for (let i = offset; i < table.rows.length; i++) {
+        // Dont override other cells in the same column
+        if (table.rows[i].cells[columnIndex].innerHTML) {
+            offset = i + 2;
+            continue;
+        }
+        // Keep in line with follow up crafting steps, if wanted
+        if (keepInLineWithFollowingCraftingSteps) {
+            for (let j = 1; j < maxCraftingTreeColumn - columnIndex; j++) {
+                if (table.rows[i].cells[columnIndex + j].innerHTML) {
+                    offset = i + 2;
+                }
+            }
         }
     }
-    //
+    // get Recipe from Cache
+    var recipeCacheObject;
     if (currentRecipeCallStackSize < 1 || wantedMaterial == getMaterialIndexByName("FICSIT Coupon Point") && currentRecipeCallStackSize < 2) {
-        var recipeCacheObject = lookUpRecipeCacheObjectForMaterialNumber(materialIndexToCraft, true); //dontAcceptCircularReferenceRecipes <- true
+        recipeCacheObject = lookUpRecipeCacheObjectForMaterialNumber(materialIndexToCraft, true); //dontAcceptCircularReferenceRecipes <- true
+        //Fallback
+        if (recipeCacheObject == -1) {
+            recipeCacheObject = lookUpRecipeCacheObjectForMaterialNumber(materialIndexToCraft, false); //dontAcceptCircularReferenceRecipes <- false
+        }
     }
     else {
-        var recipeCacheObject = lookUpRecipeCacheObjectForMaterialNumber(materialIndexToCraft, false); //dontAcceptCircularReferenceRecipes <- false
+        recipeCacheObject = lookUpRecipeCacheObjectForMaterialNumber(materialIndexToCraft, false); //dontAcceptCircularReferenceRecipes <- false
     }
     var recipeIndexArray = recipeCacheObject.recipeIndeces;
     var recipeValueCostArray = recipeCacheObject.valueCost;
@@ -271,7 +290,12 @@ function addMaterialToCraftingTreeColumn(columnIndex, materialIndexToCraft, amou
         }*/
         // increment currentRecipeCallStackSize
         currentRecipeCallStackSize++;
-        addMaterialToCraftingTreeColumn(columnIndex + 1, costPerRecipe[j].materialIndex, jAmountPerMinute);
+        if (keepInLineWithFollowingCraftingSteps) {
+            addMaterialToCraftingTreeColumn(columnIndex + 1, offset, costPerRecipe[j].materialIndex, jAmountPerMinute);
+        }
+        else {
+            addMaterialToCraftingTreeColumn(columnIndex + 1, 0, costPerRecipe[j].materialIndex, jAmountPerMinute);
+        }
         // decrement currentRecipeCallStackSize
         currentRecipeCallStackSize--;
     }
@@ -425,4 +449,9 @@ function fillNeededResourcesTable() {
             }
         }
     }
+}
+
+function switchKeepInLineWithFollowingCraftingSteps() {
+    keepInLineWithFollowingCraftingSteps = !keepInLineWithFollowingCraftingSteps;
+    fillCraftingTree();
 }
