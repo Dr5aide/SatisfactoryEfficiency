@@ -60,13 +60,14 @@ function executeOrderDEA() {
     }
     // package the array arrays
     var rows = []
-    var row = ["Recipe ID", "Recipe Name", "Machine"];
+    //var row = ["Recipe ID", "Recipe Name", "Machine"];
+    var row = ["Recipe Name"];
     row = row.concat(resourceNames);
     row = row.concat(["Output"]);
     rows.push(row);
     for (let i = 0; i < potentialRecipes.length; i++) {
         var iRecipeName = recipes[potentialRecipes[i].index].name;
-        var iMachineName = machines[recipes[potentialRecipes[i].index].machine].name;
+        //var iMachineName = machines[recipes[potentialRecipes[i].index].machine].name;
         var iOutputQuantity = 0;
         for (let j = 0; j < recipes[potentialRecipes[i].index].output; j++) {
             if (recipes[potentialRecipes[i].index].output[j] == productIndex) {
@@ -74,7 +75,8 @@ function executeOrderDEA() {
             }
         }
         // temporyRecipeID, recipeName, machineUsed, inputResource1, ..., inputResourceN, output
-        var row = [i, iRecipeName, iMachineName];
+        //var row = [i, iRecipeName, iMachineName];
+        var row = [iRecipeName];
         row = row.concat(resourceCostPerMinute[i]);
         row = row.concat([iOutputQuantity]);
         rows.push(row);
