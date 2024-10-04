@@ -1,6 +1,6 @@
 const resourceValueMultiplier = 1000;
 //##
-var unlockedTiers = 8;
+var unlockedTiers = 9;
 //
 var selectedEnergySourceIndex = 2;
 var selectableEnergySourceIndeces = getAvailableEnergySourceIndeces();
@@ -156,6 +156,7 @@ function addMaterialToCraftingTreeColumn(columnIndex, offset, materialIndexToCra
     }
     var recipeIndexArray = recipeCacheObject.recipeIndeces;
     var recipeValueCostArray = recipeCacheObject.valueCost;
+    console.log("materialIndexToCraft: " + materialIndexToCraft + ' ' + materials[materialIndexToCraft].name);
     var recipeIndex = recipeIndexArray[getEfficiencyIndexPerMaterial(materialIndexToCraft)];
     var recipe = recipes[recipeIndex];
     //

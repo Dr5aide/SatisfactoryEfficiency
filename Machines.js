@@ -66,15 +66,24 @@ const machines =
         },
         // Tier 8
         {
-            name: "Particle Accelerator (Plutonium Pellet)",
+            name: "Particle Accelerator (low-energy)",
             powerConsumption_mw: 500
         },
         {
-            name: "Particle Accelerator (Nuclear Pasta)",
+            name: "Particle Accelerator (high-energy)",
             powerConsumption_mw: 1000
         },
         {
             name: "Nuclear Power Plant",
             powerConsumption_mw: 0//-2500
+        },
+        // Tier 9
+        {
+            name: "Converter",
+            powerConsumption_mw: 300
+        },
+        {
+            name: "Quantum Encoder",
+            powerConsumption_mw: 2000
         }
     ]

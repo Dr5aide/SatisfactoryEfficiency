@@ -61,7 +61,7 @@ const materials =
             megawattSecondToExtract: 5,
             //Impure: 33 Normal: 41 Pure: 46
             relativeNodeAmount: 149.5,
-            relativeNeed: 0.8
+            relativeNeed: 0.6
         },
         {
             name: "Copper Ore",
@@ -71,7 +71,7 @@ const materials =
             megawattSecondToExtract: 5,
             //Impure: 9 Normal: 28 Pure: 12
             relativeNodeAmount: 56.5,
-            relativeNeed: 0.75
+            relativeNeed: 0.6
         },
         {
             name: "Caterium Ore",
@@ -81,7 +81,7 @@ const materials =
             megawattSecondToExtract: 5,
             //Impure: 0 Normal: 8 Pure: 8
             relativeNodeAmount: 24,
-            relativeNeed: 0.30
+            relativeNeed: 0.2
         },
         {
             name: "Coal",
@@ -121,17 +121,17 @@ const materials =
             megawattSecondToExtract: 5,
             //Impure: 5 Normal: 6 Pure: 6
             relativeNodeAmount: 20.5,
-            relativeNeed: 0.15
+            relativeNeed: 0.3
         },
         {
-            name: "S.A.M. Ore",
+            name: "SAM",
             tier: 0,
             isResource: true,
             ficsitCouponValue: 0,
             megawattSecondToExtract: 5,
             //Impure: 8 Normal: 5 Pure: 0
             relativeNodeAmount: 9,
-            relativeNeed: 0
+            relativeNeed: 1
         },
         {
             name: "Uranium",
@@ -173,6 +173,12 @@ const materials =
             tier: 7,
             isResource: false,
             ficsitCouponValue: 131
+        },
+        {
+            name: "Ficsite Ingot",
+            tier: 9,
+            isResource: false,
+            ficsitCouponValue: 1936
         },
         // Minerals
         {
@@ -292,16 +298,50 @@ const materials =
             isResource: false,
             ficsitCouponValue: 0
         },
+        {
+            name: "Dissolved Silica",
+            tier: 8,
+            isResource: false,
+            ficsitCouponValue: 0
+        },
         // Gases
         {
             name: "Nitrogen Gas",
             tier: 8,
             isResource: true,
-            // megawatt (150) / output (1)
-            megawattSecondToExtract: 150,
+            // megawatt (150) / output (6*60/min) * 60[seconds/min]
+            megawattSecondToExtract: 25,
             //Impure: 2 Normal: 7 Pure: 36
             relativeNodeAmount: 80,
             relativeNeed: 0.15
+        },
+        {
+            name: "Rocket Fuel",
+            tier: 8,
+            isResource: false,
+            ficsitCouponValue: 0
+        },
+        {
+            name: "Ionized Fuel",
+            tier: 9,
+            isResource: false,
+            ficsitCouponValue: 0
+        },
+        {
+            name: "Dark Matter Residue",
+            tier: 9,
+            isResource: false,
+            ficsitCouponValue: 0
+        },
+        {
+            name: "Excited Photonic Matter",
+            tier: 9,
+            isResource: true,
+            // megawatt (250) / output (200/min) * 60[seconds/min]
+            megawattSecondToExtract: 75,
+            //Infinite "Notes"
+            relativeNodeAmount: 10000,
+            relativeNeed: 1
         },
         // Standard Parts
         {
@@ -381,6 +421,12 @@ const materials =
             tier: 8,
             isResource: false,
             ficsitCouponValue: 62840
+        },
+        {
+            name: "Ficsite Trigon",
+            tier: 9,
+            isResource: false,
+            ficsitCouponValue: 1291
         },
         {
             name: "Fabric",
@@ -480,6 +526,18 @@ const materials =
             isResource: false,
             ficsitCouponValue: 3776
         },
+        {
+            name: "Reanimated SAM",
+            tier: 9,
+            isResource: false,
+            ficsitCouponValue: 160
+        },
+        {
+            name: "SAM Fluctuator",
+            tier: 9,
+            isResource: false,
+            ficsitCouponValue: 1968
+        },
         // Communications
         {
             name: "Computer",
@@ -515,7 +573,44 @@ const materials =
             name: "Superposition Oscillator",
             tier: 9,
             isResource: false,
-            ficsitCouponValue: 0
+            ficsitCouponValue: 37292
+        },
+        // Quantum Technology
+        {
+            name: "Diamonds",
+            tier: 9,
+            isResource: false,
+            ficsitCouponValue: 240
+        },
+        {
+            name: "Time Crystal",
+            tier: 9,
+            isResource: false,
+            ficsitCouponValue: 960
+        },
+        {
+            name: "Dark Matter Crystal",
+            tier: 9,
+            isResource: false,
+            ficsitCouponValue: 1780
+        },
+        {
+            name: "Singularity Cell",
+            tier: 9,
+            isResource: false,
+            ficsitCouponValue: 114675
+        },
+        {
+            name: "Neural-Quantum Processor",
+            tier: 9,
+            isResource: false,
+            ficsitCouponValue: 248034
+        },
+        {
+            name: "Alien Power Matrix",
+            tier: 9,
+            isResource: false,
+            ficsitCouponValue: 210
         },
         // Containers
         {
@@ -565,6 +660,18 @@ const materials =
             tier: 8,
             isResource: false,
             ficsitCouponValue: 312
+        },
+        {
+            name: "Packaged Dark Matter Residue",
+            tier: 9,
+            isResource: false,
+            ficsitCouponValue: 0
+        },
+        {
+            name: "Packaged Excited Photonic Matter",
+            tier: 9,
+            isResource: false,
+            ficsitCouponValue: 0
         },
         //Fuels
         {
@@ -654,6 +761,18 @@ const materials =
             tier: 5,
             isResource: false,
             ficsitCouponValue: 570
+        },
+        {
+            name: "Packaged Rocket Fuel",
+            tier: 7,
+            isResource: false,
+            ficsitCouponValue: 1028
+        },
+        {
+            name: "Packaged Ionized Fuel",
+            tier: 9,
+            isResource: false,
+            ficsitCouponValue: 5246
         },
         {
             name: "Uranium Fuel Rod",
@@ -808,6 +927,18 @@ const materials =
             isResource: false,
             ficsitCouponValue: 0
         },
+        {
+            name: "Ficsonium",
+            tier: 9,
+            isResource: false,
+            ficsitCouponValue: 0
+        },
+        {
+            name: "Ficsonium Fuel Rod",
+            tier: 9,
+            isResource: false,
+            ficsitCouponValue: 0
+        },
         // Waste
         {
             name: "Uranium Waste",
@@ -917,6 +1048,24 @@ const materials =
             tier: 8,
             isResource: false,
             ficsitCouponValue: 543424
+        },
+        {
+            name: "Biochemical Sculptor",
+            tier: 9,
+            isResource: false,
+            ficsitCouponValue: 301778
+        },
+        {
+            name: "Ballistic Warp Drive",
+            tier: 9,
+            isResource: false,
+            ficsitCouponValue: 2895334
+        },
+        {
+            name: "AI Expansion Server",
+            tier: 9,
+            isResource: false,
+            ficsitCouponValue: 597652
         },
         // Not a Resource
         {
