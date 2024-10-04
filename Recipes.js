@@ -1009,10 +1009,10 @@ const recipes =
 		},
 		{
 			name: "Bolted Iron Plate",
-			tier: 5,
+			tier: 2,
 			output: [getMaterialIndexByName("Reinforced Iron Plate")],
 			outputQuantity: [3],
-			input: [getMaterialIndexByName("Iron Plate"), getMaterialIndexByName("Rubber")],
+			input: [getMaterialIndexByName("Iron Plate"), getMaterialIndexByName("Screw")],
 			inputQuantity: [18, 50],
 			machine: getMachineIndexbyName("Assembler"),
 			craftingTime_s: 12
