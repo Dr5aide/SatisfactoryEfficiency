@@ -569,7 +569,7 @@ const recipes =
 			tier: 5,
 			output: [getMaterialIndexByName("Packaged Turbofuel")],
 			outputQuantity: [2],
-			input: [getMaterialIndexByName("Liquid Biofuel"), getMaterialIndexByName("Empty Canister")],
+			input: [getMaterialIndexByName("Turbofuel"), getMaterialIndexByName("Empty Canister")],
 			inputQuantity: [2, 2],
 			machine: getMachineIndexbyName("Packager"),
 			craftingTime_s: 6

@@ -187,7 +187,7 @@ function checkForCircularReference({ materialIndexToCalc, addToEnergyRecipeStack
             if (materialIndexToCalc == recipes[recipeStack[i].recipeIndex].output[j]) {
                 console.log("Found secondary Output in a recipe before: " + materialIndexToCalc + " " + materials[materialIndexToCalc].name + " in recipe output of " + recipeStack[i].recipeIndex + " " + recipes[recipeStack[i].recipeIndex].name);
                 var excessOutputCurrentRecipe = [];
-                var excessInputCurrentrecipe = lookUpRecipeStackOutputInputOverlapBetween1And2(i, currentRecipeCallStackSize, addToEnergyRecipeStack);
+                var excessOutputCurrentRecipe = lookUpRecipeStackInputOutputOverlapBetween1And2(i, currentRecipeCallStackSize, addToEnergyRecipeStack);
                 var recipeQuantity = materialQuantityToCalc / recipes[recipeStack[i].recipeIndex].outputQuantity[0];
                 var detectedCircularReference = {
                     recipeStackDistance: i - 1,
