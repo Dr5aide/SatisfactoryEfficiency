@@ -163,6 +163,10 @@ function addMaterialToCraftingTreeColumn(columnIndex, offset, materialIndexToCra
             craftsPerMinute = amountPerMinute / recipe.outputQuantity[i];
         }
     }
+    // Fallback
+    if (craftsPerMinute < 0) {
+        return;
+    }
     //
     if (!table.rows[offset]) {
         for (let j = 0; j < 3; j++) {
@@ -214,8 +218,8 @@ function addMaterialToCraftingTreeColumn(columnIndex, offset, materialIndexToCra
     //
     var detectedCircularReference = checkForCircularReference({ materialIndexToCalc: materialIndexToCraft, addToEnergyRecipeStack: false, materialQuantityToCalc: outputAmount });
     circularReferenceDetected = detectedCircularReference.recipeStackDistance + 1;
-    outputToRemoveCircularReference = multiplyCostArrayWith(detectedCircularReference.outputToRemoveCircularReference, 1 / detectedCircularReference.recipeQuantity);  //
-    inputToRemoveCircularReference = multiplyCostArrayWith(detectedCircularReference.inputToRemoveCircularReference, 1 / detectedCircularReference.recipeQuantity);
+    outputToRemoveCircularReference = multiplyCostArrayWith(detectedCircularReference.outputToRemoveCircularReference, 1);
+    inputToRemoveCircularReference = multiplyCostArrayWith(detectedCircularReference.inputToRemoveCircularReference, 1);
     // One of error compared to Calculation.js
     currentRecipeCallStackSize++;
     //
