@@ -363,7 +363,7 @@ const recipes =
 		},
 		{
 			name: "Distilled Silica",
-			tier: 7,
+			tier: 8,
 			output: [getMaterialIndexByName("Silica"), getMaterialIndexByName("Water")],
 			outputQuantity: [27, 8],
 			input: [getMaterialIndexByName("Dissolved Silica"), getMaterialIndexByName("Limestone"), getMaterialIndexByName("Water")],
@@ -446,7 +446,7 @@ const recipes =
 		},
 		{
 			name: "Empty Fluid Tank",
-			tier: 8,
+			tier: 7,
 			output: [getMaterialIndexByName("Empty Fluid Tank")],
 			outputQuantity: [1],
 			input: [getMaterialIndexByName("Aluminum Ingot")],
