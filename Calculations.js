@@ -186,8 +186,8 @@ function checkForCircularReference({ materialIndexToCalc, addToEnergyRecipeStack
         for (let j = 1; j < recipes[recipeStack[j].recipeIndex].output.length; j++) {
             if (materialIndexToCalc == recipes[recipeStack[i].recipeIndex].output[j]) {
                 console.log("Found secondary Output in a recipe before: " + materialIndexToCalc + " " + materials[materialIndexToCalc].name + " in recipe output of " + recipeStack[i].recipeIndex + " " + recipes[recipeStack[i].recipeIndex].name);
-                var excessOutputCurrentRecipe = [];
                 var excessOutputCurrentRecipe = lookUpRecipeStackInputOutputOverlapBetween1And2(i, currentRecipeCallStackSize, addToEnergyRecipeStack);
+                var excessInputCurrentrecipe = [];
                 var recipeQuantity = materialQuantityToCalc / recipes[recipeStack[i].recipeIndex].outputQuantity[0];
                 var detectedCircularReference = {
                     recipeStackDistance: i - 1,
@@ -225,6 +225,7 @@ function calculateResourceCostPerMaterial(materialIndexToCalc, calculatePowerCos
     ///////////////
     var detectedCircularReference = checkForCircularReference({ materialIndexToCalc: materialIndexToCalc, addToEnergyRecipeStack: addToEnergyRecipeStack, materialQuantityToCalc: materialQuantityToCalc });
     circularReferenceDetected = detectedCircularReference.recipeStackDistance + 1;
+    console.log(detectedCircularReference);
     outputToRemoveCircularReference = multiplyCostArrayWith(detectedCircularReference.outputToRemoveCircularReference, 1 / detectedCircularReference.recipeQuantity);  //
     inputToRemoveCircularReference = multiplyCostArrayWith(detectedCircularReference.inputToRemoveCircularReference, 1 / detectedCircularReference.recipeQuantity);
     var circularReferenceIsPrimary = detectedCircularReference.circularReferenceIsPrimary;
@@ -303,6 +304,12 @@ function calculateResourceCostPerMaterial(materialIndexToCalc, calculatePowerCos
 // Recipe cache for currently saved efficiency ranking
 var recipeCacheForMaterial = [];
 function addRecipesForMaterialToCache(recipeArrayToStore, materialToStore, valueCostArray, circularReferenceDetectedToStore) {
+    for (let i = 0; i < valueCostArray.length; i++) {
+        if ((valueCostArray[i] < 0)) {
+            console.log("Error: valueCostArray has value below zero");
+            throw new Error('valueCostArray has value below zero');
+        }
+    }
     // Is this recipe already included?
     for (let i = 0; i < recipeCacheForMaterial.length; i++) {
         if (recipeCacheForMaterial[i].materialIndex == materialToStore && recipeCacheForMaterial[i].circularReferenceDetected == circularReferenceDetectedToStore) {
@@ -420,7 +427,11 @@ function getRecipeIndexFor(materialIndex, calculatePowerCost, addToEnergyRecipeS
     var efficiencyRecipeValueCosts = [];
     for (let i = 0; i < potentialRecipes.length; i++) {
         iResourceCostArray = calculateResourceCostPerMaterialForRecipe(materialIndex, potentialRecipes[i].index, calculatePowerCost, addToEnergyRecipeStack, materialQuantityToCalc);
+        console.log("iResourceCostArray:");
+        console.log(iResourceCostArray);
         iResourceValue = getResourceValueForResourceArray(iResourceCostArray);
+        console.log("iResourceValue:");
+        console.log(iResourceValue);
         //
         var whereToAddiRecipe = efficiencyRecipeIndeces.length;
         for (let j = efficiencyRecipeIndeces.length - 1; j >= 0; j--) {
@@ -558,6 +569,8 @@ function calculateResourceCostPerMaterialForRecipe(materialIndex, recipeIndex, c
     }
     // Cost for whole recipe
     costArray = calculateResourceCostPerRecipe(recipeIndex, calculatePowerCost, [], addToEnergyRecipeStack, materialQuantityToCalc);
+    console.log("costArray:");
+    console.log(costArray);
     // Material output
     var outputPerRecipe;
     for (let i = 0; i < recipes[recipeIndex].output.length; i++) {
@@ -665,6 +678,9 @@ function subtractCosts(cost1, cost2) {
         for (let j = 0; j < cost1.length; j++) {
             if (cost1[j].materialIndex == cost2[i].materialIndex) {
                 cost1[j].quantity -= cost2[i].quantity;
+                if (cost1[j].quantity < 0) {
+                    cost1[j].quantity = 0;
+                }
             }
         }
     }
@@ -678,7 +694,7 @@ function removeAllZerosFromCostArray(costArray) {
     for (let i = 0; i < costArray.length; i++) {
         if (costArray[i].quantity < 0) {
             costArray[i].quantity = 0;
-            //throw new Error('Quantity of ' + costArray[i].materialIndex + ' ' + materials[costArray[i].materialIndex].name + ' in cost array is below zero');
+            throw new Error('Quantity of ' + costArray[i].materialIndex + ' ' + materials[costArray[i].materialIndex].name + ' in cost array is below zero');
         }
         if (costArray[i].quantity == 0) {
             costArray.splice(i, 1);
