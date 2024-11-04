@@ -146,19 +146,14 @@ function addMaterialToCraftingTreeColumn(columnIndex, offset, materialIndexToCra
     }
     // get Recipe from Cache
     var recipeCacheObject;
-    if (currentRecipeCallStackSize < 1 || wantedMaterial == getMaterialIndexByName("FICSIT Coupon Point") && currentRecipeCallStackSize < 2) {
-        recipeCacheObject = lookUpRecipeCacheObjectForMaterialNumber(materialIndexToCraft, true); //dontAcceptCircularReferenceRecipes <- true
-        //Fallback
-        if (recipeCacheObject == -1) {
-            recipeCacheObject = lookUpRecipeCacheObjectForMaterialNumber(materialIndexToCraft, false); //dontAcceptCircularReferenceRecipes <- false
-        }
-    }
-    else {
+    recipeCacheObject = lookUpRecipeCacheObjectForMaterialNumber(materialIndexToCraft, true); //dontAcceptCircularReferenceRecipes <- true
+    //Fallback
+    if (recipeCacheObject == -1) {
         recipeCacheObject = lookUpRecipeCacheObjectForMaterialNumber(materialIndexToCraft, false); //dontAcceptCircularReferenceRecipes <- false
     }
+    //
     var recipeIndexArray = recipeCacheObject.recipeIndeces;
     var recipeValueCostArray = recipeCacheObject.valueCost;
-    console.log("materialIndexToCraft: " + materialIndexToCraft + ' ' + materials[materialIndexToCraft].name);
     var recipeIndex = recipeIndexArray[getEfficiencyIndexPerMaterial(materialIndexToCraft)];
     var recipe = recipes[recipeIndex];
     //
