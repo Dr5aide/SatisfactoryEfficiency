@@ -14,7 +14,11 @@ var energyRecipeStack = [];
 var currentRecipeCallStackSize = 0;
 var highestRecipeCallStack = 0;
 var distanceOfCircularReferenceCheck = 8;
-function addRecipeIndexToRecipeStack(recipeIndexToAdd, addToEnergyRecipeStack) {
+function addRecipeIndexToRecipeStack(recipeIndexToAdd, addToEnergyRecipeStack, materialQuantityToCalc) {
+    if (!(materialQuantityToCalc > 0)) {
+        console.log("Error: materialQuantityToCalc missing");
+    }
+    //
     var recipeStack = [];
     if (addToEnergyRecipeStack) {
         recipeStack = energyRecipeStack;
@@ -22,9 +26,15 @@ function addRecipeIndexToRecipeStack(recipeIndexToAdd, addToEnergyRecipeStack) {
     else {
         recipeStack = craftingRecipeStack;
     }
+    //
+    recipeQuantityThis = materialQuantityToCalc / recipes[recipeIndexToAdd].outputQuantity[0];
+    //
     recipeStack[currentRecipeCallStackSize] = {
         recipeIndex: recipeIndexToAdd,
-        recipeName: recipes[recipeIndexToAdd].name
+        recipeName: recipes[recipeIndexToAdd].name,
+        recipeQuantity: recipeQuantityThis,
+        outputQuantity: recipes[recipeIndexToAdd].outputQuantity.map(element => element * recipeQuantityThis),
+        inputQuantity: recipes[recipeIndexToAdd].inputQuantity.map(element => element * recipeQuantityThis)
     };
     if (addToEnergyRecipeStack) {
         energyRecipeStack = recipeStack;
@@ -83,14 +93,8 @@ function lookUpInputOverlapForCostArray(recipeIndex, costArrays) {
     }
     return InputOverlap;
 }
-
-// Calcuate Resources per Material
-function calculateResourceCostPerMaterial(materialIndexToCalc, calculatePowerCost, addToEnergyRecipeStack) {
-    console.log("calculateResourceCostPerMaterial for " + materialIndexToCalc + " " + materials[materialIndexToCalc].name + " at " + currentRecipeCallStackSize);
-    // check for circular reference
-    var circularReferenceDetected = 0; // 0 = false, while 1,2,3... are circularReference of size 2,3,4...
-    var outputToRemoveCircularReference = [];
-    var inputToRemoveCircularReference = [];
+// output and input overlap with materialQuantityToCraft
+function lookUpRecipeStackOutputInputOverlapBetween1And2(recipeStackIndex1, recipeStackIndex2, addToEnergyRecipeStack) {
     var recipeStack = [];
     if (addToEnergyRecipeStack) {
         recipeStack = energyRecipeStack;
@@ -98,72 +102,129 @@ function calculateResourceCostPerMaterial(materialIndexToCalc, calculatePowerCos
     else {
         recipeStack = craftingRecipeStack;
     }
-    ///////////////
-    // RecipeStack is only updated in getRecipeIndexFor()
-    var circularReferenceIsPrimary = true; //true is a dummy value, that doesnt break anything
-    var materialToCalcInRecipestack = -1; // 0 = false, while 1,2,3... are material in recipe 1,2,3... before in the stack
-    var distanceChecked = 0;
-    outerLoop:
-    for (let i = currentRecipeCallStackSize - 1; i > 1 && distanceChecked < distanceOfCircularReferenceCheck; i--) {
-        if (!(recipeStack[i] === undefined)) {
-            // For direct circular reference primary Output is considered
-            if (i == currentRecipeCallStackSize - 1) {
-                if (recipes[recipeStack[i].recipeIndex].output[0] == materialIndexToCalc) {
-                    materialToCalcInRecipestack = i;
-                    console.log("Found primary Output in a recipe before: " + materialIndexToCalc + " " + materials[materialIndexToCalc].name + " in recipe output of " + recipeStack[i].recipeIndex + " " + recipes[recipeStack[i].recipeIndex].name);
-                    circularReferenceIsPrimary = true;
-                    break outerLoop;
+    //
+    //console.log("recipeStackIndex1 = " + recipeStackIndex1);
+    //console.log("recipeStackIndex2 = " + recipeStackIndex2);
+    //console.log("recipeStack: ");
+    //console.log(recipeStack);
+    //console.log("looking up overlap between output of stack " + recipeStackIndex1 + " " + recipeStack[recipeStackIndex1].name + " and input of stack " + recipeStackIndex2 + " " + recipeStack[recipeStackIndex2].name);
+    //
+    var OutputOverlap = [];
+    var recipeIndex1 = recipeStack[recipeStackIndex1].recipeIndex;
+    var recipeIndex2 = recipeStack[recipeStackIndex2].recipeIndex;
+    for (let i = 0; i < recipes[recipeIndex2].input.length; i++) {
+        for (let j = 0; j < recipes[recipeIndex1].output.length; j++) {
+            if (recipes[recipeIndex2].input[i] == recipes[recipeIndex1].output[j]) {
+                var ijQuantityToAdd = 0;
+                if (recipes[recipeIndex2].inputQuantity[i] < recipes[recipeIndex1].outputQuantity[j]) {
+                    ijQuantityToAdd = recipes[recipeIndex2].inputQuantity[i];
                 }
+                else {
+                    ijQuantityToAdd = recipes[recipeIndex1].outputQuantity[j];
+                }
+                OutputOverlap.push({
+                    name: materials[recipes[recipeIndex1].output[j]].name,
+                    materialIndex: recipes[recipeIndex1].output[j],
+                    quantity: ijQuantityToAdd
+                });
             }
-            // For big circular reference only secondary Outputs will be considered
-            for (let j = 1; j < recipes[recipeStack[i].recipeIndex].output.length; j++) {
-                if (recipes[recipeStack[i].recipeIndex].output[j] == materialIndexToCalc) {
-                    materialToCalcInRecipestack = i;
-                    console.log("Found secondary Output in a recipe before: " + materialIndexToCalc + " " + materials[materialIndexToCalc].name + " in recipe output of " + recipeStack[i].recipeIndex + " " + recipes[recipeStack[i].recipeIndex].name);
-                    circularReferenceIsPrimary = false;
-                    break outerLoop;
+        }
+    }
+    return OutputOverlap;
+}
+function lookUpRecipeStackInputOutputOverlapBetween1And2(recipeStackIndex1, recipeStackIndex2, addToEnergyRecipeStack) {
+    return lookUpRecipeStackOutputInputOverlapBetween1And2(recipeStackIndex2, recipeStackIndex1, addToEnergyRecipeStack);
+}
+
+// Circular Reference Check
+function checkForCircularReference({ materialIndexToCalc, addToEnergyRecipeStack, materialQuantityToCalc } = {}) {
+    if (!(materialQuantityToCalc > 0)) {
+        console.log("Error: materialQuantityToCalc missing");
+    }
+    var recipeStack = [];
+    if (addToEnergyRecipeStack) {
+        recipeStack = energyRecipeStack;
+    }
+    else {
+        recipeStack = craftingRecipeStack;
+    }
+    // Primary Circular Reference
+    var distanceChecked = 0;
+    for (let i = currentRecipeCallStackSize - 1; i > 1 && distanceChecked < distanceOfCircularReferenceCheck; i--) {
+        if (materialIndexToCalc == recipes[recipeStack[i].recipeIndex].output[0]) {
+            console.log("Found primary Output in a recipe before: " + materialIndexToCalc + " " + materials[materialIndexToCalc].name + " in recipe output of " + recipeStack[i].recipeIndex + " " + recipes[recipeStack[i].recipeIndex].name);
+            var excessOutputCurrentRecipe = lookUpRecipeStackInputOutputOverlapBetween1And2(i, currentRecipeCallStackSize, addToEnergyRecipeStack);
+            var excessInputCurrentrecipe = lookUpRecipeStackOutputInputOverlapBetween1And2(i, currentRecipeCallStackSize, addToEnergyRecipeStack);
+            //var recipeQuantity = materialQuantityToCalc / recipes[recipeStack[i].recipeIndex].outputQuantity[0];
+            var recipeQuantity = recipeStack[currentRecipeCallStackSize].recipeQuantity;
+            var detectedCircularReference = {
+                recipeStackDistance: i - 1,
+                circularReferenceIsPrimary: true,
+                inputToRemoveCircularReference: excessOutputCurrentRecipe,
+                outputToRemoveCircularReference: excessInputCurrentrecipe,
+                recipeQuantity: recipeQuantity
+            }
+            //console.log("detectedCircularReference variable for the detected circular reference:");
+            //console.log(detectedCircularReference);
+            return detectedCircularReference;
+        }
+        distanceChecked++;
+    }
+    // Secondary Circular Reference
+    distanceChecked = 0;
+    for (let i = currentRecipeCallStackSize - 1; i > 1 && distanceChecked < distanceOfCircularReferenceCheck; i--) {
+        for (let j = 1; j < recipes[recipeStack[j].recipeIndex].output.length; j++) {
+            if (materialIndexToCalc == recipes[recipeStack[i].recipeIndex].output[j]) {
+                console.log("Found secondary Output in a recipe before: " + materialIndexToCalc + " " + materials[materialIndexToCalc].name + " in recipe output of " + recipeStack[i].recipeIndex + " " + recipes[recipeStack[i].recipeIndex].name);
+                var excessOutputCurrentRecipe = [];
+                var excessInputCurrentrecipe = lookUpRecipeStackOutputInputOverlapBetween1And2(i, currentRecipeCallStackSize, addToEnergyRecipeStack);
+                var recipeQuantity = materialQuantityToCalc / recipes[recipeStack[i].recipeIndex].outputQuantity[0];
+                var detectedCircularReference = {
+                    recipeStackDistance: i - 1,
+                    circularReferenceIsPrimary: true,
+                    inputToRemoveCircularReference: excessOutputCurrentRecipe,
+                    outputToRemoveCircularReference: excessInputCurrentrecipe,
+                    recipeQuantity: recipeQuantity
                 }
+                return detectedCircularReference;
             }
         }
         distanceChecked++;
     }
-    if (materialToCalcInRecipestack != -1) {
-        // If its a big circular reference, its most likely a secondary output like empty canisters, that loop on itself -> secondary circular reference
-        if (materialToCalcInRecipestack < currentRecipeCallStackSize - 1) {
-            outputToRemoveCircularReference = lookUpOutputOverlapForCostArray(recipeStack[materialToCalcInRecipestack].recipeIndex, {
-                materialIndex: [materialIndexToCalc],
-                quantity: [100] //Dummy value
-            });
-            if (outputToRemoveCircularReference.length > 0) {
-                circularReferenceDetected = materialToCalcInRecipestack;
-
-            }
-
-        }
-        else {
-            // If its a small circular reference, its a direct and complete circular reference like the recycling loop -> primary circular reference
-            if (materialToCalcInRecipestack == currentRecipeCallStackSize - 1) {
-                outputToRemoveCircularReference = lookUpOutputOverlapForCostArray(recipeStack[materialToCalcInRecipestack].recipeIndex, {
-                    materialIndex: recipes[recipeStack[currentRecipeCallStackSize].recipeIndex].input,
-                    quantity: recipes[recipeStack[currentRecipeCallStackSize].recipeIndex].inputQuantity
-                });
-                inputToRemoveCircularReference = lookUpInputOverlapForCostArray(recipeStack[materialToCalcInRecipestack].recipeIndex, {
-                    materialIndex: recipes[recipeStack[currentRecipeCallStackSize].recipeIndex].output,
-                    quantity: recipes[recipeStack[currentRecipeCallStackSize].recipeIndex].outputQuantity
-                });
-                if (inputToRemoveCircularReference.length > 0 && outputToRemoveCircularReference.length > 0) {
-                    circularReferenceDetected = materialToCalcInRecipestack;
-                }
-            }
-        }
+    // Fallback
+    var detectedCircularReference = {
+        recipeStackDistance: -1,
+        circularReferenceIsPrimary: true,
+        inputToRemoveCircularReference: [],
+        outputToRemoveCircularReference: []
     }
+    return detectedCircularReference;
+}
+
+// Calcuate Resources per Material
+function calculateResourceCostPerMaterial(materialIndexToCalc, calculatePowerCost, addToEnergyRecipeStack, materialQuantityToCalc) {
+    if (!(materialQuantityToCalc > 0)) {
+        console.log("Error: materialQuantityToCalc missing");
+    }
+    //
+    console.log("calculateResourceCostPerMaterial for " + materialIndexToCalc + " " + materials[materialIndexToCalc].name + " at " + currentRecipeCallStackSize);
+    // check for circular reference
+    var circularReferenceDetected = 0; // 0 = false, while 1,2,3... are circularReference of size 2,3,4...
+    var outputToRemoveCircularReference = [];
+    var inputToRemoveCircularReference = [];
     ///////////////
-    //Fallback if check for circular reference breaks apart
-    if (inputToRemoveCircularReference.length == 0) {
-        inputToRemoveCircularReference = [];
+    var detectedCircularReference = checkForCircularReference({ materialIndexToCalc: materialIndexToCalc, addToEnergyRecipeStack: addToEnergyRecipeStack, materialQuantityToCalc: materialQuantityToCalc });
+    circularReferenceDetected = detectedCircularReference.recipeStackDistance + 1;
+    outputToRemoveCircularReference = multiplyCostArrayWith(detectedCircularReference.outputToRemoveCircularReference, 1 / detectedCircularReference.recipeQuantity);  //
+    inputToRemoveCircularReference = multiplyCostArrayWith(detectedCircularReference.inputToRemoveCircularReference, 1 / detectedCircularReference.recipeQuantity);
+    var circularReferenceIsPrimary = detectedCircularReference.circularReferenceIsPrimary;
+    ///////////////
+    var recipeStack = [];
+    if (addToEnergyRecipeStack) {
+        recipeStack = energyRecipeStack;
     }
-    if (outputToRemoveCircularReference.length == 0) {
-        outputToRemoveCircularReference = [];
+    else {
+        recipeStack = craftingRecipeStack;
     }
     // increment currentRecipeCallStackSize
     currentRecipeCallStackSize++;
@@ -175,11 +236,10 @@ function calculateResourceCostPerMaterial(materialIndexToCalc, calculatePowerCos
     }
     else {
         // If there is a bigger circular reference the outputToRemoveCircularReference will zero the crafting cost for the getRecipeIndex most likely (return value is -1) or else nothing special happens
-        recipeIndex = getRecipeIndexFor(materialIndexToCalc, calculatePowerCost, addToEnergyRecipeStack, outputToRemoveCircularReference, circularReferenceIsPrimary);
+        recipeIndex = getRecipeIndexFor(materialIndexToCalc, calculatePowerCost, addToEnergyRecipeStack, outputToRemoveCircularReference, circularReferenceIsPrimary, materialQuantityToCalc);
         if (recipeIndex == -1) {
             console.log("No crafting needed, because this product is already a byproduct of another step.")
             // decrement currentRecipeCallStackSize
-
             currentRecipeCallStackSize--;
             // cost is zero because this product doesnt need to be produced anymore
             return [];
@@ -215,7 +275,7 @@ function calculateResourceCostPerMaterial(materialIndexToCalc, calculatePowerCos
         // cost is infinite, because its not possible
         return costPerProduct;
     }
-    var costPerRecipe = calculateResourceCostPerRecipe(recipeIndex, calculatePowerCost, inputToRemoveCircularReference, addToEnergyRecipeStack);
+    var costPerRecipe = calculateResourceCostPerRecipe(recipeIndex, calculatePowerCost, inputToRemoveCircularReference, addToEnergyRecipeStack, materialQuantityToCalc);
     //
     for (let i = 0; i < costPerRecipe.length; i++) {
         costPerProduct.push({
@@ -274,7 +334,10 @@ function lookUpRecipeCacheObjectForMaterialNumber(materialIndex, dontAcceptCircu
 }
 
 
-function getRecipeIndexFor(materialIndex, calculatePowerCost, addToEnergyRecipeStack, outputToRemoveCircularReference, circularReferenceIsPrimary) {
+function getRecipeIndexFor(materialIndex, calculatePowerCost, addToEnergyRecipeStack, outputToRemoveCircularReference, circularReferenceIsPrimary, materialQuantityToCalc) {
+    if (!(materialQuantityToCalc > 0)) {
+        console.log("Error: materialQuantityToCalc missing");
+    }
     // look through cache
     var cachedRecipe = lookUpCachedRecipeForMaterialNumber(materialIndex, selectedDefaultRecipeEfficiencyLevel, true); //Don't include circular reference <- true
     if (cachedRecipe >= 0) {
@@ -346,7 +409,7 @@ function getRecipeIndexFor(materialIndex, calculatePowerCost, addToEnergyRecipeS
     var efficiencyRecipeMaterialCost = [];
     var efficiencyRecipeValueCosts = [];
     for (let i = 0; i < potentialRecipes.length; i++) {
-        iResourceCostArray = calculateResourceCostPerMaterialForRecipe(materialIndex, potentialRecipes[i].index, calculatePowerCost, addToEnergyRecipeStack);
+        iResourceCostArray = calculateResourceCostPerMaterialForRecipe(materialIndex, potentialRecipes[i].index, calculatePowerCost, addToEnergyRecipeStack, materialQuantityToCalc);
         iResourceValue = getResourceValueForResourceArray(iResourceCostArray);
         //
         var whereToAddiRecipe = efficiencyRecipeIndeces.length;
@@ -382,7 +445,11 @@ function getRecipeIndexFor(materialIndex, calculatePowerCost, addToEnergyRecipeS
     return chosenRecipeIndex;
 }
 
-function calculateResourceCostPerRecipe(recipeIndex, calculatePowerCost, inputToRemoveCircularReference, addToEnergyRecipeStack) {
+function calculateResourceCostPerRecipe(recipeIndex, calculatePowerCost, inputToRemoveCircularReference, addToEnergyRecipeStack, materialQuantityToCalc) {
+    if (!(materialQuantityToCalc > 0)) {
+        console.log("Error: materialQuantityToCalc missing");
+    }
+    //
     var cost = []
     //
     for (let i = 0; i < recipes[recipeIndex].input.length; i++) {
@@ -424,11 +491,13 @@ function calculateResourceCostPerRecipe(recipeIndex, calculatePowerCost, inputTo
             cost = addCosts(cost, costToAdd);
 
         }
+        // Material if product
         else {
-            addRecipeIndexToRecipeStack(recipeIndex, addToEnergyRecipeStack);
-            var costToAdd = calculateResourceCostPerMaterial(iInputMaterialIndex, calculatePowerCost, addToEnergyRecipeStack);
-            for (let i = 0; i < costToAdd.length; i++) {
-                costToAdd[i].quantity *= iInputQuantity;
+            addRecipeIndexToRecipeStack(recipeIndex, addToEnergyRecipeStack, materialQuantityToCalc);
+            var iInputQuantityPerMaterialQuantityToCalc = iInputQuantity * materialQuantityToCalc / recipes[recipeIndex].outputQuantity[0];
+            var costToAdd = calculateResourceCostPerMaterial(iInputMaterialIndex, calculatePowerCost, addToEnergyRecipeStack, iInputQuantityPerMaterialQuantityToCalc);  // materialQuantityToCalc <= iInputQuantityPerMaterialQuantityToCalc
+            for (let j = 0; j < costToAdd.length; j++) {
+                costToAdd[j].quantity *= iInputQuantity;
             }
             cost = addCosts(cost, costToAdd);
         }
@@ -473,9 +542,12 @@ function calculateCostPerRecipe(recipeIndex, inputToRemoveCircularReference) {
     return cost;
 };
 
-function calculateResourceCostPerMaterialForRecipe(materialIndex, recipeIndex, calculatePowerCost, addToEnergyRecipeStack) {
+function calculateResourceCostPerMaterialForRecipe(materialIndex, recipeIndex, calculatePowerCost, addToEnergyRecipeStack, materialQuantityToCalc) {
+    if (!(materialQuantityToCalc > 0)) {
+        console.log("Error: materialQuantityToCalc missing");
+    }
     // Cost for whole recipe
-    costArray = calculateResourceCostPerRecipe(recipeIndex, calculatePowerCost, [], addToEnergyRecipeStack);
+    costArray = calculateResourceCostPerRecipe(recipeIndex, calculatePowerCost, [], addToEnergyRecipeStack, materialQuantityToCalc);
     // Material output
     var outputPerRecipe;
     for (let i = 0; i < recipes[recipeIndex].output.length; i++) {
@@ -519,7 +591,7 @@ function calculateEnergyResourceCost(megawattSeconds) {
             if (!(materials[iMaterialIndex].isResource)) {
                 // highestCallStack is only used for crafting table, therefore not needed in power calculation
                 updateHighestRecipeCallStack = false;
-                iResourceCostPerMaterial = calculateResourceCostPerMaterial(iMaterialIndex, false, true); // can't calc power cost or else goes endless <= false , addToEnergyRecipeStack <= true
+                iResourceCostPerMaterial = calculateResourceCostPerMaterial(iMaterialIndex, false, true, iMaterialAmount); // can't calc power cost or else goes endless <= false , addToEnergyRecipeStack <= true, materialQuantityToCalc <= iMaterialAmount
                 updateHighestRecipeCallStack = true;
             }
             else {
@@ -603,6 +675,13 @@ function removeAllZerosFromCostArray(costArray) {
             removeAllZerosFromCostArray(costArray);
             break;
         }
+    }
+    return costArray;
+};
+
+function multiplyCostArrayWith(costArray, factor) {
+    for (let i = 0; i < costArray.length; i++) {
+        costArray[i].quantity *= factor;
     }
     return costArray;
 };
