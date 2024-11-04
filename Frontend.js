@@ -102,8 +102,8 @@ function fillCraftingTree() {
     //
     fillNeededResourcesTable();
     //
-    console.log('RecipeLog:');
-    console.log(recipeLog);
+    //console.log('RecipeLog:');
+    //console.log(recipeLog);
     console.log('RecipeCache:');
     console.log(recipeCacheForMaterial);
 }
@@ -217,59 +217,10 @@ function addMaterialToCraftingTreeColumn(columnIndex, offset, materialIndexToCra
     // One of error compared to Calculation.js
     currentRecipeCallStackSize--;
     //
-    var circularReferenceIsPrimary = true; //true is a dummy value, that doesnt break anything
-    var materialToCraftInRecipestack = 0; // 0 = false, while 1,2,3... are material in recipe 1,2,3... before in the stack
-    var distanceChecked = 0;
-    outerLoop:
-    for (let i = currentRecipeCallStackSize - 1; i > 1 && distanceChecked < distanceOfCircularReferenceCheck; i--) {
-        if (!(recipeStack[i] === undefined)) {
-            // For direct circular reference primary Output is considered
-            if (i == currentRecipeCallStackSize - 1) {
-                if (recipes[recipeStack[i].recipeIndex].output[0] == materialIndexToCraft) {
-                    materialToCraftInRecipestack = i;
-                    circularReferenceIsPrimary = true;
-                    break outerLoop;
-                }
-            }
-            // For big circular reference only secondary Outputs will be considered
-            for (let j = 1; j < recipes[recipeStack[i].recipeIndex].output.length; j++) {
-                if (recipes[recipeStack[i].recipeIndex].output[j] == materialIndexToCraft) {
-                    materialToCraftInRecipestack = i;
-                    circularReferenceIsPrimary = false;
-                    break outerLoop;
-                }
-            }
-        }
-        distanceChecked++;
-    }
-    // If its a big circular reference, its most likely a secondary output like empty canisters, that loop on itself -> secondary circular reference
-    if (materialToCraftInRecipestack < currentRecipeCallStackSize - 1) {
-        outputToRemoveCircularReference = lookUpOutputOverlapForCostArray(recipeStack[materialToCraftInRecipestack].recipeIndex, {
-            materialIndex: [materialIndexToCraft],
-            quantity: [100] //Dummy value
-        });
-        if (outputToRemoveCircularReference.length > 0) {
-            circularReferenceDetected = materialToCraftInRecipestack;
-
-        }
-
-    }
-    else {
-        // If its a small circular reference, its a direct and complete circular reference like the recycling loop -> primary circular reference
-        if (materialToCraftInRecipestack == currentRecipeCallStackSize - 1) {
-            outputToRemoveCircularReference = lookUpOutputOverlapForCostArray(recipeStack[materialToCraftInRecipestack].recipeIndex, {
-                materialIndex: recipes[recipeStack[currentRecipeCallStackSize].recipeIndex].input,
-                quantity: recipes[recipeStack[currentRecipeCallStackSize].recipeIndex].inputQuantity
-            });
-            inputToRemoveCircularReference = lookUpInputOverlapForCostArray(recipeStack[materialToCraftInRecipestack].recipeIndex, {
-                materialIndex: recipes[recipeStack[currentRecipeCallStackSize].recipeIndex].output,
-                quantity: recipes[recipeStack[currentRecipeCallStackSize].recipeIndex].outputQuantity
-            });
-            if (inputToRemoveCircularReference.length > 0 && outputToRemoveCircularReference.length > 0) {
-                circularReferenceDetected = materialToCraftInRecipestack;
-            }
-        }
-    }
+    var detectedCircularReference = checkForCircularReference({ materialIndexToCalc: materialIndexToCraft, addToEnergyRecipeStack: false, materialQuantityToCalc: outputAmount });
+    circularReferenceDetected = detectedCircularReference.recipeStackDistance + 1;
+    outputToRemoveCircularReference = multiplyCostArrayWith(detectedCircularReference.outputToRemoveCircularReference, 1 / detectedCircularReference.recipeQuantity);  //
+    inputToRemoveCircularReference = multiplyCostArrayWith(detectedCircularReference.inputToRemoveCircularReference, 1 / detectedCircularReference.recipeQuantity);
     // One of error compared to Calculation.js
     currentRecipeCallStackSize++;
     //
