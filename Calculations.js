@@ -11,6 +11,7 @@ function getResourceValueForResourceArray(resourceArray) {
 // recipeStack for circular references
 var craftingRecipeStack = [];
 var energyRecipeStack = [];
+var recipeLog = []; // for debugging
 var currentRecipeCallStackSize = 0;
 var highestRecipeCallStack = 0;
 var distanceOfCircularReferenceCheck = 8;
@@ -36,6 +37,15 @@ function addRecipeIndexToRecipeStack(recipeIndexToAdd, addToEnergyRecipeStack, m
         outputQuantity: recipes[recipeIndexToAdd].outputQuantity.map(element => element * recipeQuantityThis),
         inputQuantity: recipes[recipeIndexToAdd].inputQuantity.map(element => element * recipeQuantityThis)
     };
+    // For debugging
+    recipeLog.push({
+        recipeIndex: recipeIndexToAdd,
+        recipeName: recipes[recipeIndexToAdd].name,
+        recipeQuantity: recipeQuantityThis,
+        outputQuantity: recipes[recipeIndexToAdd].outputQuantity.map(element => element * recipeQuantityThis),
+        inputQuantity: recipes[recipeIndexToAdd].inputQuantity.map(element => element * recipeQuantityThis)
+    });
+    //
     if (addToEnergyRecipeStack) {
         energyRecipeStack = recipeStack;
     }

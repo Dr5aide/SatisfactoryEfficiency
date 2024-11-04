@@ -102,6 +102,8 @@ function fillCraftingTree() {
     //
     fillNeededResourcesTable();
     //
+    console.log('RecipeLog:');
+    console.log(recipeLog);
     console.log('RecipeCache:');
     console.log(recipeCacheForMaterial);
 }
@@ -198,9 +200,10 @@ function addMaterialToCraftingTreeColumn(columnIndex, offset, materialIndexToCra
     selectElement.onchange = function () { updateSelectedEfficiencyIndexFor(materialIndexToCraft, selectElement); };
     //
     // Output
+    var outputAmount = 0;
     var detailsAboutCraftingStep = '<b>Output</b>: ';
     for (let j = 0; j < recipe.output.length; j++) {
-        var outputAmount = Math.round(recipe.outputQuantity[j] * craftsPerMinute * 100) / 100;
+        outputAmount = Math.round(recipe.outputQuantity[j] * craftsPerMinute * 100) / 100;
         detailsAboutCraftingStep = detailsAboutCraftingStep + outputAmount + '/min ' + materials[recipe.output[j]].name + ', ';
     }
     detailsAboutCraftingStep = detailsAboutCraftingStep + '\n';
@@ -281,7 +284,7 @@ function addMaterialToCraftingTreeColumn(columnIndex, offset, materialIndexToCra
     //
     var costPerRecipe = calculateCostPerRecipe(recipeIndex, inputToRemoveCircularReference);
     //
-    addRecipeIndexToRecipeStack(recipeIndex, false); //addToEnergyRecipeStack <= false
+    addRecipeIndexToRecipeStack(recipeIndex, false, outputAmount); //addToEnergyRecipeStack <= false, materialQuantityToCalc <= outputAmount
     detailsAboutCraftingStep = detailsAboutCraftingStep + '<b>Input</b>: ';
     for (let j = 0; j < costPerRecipe.length; j++) {
         var jAmountPerMinute = Math.round(costPerRecipe[j].quantity * craftsPerMinute * 100) / 100;
