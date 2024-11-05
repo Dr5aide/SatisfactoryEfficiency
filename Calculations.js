@@ -511,13 +511,13 @@ function calculateResourceCostPerRecipe(recipeIndex, calculatePowerCost, inputTo
         if (materials[iInputMaterialIndex].isResource) {
             // Power
             if (calculatePowerCost) {
-                cost = addCosts(cost, calculateEnergyResourceCost(materials[iInputMaterialIndex].megawattSecondToExtract));
+                cost = addCosts(cost, calculateEnergyResourceCost(materials[iInputMaterialIndex].megaJouleToExtract));
             }
             else {
                 var costToAdd = [{
                     name: 'MJ of Power',
                     materialIndex: getMaterialIndexByName('MJ of Power'),
-                    quantity: materials[iInputMaterialIndex].megawattSecondToExtract
+                    quantity: materials[iInputMaterialIndex].megaJouleToExtract
                 }]
                 cost = addCosts(cost, costToAdd);
             }
@@ -542,9 +542,9 @@ function calculateResourceCostPerRecipe(recipeIndex, calculatePowerCost, inputTo
         }
     }
     // Material if not resource
-    var megawattSecondsPerCraft = calculatePowerUsagePerRecipe(recipeIndex);
+    var megaJoulePerCraft = calculatePowerUsagePerRecipe(recipeIndex);
     if (calculatePowerCost) {
-        cost = addCosts(cost, calculateEnergyCost(megawattSecondsPerCraft));
+        cost = addCosts(cost, calculateEnergyCost(megaJoulePerCraft));
     }
     // returns list of data objects with type and amount per 1 recipe craft
     return cost;
@@ -605,23 +605,23 @@ function calculateResourceCostPerMaterialForRecipe(materialIndex, recipeIndex, c
 
 function calculatePowerUsagePerRecipe(recipeIndex) {
     var machineIndex = recipes[recipeIndex].machine;
-    var megawattSeconds = machines[machineIndex].powerConsumption_mw * recipes[recipeIndex].craftingTime_s;
+    var megaJoule = machines[machineIndex].powerConsumption_mw * recipes[recipeIndex].craftingTime_s;
     // returns megawatt seconds (I know thats a damn cursed unit) per 1 recipe craft
-    return megawattSeconds;
+    return megaJoule;
 };
 
 var resourceCostArrayPerMegawattSecondCache = [];
 
-function calculateEnergyResourceCost(megawattSeconds) {
-    var costForMegawattSeconds = [];
+function calculateEnergyResourceCost(megaJoule) {
+    var costFormegaJoule = [];
     if (resourceCostArrayPerMegawattSecondCache != []) {
-        costForMegawattSeconds = resourceCostArrayPerMegawattSecondCache;
+        costFormegaJoule = resourceCostArrayPerMegawattSecondCache;
         for (let i = 0; i < resourceCostArrayPerMegawattSecondCache.length; i++) {
-            costForMegawattSeconds[i].quantity *= megawattSeconds;
+            costFormegaJoule[i].quantity *= megaJoule;
         }
     }
     else {
-        var materialCostArray = calculateEnergyCost(megawattSeconds);
+        var materialCostArray = calculateEnergyCost(megaJoule);
         for (let i = 0; i < materialCostArray.length; i++) {
             var iMaterialIndex = materialCostArray[i].materialIndex;
             var iMaterialAmount = materialCostArray[i].quantity;
@@ -644,19 +644,19 @@ function calculateEnergyResourceCost(megawattSeconds) {
             for (let i = 0; i < iResourceCostPerMaterial.length; i++) {
                 iResourceCostPerMaterial[i].quantity = iResourceCostPerMaterial[i].quantity * iMaterialAmount;
             }
-            addCosts(costForMegawattSeconds, iResourceCostPerMaterial);
+            addCosts(costFormegaJoule, iResourceCostPerMaterial);
         }
         // Set a cache
-        newResourceCostArrayPerMegawattSecondCache = costForMegawattSeconds;
+        newResourceCostArrayPerMegawattSecondCache = costFormegaJoule;
         for (let i = 0; i < newResourceCostArrayPerMegawattSecondCache.length; i++) {
-            newResourceCostArrayPerMegawattSecondCache[i] /= megawattSeconds;
+            newResourceCostArrayPerMegawattSecondCache[i] /= megaJoule;
         }
         resourceCostArrayPerMegawattSecondCache = newResourceCostArrayPerMegawattSecondCache;
     }
-    return costForMegawattSeconds;
+    return costFormegaJoule;
 }
 
-function calculateEnergyCost(megawattSeconds) {
+function calculateEnergyCost(megaJoule) {
     var cost = []
     //
     var MJPerBurn = energySources[selectedEnergySourceIndex].outputQuantity[0];
@@ -665,7 +665,7 @@ function calculateEnergyCost(megawattSeconds) {
         cost = addCosts(cost, [{
             name: materials[energySources[selectedEnergySourceIndex].input[i]].name,
             materialIndex: energySources[selectedEnergySourceIndex].input[i],
-            quantity: energySources[selectedEnergySourceIndex].inputQuantity[i] * megawattSeconds / MJPerBurn
+            quantity: energySources[selectedEnergySourceIndex].inputQuantity[i] * megaJoule / MJPerBurn
         }]);
     }
     //

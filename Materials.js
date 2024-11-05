@@ -36,7 +36,7 @@ const materials =
             tier: 0,
             isResource: true,
             ficsitCouponValue: 0,
-            megawattSecondToExtract: 0,
+            megaJouleToExtract: 0,
             //Dummy
             relativeNodeAmount: 1,
             relativeNeed: 0
@@ -47,7 +47,7 @@ const materials =
             tier: 0,
             isResource: true,
             ficsitCouponValue: 2,
-            megawattSecondToExtract: 5,
+            megaJouleToExtract: 5,
             //Impure: 12 Normal: 47 Pure: 27
             relativeNodeAmount: 107,
             // based on https://www.reddit.com/r/SatisfactoryGame/comments/poc898/alternate_recipes_indepth_analysis_an_objective/ then refined by try and error
@@ -58,7 +58,7 @@ const materials =
             tier: 0,
             isResource: true,
             ficsitCouponValue: 1,
-            megawattSecondToExtract: 5,
+            megaJouleToExtract: 5,
             //Impure: 33 Normal: 41 Pure: 46
             relativeNodeAmount: 149.5,
             relativeNeed: 0.6
@@ -68,7 +68,7 @@ const materials =
             tier: 0,
             isResource: true,
             ficsitCouponValue: 3,
-            megawattSecondToExtract: 5,
+            megaJouleToExtract: 5,
             //Impure: 9 Normal: 28 Pure: 12
             relativeNodeAmount: 56.5,
             relativeNeed: 0.6
@@ -78,7 +78,7 @@ const materials =
             tier: 0,
             isResource: true,
             ficsitCouponValue: 7,
-            megawattSecondToExtract: 5,
+            megaJouleToExtract: 5,
             //Impure: 0 Normal: 8 Pure: 8
             relativeNodeAmount: 24,
             relativeNeed: 0.2
@@ -88,7 +88,7 @@ const materials =
             tier: 0,
             isResource: true,
             ficsitCouponValue: 3,
-            megawattSecondToExtract: 5,
+            megaJouleToExtract: 5,
             //Impure: 6 Normal: 29 Pure: 15
             relativeNodeAmount: 62,
             relativeNeed: 0.5
@@ -98,7 +98,7 @@ const materials =
             tier: 0,
             isResource: true,
             ficsitCouponValue: 15,
-            megawattSecondToExtract: 5,
+            megaJouleToExtract: 5,
             //Impure: 0 Normal: 11 Pure: 5
             relativeNodeAmount: 21,
             relativeNeed: 0.25
@@ -108,7 +108,7 @@ const materials =
             tier: 0,
             isResource: true,
             ficsitCouponValue: 11,
-            megawattSecondToExtract: 5,
+            megaJouleToExtract: 5,
             //Impure: 1 Normal: 7 Pure: 3
             relativeNodeAmount: 14.5,
             relativeNeed: 0.16
@@ -118,7 +118,7 @@ const materials =
             tier: 0,
             isResource: true,
             ficsitCouponValue: 8,
-            megawattSecondToExtract: 5,
+            megaJouleToExtract: 5,
             //Impure: 5 Normal: 6 Pure: 6
             relativeNodeAmount: 20.5,
             relativeNeed: 0.3
@@ -128,7 +128,7 @@ const materials =
             tier: 0,
             isResource: true,
             ficsitCouponValue: 0,
-            megawattSecondToExtract: 5,
+            megaJouleToExtract: 5,
             //Impure: 8 Normal: 5 Pure: 0
             relativeNodeAmount: 9,
             relativeNeed: 1
@@ -138,7 +138,7 @@ const materials =
             tier: 0,
             isResource: true,
             ficsitCouponValue: 35,
-            megawattSecondToExtract: 5,
+            megaJouleToExtract: 5,
             //Impure: 1 Normal: 3 Pure: 0
             relativeNodeAmount: 3.5,
             relativeNeed: 0.05
@@ -235,7 +235,7 @@ const materials =
             tier: 3,
             isResource: true,
             ficsitCouponValue: 0,
-            megawattSecondToExtract: 10,
+            megaJouleToExtract: 10,
             //Dummy
             relativeNodeAmount: 10000,
             relativeNeed: 1
@@ -245,7 +245,7 @@ const materials =
             tier: 5,
             isResource: true,
             ficsitCouponValue: 0,
-            megawattSecondToExtract: 20,
+            megaJouleToExtract: 20,
             //Impure: 10 Normal: 12 Pure: 8
             relativeNodeAmount: 33,
             relativeNeed: 0.52
@@ -310,7 +310,7 @@ const materials =
             tier: 8,
             isResource: true,
             // megawatt (150) / output (6*60/min) * 60[seconds/min]
-            megawattSecondToExtract: 25,
+            megaJouleToExtract: 25,
             //Impure: 2 Normal: 7 Pure: 36
             relativeNodeAmount: 80,
             relativeNeed: 0.15
@@ -338,7 +338,7 @@ const materials =
             tier: 9,
             isResource: true,
             // megawatt (250) / output (200/min) * 60[seconds/min]
-            megawattSecondToExtract: 75,
+            megaJouleToExtract: 75,
             //Infinite "Notes"
             relativeNodeAmount: 10000,
             relativeNeed: 1
@@ -679,7 +679,7 @@ const materials =
             tier: 0,
             isResource: true,
             ficsitCouponValue: 3,
-            megawattSecondToExtract: 0,
+            megaJouleToExtract: 0,
             //Dummy
             relativeNodeAmount: 1,
             relativeNeed: 1
@@ -689,7 +689,7 @@ const materials =
             tier: 0,
             isResource: true,
             ficsitCouponValue: 10,
-            megawattSecondToExtract: 0,
+            megaJouleToExtract: 0,
             //Dummy
             relativeNodeAmount: 0.1,
             relativeNeed: 1
@@ -699,7 +699,7 @@ const materials =
             tier: 0,
             isResource: true,
             ficsitCouponValue: 10,
-            megawattSecondToExtract: 0,
+            megaJouleToExtract: 0,
             //Dummy
             relativeNodeAmount: 1,
             relativeNeed: 1
@@ -709,7 +709,7 @@ const materials =
             tier: 0,
             isResource: true,
             ficsitCouponValue: 30,
-            megawattSecondToExtract: 0,
+            megaJouleToExtract: 0,
             //Dummy
             relativeNodeAmount: 1,
             relativeNeed: 1
@@ -958,7 +958,7 @@ const materials =
             tier: 0,
             isResource: true,
             ficsitCouponValue: 0,
-            megawattSecondToExtract: 0,
+            megaJouleToExtract: 0,
             //Dummy
             relativeNodeAmount: 0.1,
             relativeNeed: 1
@@ -968,7 +968,7 @@ const materials =
             tier: 0,
             isResource: true,
             ficsitCouponValue: 0,
-            megawattSecondToExtract: 0,
+            megaJouleToExtract: 0,
             //Dummy
             relativeNodeAmount: 0.05,
             relativeNeed: 1
@@ -978,7 +978,7 @@ const materials =
             tier: 0,
             isResource: true,
             ficsitCouponValue: 0,
-            megawattSecondToExtract: 0,
+            megaJouleToExtract: 0,
             //Dummy
             relativeNodeAmount: 0.02,
             relativeNeed: 1
@@ -1073,7 +1073,7 @@ const materials =
             tier: 0,
             isResource: true,
             ficsitCouponValue: 0,
-            megawattSecondToExtract: 0,
+            megaJouleToExtract: 0,
             //Dummy
             relativeNodeAmount: 1,
             relativeNeed: 100000//Number.POSITIVE_INFINITY
