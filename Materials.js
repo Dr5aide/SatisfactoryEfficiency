@@ -122,7 +122,7 @@ const materials =
             ficsitCouponValue: 0,
             megaJouleToExtract: 5,
             relativeNodeAmount: 3.5,
-            relativeNeed: 1
+            relativeNeed: 0.1
         },
         {
             name: "Uranium",
