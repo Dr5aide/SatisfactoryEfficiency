@@ -1810,6 +1810,17 @@ const recipes =
 			machine: getMachineIndexbyName("Quantum Encoder"),
 			craftingTime_s: 12
 		},
+		// Dummy for dark matter residue
+		{
+			name: "Superposition Oscillator",
+			tier: 9,
+			output: [getMaterialIndexByName("Dark Matter Residue"), getMaterialIndexByName("Superposition Oscillator")],
+			outputQuantity: [25, 1],
+			input: [getMaterialIndexByName("Dark Matter Crystal"), getMaterialIndexByName("Crystal Oscillator"), getMaterialIndexByName("Alclad Aluminum Sheet"), getMaterialIndexByName("Excited Photonic Matter")],
+			inputQuantity: [6, 1, 9, 25],
+			machine: getMachineIndexbyName("Quantum Encoder"),
+			craftingTime_s: 12
+		},
 		// Quantum Technology
 		{
 			name: "Diamonds",
