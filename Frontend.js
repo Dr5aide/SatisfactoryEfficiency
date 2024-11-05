@@ -217,8 +217,8 @@ function addMaterialToCraftingTreeColumn(columnIndex, offset, materialIndexToCra
     // Input
     // check for circular reference
     var circularReferenceDetected = false;
-    var outputToRemoveCircularReference = [];
-    var inputToRemoveCircularReference = [];
+    var excessOutputNextRecipeCircularReference = [];
+    var excessInputNextRecipeCircularReference = [];
     var recipeStack = craftingRecipeStack;
     /////////////// (Copy from Calculation.js)
     // One of error compared to Calculation.js
@@ -226,21 +226,21 @@ function addMaterialToCraftingTreeColumn(columnIndex, offset, materialIndexToCra
     //
     var detectedCircularReference = checkForCircularReference({ materialIndexToCalc: materialIndexToCraft, addToEnergyRecipeStack: false, materialQuantityToCalc: outputAmount });
     circularReferenceDetected = detectedCircularReference.recipeStackDistance + 1;
-    outputToRemoveCircularReference = multiplyCostArrayWith(detectedCircularReference.outputToRemoveCircularReference, 1);
-    inputToRemoveCircularReference = multiplyCostArrayWith(detectedCircularReference.inputToRemoveCircularReference, 1);
+    excessOutputNextRecipeCircularReference = multiplyCostArrayWith(detectedCircularReference.excessOutputNextRecipeCircularReference, 1);
+    excessInputNextRecipeCircularReference = multiplyCostArrayWith(detectedCircularReference.excessInputNextRecipeCircularReference, 1);
     // One of error compared to Calculation.js
     currentRecipeCallStackSize++;
     //
     ///////////////
     //Fallback if check for circular reference breaks apart
-    if (inputToRemoveCircularReference.length == 0) {
-        inputToRemoveCircularReference = [];
+    if (excessInputNextRecipeCircularReference.length == 0) {
+        excessInputNextRecipeCircularReference = [];
     }
-    if (outputToRemoveCircularReference.length == 0) {
-        outputToRemoveCircularReference = [];
+    if (excessOutputNextRecipeCircularReference.length == 0) {
+        excessOutputNextRecipeCircularReference = [];
     }
     //
-    var costPerRecipe = calculateCostPerRecipe(recipeIndex, inputToRemoveCircularReference);
+    var costPerRecipe = calculateCostPerRecipe(recipeIndex, excessInputNextRecipeCircularReference);
     //
     addRecipeIndexToRecipeStack(recipeIndex, false, outputAmount); //addToEnergyRecipeStack <= false, materialQuantityToCalc <= outputAmount
     detailsAboutCraftingStep = detailsAboutCraftingStep + '<b>Input</b>: ';
