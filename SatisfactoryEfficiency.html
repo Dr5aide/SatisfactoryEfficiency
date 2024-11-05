@@ -55,8 +55,7 @@
           </h3>
           <div class="form-group" style="margin-bottom: 12px">
             <label for="unlockedTiers">Unlocked Tiers</label>
-            <select type="number" class="form-control" id="unlockedTiers" onchange="updateTierDependentVariables();
-            updateVariablesFromInput();">
+            <select type="number" class="form-control" id="unlockedTiers" onchange="updateUnlockedTiers();">
               <option value=9>9</option>
               <option value=8>8</option>
               <option value=7>7</option>
@@ -71,7 +70,7 @@
           </div>
           <div class="form-group" style="margin-bottom: 12px">
             <label for="energySource">Energy Source</label>
-            <select type="number" class="form-control" id="energySource" onchange="updateVariablesFromInput();">
+            <select type="number" class="form-control" id="energySource" onchange="updateEnergySource();">
             </select>
           </div>
           <!-- Dummy Button to catch onEnter-->

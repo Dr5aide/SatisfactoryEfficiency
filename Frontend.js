@@ -20,7 +20,7 @@ const selectableDefaultRecipeEfficiencies = [1, 2, 3];
 var keepInLineWithFollowingCraftingSteps = false;
 var maxCraftingTreeColumn = 0;
 
-function updateTierDependentVariables() {
+function updateUnlockedTiers() {
     unlockedTiers = parseInt(document.getElementById("unlockedTiers").value);
     // since more crafting recipes may have been unlocked selectedEfficiencyIndexPerMaterial would be desynched
     selectedEfficiencyIndexPerMaterial = [];
@@ -30,11 +30,19 @@ function updateTierDependentVariables() {
     //
     loadSelectOptions();
     loadPreSets();
+    //
+    updateVariablesFromInput();
+}
+
+function updateEnergySource() {
+    selectedEnergySourceIndex = parseInt(document.getElementById("energySource").value);
+    resourceCostArrayPerMegawattSecondCache = [];
+    //
+    updateVariablesFromInput();
 }
 
 function updateVariablesFromInput() {
     console.log('Updating Input');
-    selectedEnergySourceIndex = parseInt(document.getElementById("energySource").value);
     wantedMaterial = parseInt(document.getElementById("wantedMaterial").value);
     amountOfWantedMaterialPerMinute = parseInt(document.getElementById("wantedMaterialAmount").value);
     //
