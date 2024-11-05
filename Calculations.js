@@ -230,7 +230,7 @@ function checkForCircularReference({ materialIndexToCalc, addToEnergyRecipeStack
 }
 
 // Calcuate Resources per Material
-function calculateResourceCostPerMaterial(materialIndexToCalc, calculatePowerCost, addToEnergyRecipeStack, materialQuantityToCalc) {
+function calculateResourceCostPerMaterial({ materialIndexToCalc, calculatePowerCost, addToEnergyRecipeStack, materialQuantityToCalc } = {}) {
     console.log("calculateResourceCostPerMaterial for " + materialIndexToCalc + " " + materials[materialIndexToCalc].name + " at " + currentRecipeCallStackSize);
     //
     if (!(materialQuantityToCalc > 0)) {
@@ -535,7 +535,7 @@ function calculateResourceCostPerRecipe(recipeIndex, calculatePowerCost, excessO
         else {
             addRecipeIndexToRecipeStack(recipeIndex, addToEnergyRecipeStack, materialQuantityToCalc);
             var iInputQuantityPerMaterialQuantityToCalc = iInputQuantity * materialQuantityToCalc / recipes[recipeIndex].outputQuantity[0];
-            var costToAdd = calculateResourceCostPerMaterial(iInputMaterialIndex, calculatePowerCost, addToEnergyRecipeStack, iInputQuantityPerMaterialQuantityToCalc);  // materialQuantityToCalc <= iInputQuantityPerMaterialQuantityToCalc
+            var costToAdd = calculateResourceCostPerMaterial({ materialIndexToCalc: iInputMaterialIndex, calculatePowerCost: calculatePowerCost, addToEnergyRecipeStack: addToEnergyRecipeStack, materialQuantityToCalc: iInputQuantityPerMaterialQuantityToCalc });
             for (let j = 0; j < costToAdd.length; j++) {
                 costToAdd[j].quantity *= iInputQuantity;
             }
@@ -631,7 +631,7 @@ function calculateEnergyResourceCost(megaJoule) {
             if (!(materials[iMaterialIndex].isResource)) {
                 // highestCallStack is only used for crafting table, therefore not needed in power calculation
                 updateHighestRecipeCallStack = false;
-                iResourceCostPerMaterial = calculateResourceCostPerMaterial(iMaterialIndex, false, true, iMaterialAmount); // can't calc power cost or else goes endless <= false , addToEnergyRecipeStack <= true, materialQuantityToCalc <= iMaterialAmount
+                iResourceCostPerMaterial = calculateResourceCostPerMaterial({ materialIndexToCalc: iMaterialIndex, calculatePowerCost: false, addToEnergyRecipeStack: true, materialQuantityToCalc: iMaterialAmount });
                 updateHighestRecipeCallStack = true;
             }
             else {

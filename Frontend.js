@@ -98,8 +98,8 @@ function fillCraftingTree() {
     var table = document.getElementById("craftingTreeTable");
     table.innerHTML = '';
     // calculate once to fill cache
-    calculateResourceCostPerMaterial(wantedMaterial, true, false, amountOfWantedMaterialPerMinute);  // withPowerCalc <= true; add recipes to energy calc log, not material calc log <= false, materialQuantityToCalc <= amountOfWantedMaterialPerMinute
-    //
+    calculateResourceCostPerMaterial({ materialIndexToCalc: wantedMaterial, calculatePowerCost: true, addToEnergyRecipeStack: false, materialQuantityToCalc: amountOfWantedMaterialPerMinute });
+
     let row = table.insertRow();
     for (let i = 0; i <= highestRecipeCallStack; i++) {
         let cell = row.insertCell(i);
