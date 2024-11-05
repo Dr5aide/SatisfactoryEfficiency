@@ -48,9 +48,8 @@ const materials =
             isResource: true,
             ficsitCouponValue: 2,
             megaJouleToExtract: 5,
-            //Impure: 12 Normal: 47 Pure: 27
-            relativeNodeAmount: 107,
-            // based on https://www.reddit.com/r/SatisfactoryGame/comments/poc898/alternate_recipes_indepth_analysis_an_objective/ then refined by try and error
+            relativeNodeAmount: 116.5,
+            // relative need is determined through trial and error
             relativeNeed: 0.3
         },
         {
@@ -59,9 +58,8 @@ const materials =
             isResource: true,
             ficsitCouponValue: 1,
             megaJouleToExtract: 5,
-            //Impure: 33 Normal: 41 Pure: 46
-            relativeNodeAmount: 149.5,
-            relativeNeed: 0.6
+            relativeNodeAmount: 153.5,
+            relativeNeed: 0.58
         },
         {
             name: "Copper Ore",
@@ -69,9 +67,8 @@ const materials =
             isResource: true,
             ficsitCouponValue: 3,
             megaJouleToExtract: 5,
-            //Impure: 9 Normal: 28 Pure: 12
-            relativeNodeAmount: 56.5,
-            relativeNeed: 0.6
+            relativeNodeAmount: 61.5,
+            relativeNeed: 0.65
         },
         {
             name: "Caterium Ore",
@@ -79,9 +76,8 @@ const materials =
             isResource: true,
             ficsitCouponValue: 7,
             megaJouleToExtract: 5,
-            //Impure: 0 Normal: 8 Pure: 8
-            relativeNodeAmount: 24,
-            relativeNeed: 0.2
+            relativeNodeAmount: 25,
+            relativeNeed: 0.185
         },
         {
             name: "Coal",
@@ -89,9 +85,8 @@ const materials =
             isResource: true,
             ficsitCouponValue: 3,
             megaJouleToExtract: 5,
-            //Impure: 6 Normal: 29 Pure: 15
-            relativeNodeAmount: 62,
-            relativeNeed: 0.5
+            relativeNodeAmount: 70.5,
+            relativeNeed: 0.6
         },
         {
             name: "Raw Quartz",
@@ -99,8 +94,7 @@ const materials =
             isResource: true,
             ficsitCouponValue: 15,
             megaJouleToExtract: 5,
-            //Impure: 0 Normal: 11 Pure: 5
-            relativeNodeAmount: 21,
+            relativeNodeAmount: 18,
             relativeNeed: 0.25
         },
         {
@@ -109,9 +103,8 @@ const materials =
             isResource: true,
             ficsitCouponValue: 11,
             megaJouleToExtract: 5,
-            //Impure: 1 Normal: 7 Pure: 3
-            relativeNodeAmount: 14.5,
-            relativeNeed: 0.16
+            relativeNodeAmount: 20.5,
+            relativeNeed: 0.14
         },
         {
             name: "Bauxite",
@@ -119,8 +112,7 @@ const materials =
             isResource: true,
             ficsitCouponValue: 8,
             megaJouleToExtract: 5,
-            //Impure: 5 Normal: 6 Pure: 6
-            relativeNodeAmount: 20.5,
+            relativeNodeAmount: 22.5,
             relativeNeed: 0.3
         },
         {
@@ -129,8 +121,7 @@ const materials =
             isResource: true,
             ficsitCouponValue: 0,
             megaJouleToExtract: 5,
-            //Impure: 8 Normal: 5 Pure: 0
-            relativeNodeAmount: 9,
+            relativeNodeAmount: 3.5,
             relativeNeed: 1
         },
         {
@@ -139,8 +130,7 @@ const materials =
             isResource: true,
             ficsitCouponValue: 35,
             megaJouleToExtract: 5,
-            //Impure: 1 Normal: 3 Pure: 0
-            relativeNodeAmount: 3.5,
+            relativeNodeAmount: 17,
             relativeNeed: 0.05
         },
         // Ingots
@@ -248,7 +238,7 @@ const materials =
             megaJouleToExtract: 20,
             //Impure: 10 Normal: 12 Pure: 8
             relativeNodeAmount: 33,
-            relativeNeed: 0.52
+            relativeNeed: 0.495
         },
         {
             name: "Heavy Oil Residue",
