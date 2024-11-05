@@ -239,10 +239,11 @@ function calculateResourceCostPerMaterial(materialIndexToCalc, calculatePowerCos
     var costPerProduct = [];
     //
     if (materialQuantityToCalc < 0) {
+        throw new Error("QuantityToCalc for " + materialIndexToCalc + " " + materials[materialIndexToCalc].name + " at " + currentRecipeCallStackSize + " is negative");
         // decrement currentRecipeCallStackSize
-        currentRecipeCallStackSize--;
+        //currentRecipeCallStackSize--;
         //
-        return costPerProduct;
+        //return costPerProduct;
     }
     // check for circular reference
     var circularReferenceDetected = 0; // 0 = false, while 1,2,3... are circularReference of size 2,3,4...
