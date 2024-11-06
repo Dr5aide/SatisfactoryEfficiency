@@ -99,7 +99,9 @@ function fillCraftingTree() {
     table.innerHTML = '';
     // calculate once to fill cache
     calculateResourceCostPerMaterial({ materialIndexToCalc: wantedMaterial, calculatePowerCost: true, addToEnergyRecipeStack: false, materialQuantityToCalc: amountOfWantedMaterialPerMinute });
-
+    // filling the crafting table needs offset to check for secondary circular reference up to the first stack entry
+    currentRecipeCallStackSize++;
+    //
     let row = table.insertRow();
     for (let i = 0; i <= highestRecipeCallStack; i++) {
         let cell = row.insertCell(i);
@@ -187,7 +189,7 @@ function addMaterialToCraftingTreeColumn(columnIndex, offset, materialIndexToCra
             craftsPerMinute = amountPerMinute / recipe.outputQuantity[i];
         }
     }
-    // Fallback
+    // go back if crafting is broken
     if (craftsPerMinute < 0) {
         return;
     }
@@ -255,7 +257,16 @@ function addMaterialToCraftingTreeColumn(columnIndex, offset, materialIndexToCra
     if (excessOutputNextRecipeCircularReference.length == 0) {
         excessOutputNextRecipeCircularReference = [];
     }
-    //
+    // Excess "NextInput" handling
+    for (let i = 0; i < excessInputNextRecipeCircularReference.length; i++) {
+        if (excessInputNextRecipeCircularReference[i].materialIndex == materialIndexToCraft) {
+            if (0 == (recipes[recipeIndex].outputQuantity - excessInputNextRecipeCircularReference[i].quantity)) {
+                titleCell.innerHTML = "";
+                return;
+            }
+        }
+    }
+    // Excess NextOutput handling
     var costPerRecipe = calculateCostPerRecipe(recipeIndex, excessOutputNextRecipeCircularReference);
     //
     addRecipeIndexToRecipeStack(recipeIndex, false, outputAmount, materialIndexToCraft); //addToEnergyRecipeStack <= false, materialQuantityToCalc <= outputAmount
