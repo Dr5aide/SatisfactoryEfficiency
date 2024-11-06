@@ -163,7 +163,7 @@ function checkForCircularReference({ materialIndexToCalc, addToEnergyRecipeStack
     }
     // Primary Circular Reference
     var distanceChecked = 0;
-    for (let i = currentRecipeCallStackSize - 1; i > 0 && distanceChecked < distanceOfCircularReferenceCheck; i--) {
+    for (let i = currentRecipeCallStackSize - 1; i > 1 && distanceChecked < distanceOfCircularReferenceCheck; i--) {
         for (let j = 0; j < recipes[recipeStack[i].recipeIndex].output.length; j++) {
             if (materialIndexToCalc == recipes[recipeStack[i].recipeIndex].output[j] && recipeStack[i].outputIndexToCalc == j) {
                 console.log("Found primary Output in a recipe before: " + materialIndexToCalc + " " + materials[materialIndexToCalc].name + " in recipe output of " + recipeStack[i].recipeIndex + " " + recipes[recipeStack[i].recipeIndex].name);
