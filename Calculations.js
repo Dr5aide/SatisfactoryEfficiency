@@ -14,7 +14,7 @@ var energyRecipeStack = [];
 var recipeLog = []; // for debugging
 var currentRecipeCallStackSize = 0;
 var highestRecipeCallStack = 0;
-var distanceOfCircularReferenceCheck = 8;
+var distanceOfCircularReferenceCheck = 16; // Thats stupid long, but the calculation is doing its best to break
 function addRecipeIndexToRecipeStack(recipeIndexToAdd, addToEnergyRecipeStack, materialQuantityToCalc, materialIndexToCalc) {
     if (!(materialQuantityToCalc > 0)) {
         console.log("Error: materialQuantityToCalc missing");
@@ -432,7 +432,7 @@ function getRecipeIndexFor(materialIndex, calculatePowerCost, addToEnergyRecipeS
     var potentialRecipes = [];
     for (let i = 0; i < recipes.length; i++) {
         // secondary Output disabled because of circular reference complexity
-        if (recipes[i].secondaryOutputAllowed && false) {
+        if (recipes[i].secondaryOutputAllowed) {
             for (let j = 0; j < recipes[i].output.length; j++) {
                 if (recipes[i].output[j] == materialIndex && recipes[i].tier <= unlockedTiers) {
                     potentialRecipes.push({

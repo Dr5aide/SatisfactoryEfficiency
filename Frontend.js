@@ -159,11 +159,25 @@ function addMaterialToCraftingTreeColumn(columnIndex, offset, materialIndexToCra
     if (recipeCacheObject == -1) {
         recipeCacheObject = lookUpRecipeCacheObjectForMaterialNumber(materialIndexToCraft, false); //dontAcceptCircularReferenceRecipes <- false
     }
+    // Second Fallback
+    if (recipeCacheObject == -1) {
+        var temporaryCraftingRecipeStack = craftingRecipeStack;
+        craftingRecipeStack = [];
+        var temporaryCurrentRecipeCallStackSize = currentRecipeCallStackSize;
+        currentRecipeCallStackSize = 0;
+        //
+        calculateResourceCostPerMaterial({ materialIndexToCalc: materialIndexToCraft, calculatePowerCost: true, addToEnergyRecipeStack: false, materialQuantityToCalc: amountPerMinute })
+        recipeCacheObject = lookUpRecipeCacheObjectForMaterialNumber(materialIndexToCraft, true);
+        if (recipeCacheObject == -1) {
+            recipeCacheObject = lookUpRecipeCacheObjectForMaterialNumber(materialIndexToCraft, false); //dontAcceptCircularReferenceRecipes <- false
+        }
+        //
+        craftingRecipeStack = temporaryCraftingRecipeStack;
+        currentRecipeCallStackSize = temporaryCurrentRecipeCallStackSize;
+    }
     //
     var recipeIndexArray = recipeCacheObject.recipeIndeces;
     var recipeValueCostArray = recipeCacheObject.valueCost;
-    console.log("recipeIndexArray: ");
-    console.log(recipeIndexArray);
     var recipeIndex = recipeIndexArray[getEfficiencyIndexPerMaterial(materialIndexToCraft)];
     var recipe = recipes[recipeIndex];
     //
@@ -221,15 +235,15 @@ function addMaterialToCraftingTreeColumn(columnIndex, offset, materialIndexToCra
     var circularReferenceDetected = false;
     var excessOutputNextRecipeCircularReference = [];
     var excessInputNextRecipeCircularReference = [];
-    var recipeStack = craftingRecipeStack;
     /////////////// (Copy from Calculation.js)
     // One of error compared to Calculation.js
     currentRecipeCallStackSize--;
     //
-    var detectedCircularReference = checkForCircularReference({ materialIndexToCalc: materialIndexToCraft, addToEnergyRecipeStack: false, materialQuantityToCalc: outputAmount });
+    var detectedCircularReference;
+    detectedCircularReference = checkForCircularReference({ materialIndexToCalc: materialIndexToCraft, addToEnergyRecipeStack: false, materialQuantityToCalc: outputAmount });
     circularReferenceDetected = detectedCircularReference.recipeStackDistance + 1;
-    excessOutputNextRecipeCircularReference = multiplyCostArrayWith(detectedCircularReference.excessOutputNextRecipeCircularReference, 1);
-    excessInputNextRecipeCircularReference = multiplyCostArrayWith(detectedCircularReference.excessInputNextRecipeCircularReference, 1);
+    excessOutputNextRecipeCircularReference = detectedCircularReference.excessOutputNextRecipeCircularReference;
+    excessInputNextRecipeCircularReference = detectedCircularReference.excessInputNextRecipeCircularReference;
     // One of error compared to Calculation.js
     currentRecipeCallStackSize++;
     //
@@ -242,16 +256,13 @@ function addMaterialToCraftingTreeColumn(columnIndex, offset, materialIndexToCra
         excessOutputNextRecipeCircularReference = [];
     }
     //
-    var costPerRecipe = calculateCostPerRecipe(recipeIndex, excessInputNextRecipeCircularReference);
+    var costPerRecipe = calculateCostPerRecipe(recipeIndex, excessOutputNextRecipeCircularReference);
     //
     addRecipeIndexToRecipeStack(recipeIndex, false, outputAmount, materialIndexToCraft); //addToEnergyRecipeStack <= false, materialQuantityToCalc <= outputAmount
     detailsAboutCraftingStep = detailsAboutCraftingStep + '<b>Input</b>: ';
     for (let j = 0; j < costPerRecipe.length; j++) {
         var jAmountPerMinute = Math.round(costPerRecipe[j].quantity * craftsPerMinute * 100) / 100;
         detailsAboutCraftingStep = detailsAboutCraftingStep + jAmountPerMinute + '/min ' + materials[costPerRecipe[j].materialIndex].name + ', ';
-        /*if (materials[costPerRecipe[j].materialIndex].isResource) {
-            continue;
-        }*/
         // increment currentRecipeCallStackSize
         currentRecipeCallStackSize++;
         if (keepInLineWithFollowingCraftingSteps) {
