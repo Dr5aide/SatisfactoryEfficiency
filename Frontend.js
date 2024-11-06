@@ -162,6 +162,8 @@ function addMaterialToCraftingTreeColumn(columnIndex, offset, materialIndexToCra
     //
     var recipeIndexArray = recipeCacheObject.recipeIndeces;
     var recipeValueCostArray = recipeCacheObject.valueCost;
+    console.log("recipeIndexArray: ");
+    console.log(recipeIndexArray);
     var recipeIndex = recipeIndexArray[getEfficiencyIndexPerMaterial(materialIndexToCraft)];
     var recipe = recipes[recipeIndex];
     //
@@ -242,7 +244,7 @@ function addMaterialToCraftingTreeColumn(columnIndex, offset, materialIndexToCra
     //
     var costPerRecipe = calculateCostPerRecipe(recipeIndex, excessInputNextRecipeCircularReference);
     //
-    addRecipeIndexToRecipeStack(recipeIndex, false, outputAmount); //addToEnergyRecipeStack <= false, materialQuantityToCalc <= outputAmount
+    addRecipeIndexToRecipeStack(recipeIndex, false, outputAmount, materialIndexToCraft); //addToEnergyRecipeStack <= false, materialQuantityToCalc <= outputAmount
     detailsAboutCraftingStep = detailsAboutCraftingStep + '<b>Input</b>: ';
     for (let j = 0; j < costPerRecipe.length; j++) {
         var jAmountPerMinute = Math.round(costPerRecipe[j].quantity * craftsPerMinute * 100) / 100;

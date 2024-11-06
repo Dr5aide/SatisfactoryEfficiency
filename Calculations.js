@@ -15,7 +15,7 @@ var recipeLog = []; // for debugging
 var currentRecipeCallStackSize = 0;
 var highestRecipeCallStack = 0;
 var distanceOfCircularReferenceCheck = 8;
-function addRecipeIndexToRecipeStack(recipeIndexToAdd, addToEnergyRecipeStack, materialQuantityToCalc) {
+function addRecipeIndexToRecipeStack(recipeIndexToAdd, addToEnergyRecipeStack, materialQuantityToCalc, materialIndexToCalc) {
     if (!(materialQuantityToCalc > 0)) {
         console.log("Error: materialQuantityToCalc missing");
     }
@@ -28,14 +28,21 @@ function addRecipeIndexToRecipeStack(recipeIndexToAdd, addToEnergyRecipeStack, m
         recipeStack = craftingRecipeStack;
     }
     //
-    recipeQuantityThis = materialQuantityToCalc / recipes[recipeIndexToAdd].outputQuantity[0];
+    var outputIndexToCalcThis = 0;
+    for (let i = 0; i < recipes[recipeIndexToAdd].output.length; i++) {
+        if (materialIndexToCalc == recipes[recipeIndexToAdd].output[i]) {
+            outputIndexToCalcThis = i;
+        }
+    }
+    var recipeQuantityThis = materialQuantityToCalc / recipes[recipeIndexToAdd].outputQuantity[outputIndexToCalcThis];
     //
     recipeStack[currentRecipeCallStackSize] = {
         recipeIndex: recipeIndexToAdd,
         recipeName: recipes[recipeIndexToAdd].name,
         recipeQuantity: recipeQuantityThis,
         outputQuantity: recipes[recipeIndexToAdd].outputQuantity.map(element => element * recipeQuantityThis),
-        inputQuantity: recipes[recipeIndexToAdd].inputQuantity.map(element => element * recipeQuantityThis)
+        inputQuantity: recipes[recipeIndexToAdd].inputQuantity.map(element => element * recipeQuantityThis),
+        outputIndexToCalc: outputIndexToCalcThis
     };
     // For debugging
     recipeLog.push({
@@ -43,7 +50,8 @@ function addRecipeIndexToRecipeStack(recipeIndexToAdd, addToEnergyRecipeStack, m
         recipeName: recipes[recipeIndexToAdd].name,
         recipeQuantity: recipeQuantityThis,
         outputQuantity: recipes[recipeIndexToAdd].outputQuantity.map(element => element * recipeQuantityThis),
-        inputQuantity: recipes[recipeIndexToAdd].inputQuantity.map(element => element * recipeQuantityThis)
+        inputQuantity: recipes[recipeIndexToAdd].inputQuantity.map(element => element * recipeQuantityThis),
+        outputIndexToCalc: outputIndexToCalcThis
     });
     //
     if (addToEnergyRecipeStack) {
@@ -155,64 +163,84 @@ function checkForCircularReference({ materialIndexToCalc, addToEnergyRecipeStack
     }
     // Primary Circular Reference
     var distanceChecked = 0;
-    for (let i = currentRecipeCallStackSize - 1; i > 1 && distanceChecked < distanceOfCircularReferenceCheck; i--) {
-        if (materialIndexToCalc == recipes[recipeStack[i].recipeIndex].output[0]) {
-            console.log("Found primary Output in a recipe before: " + materialIndexToCalc + " " + materials[materialIndexToCalc].name + " in recipe output of " + recipeStack[i].recipeIndex + " " + recipes[recipeStack[i].recipeIndex].name);
-            var excessOutputNextRecipe = lookUpRecipeStackInputOutputOverlapBetween1And2(i, currentRecipeCallStackSize, addToEnergyRecipeStack);
-            if (excessOutputNextRecipe.length > 0) {
-            }
-            var excessInputNextRecipe = lookUpRecipeStackOutputInputOverlapBetween1And2(i, currentRecipeCallStackSize, addToEnergyRecipeStack);
-            if (excessOutputNextRecipe.length > 0) {
-            }
-            // The recipeQuantity is the biggest ratio of excess to the next recipes In/Outputs, so it can be calculated back to a full recipe in another methode
-            var biggestRecipeQuantityForExcess = 0; // Dummy value
-            for (let k = 0; k < excessOutputNextRecipe.length; k++) {
-                for (let l = 0; l < recipes[recipeStack[i].recipeIndex].outputQuantity.length; l++) {
-                    if (excessOutputNextRecipe[k].materialIndex == recipes[recipeStack[i].recipeIndex].output[l]) {
-                        var kRecipeQuantity = excessOutputNextRecipe[k].quantity / recipes[recipeStack[i].recipeIndex].outputQuantity[l];
-                        if (biggestRecipeQuantityForExcess < kRecipeQuantity) {
-                            biggestRecipeQuantityForExcess = kRecipeQuantity;
-                        }
-                    }
-                }
-            }
-            for (let k = 0; k < excessInputNextRecipe.length; k++) {
-                for (let l = 0; l < recipes[recipeStack[i].recipeIndex].inputQuantity.length; l++) {
-                    if (excessInputNextRecipe[k].materialIndex == recipes[recipeStack[i].recipeIndex].input[l]) {
-                        var kRecipeQuantity = excessInputNextRecipe[k].quantity / recipes[recipeStack[i].recipeIndex].inputQuantity[l];
-                        if (biggestRecipeQuantityForExcess < kRecipeQuantity) {
-                            biggestRecipeQuantityForExcess = kRecipeQuantity;
-                        }
-                    }
-                }
-            }
-            //
-            var detectedCircularReference = {
-                recipeStackDistance: i - 1,
-                circularReferenceIsPrimary: true,
-                excessOutputNextRecipeCircularReference: excessOutputNextRecipe,
-                excessInputNextRecipeCircularReference: excessInputNextRecipe,
-                recipeQuantity: biggestRecipeQuantityForExcess
-            }
-            return detectedCircularReference;
-        }
-        distanceChecked++;
-    }
-    // Secondary Circular Reference
-    distanceChecked = 0;
-    for (let i = currentRecipeCallStackSize - 1; i > 1 && distanceChecked < distanceOfCircularReferenceCheck; i--) {
-        for (let j = 1; j < recipes[recipeStack[j].recipeIndex].output.length; j++) {
-            if (materialIndexToCalc == recipes[recipeStack[i].recipeIndex].output[j]) {
-                console.log("Found secondary Output in a recipe before: " + materialIndexToCalc + " " + materials[materialIndexToCalc].name + " in recipe output of " + recipeStack[i].recipeIndex + " " + recipes[recipeStack[i].recipeIndex].name);
+    for (let i = currentRecipeCallStackSize - 1; i > 0 && distanceChecked < distanceOfCircularReferenceCheck; i--) {
+        for (let j = 0; j < recipes[recipeStack[i].recipeIndex].output.length; j++) {
+            if (materialIndexToCalc == recipes[recipeStack[i].recipeIndex].output[j] && recipeStack[i].outputIndexToCalc == j) {
+                console.log("Found primary Output in a recipe before: " + materialIndexToCalc + " " + materials[materialIndexToCalc].name + " in recipe output of " + recipeStack[i].recipeIndex + " " + recipes[recipeStack[i].recipeIndex].name);
                 var excessOutputNextRecipe = lookUpRecipeStackInputOutputOverlapBetween1And2(i, currentRecipeCallStackSize, addToEnergyRecipeStack);
-                var excessInputNextRecipe = [];
-                var recipeQuantityOutputExcess = materialQuantityToCalc / recipes[recipeStack[i].recipeIndex].outputQuantity[0];
+                if (excessOutputNextRecipe.length > 0) {
+                }
+                var excessInputNextRecipe = lookUpRecipeStackOutputInputOverlapBetween1And2(i, currentRecipeCallStackSize, addToEnergyRecipeStack);
+                if (excessOutputNextRecipe.length > 0) {
+                }
+                // The recipeQuantity is the biggest ratio of excess to the next recipes In/Outputs, so it can be calculated back to a full recipe in another methode
+                var biggestRecipeQuantityForExcess = 0; // Dummy value
+                for (let k = 0; k < excessOutputNextRecipe.length; k++) {
+                    for (let l = 0; l < recipes[recipeStack[i].recipeIndex].outputQuantity.length; l++) {
+                        if (excessOutputNextRecipe[k].materialIndex == recipes[recipeStack[i].recipeIndex].output[l]) {
+                            var kRecipeQuantity = excessOutputNextRecipe[k].quantity / recipes[recipeStack[i].recipeIndex].outputQuantity[l];
+                            if (biggestRecipeQuantityForExcess < kRecipeQuantity) {
+                                biggestRecipeQuantityForExcess = kRecipeQuantity;
+                            }
+                        }
+                    }
+                }
+                for (let k = 0; k < excessInputNextRecipe.length; k++) {
+                    for (let l = 0; l < recipes[recipeStack[i].recipeIndex].inputQuantity.length; l++) {
+                        if (excessInputNextRecipe[k].materialIndex == recipes[recipeStack[i].recipeIndex].input[l]) {
+                            var kRecipeQuantity = excessInputNextRecipe[k].quantity / recipes[recipeStack[i].recipeIndex].inputQuantity[l];
+                            if (biggestRecipeQuantityForExcess < kRecipeQuantity) {
+                                biggestRecipeQuantityForExcess = kRecipeQuantity;
+                            }
+                        }
+                    }
+                }
+                //
                 var detectedCircularReference = {
                     recipeStackDistance: i - 1,
                     circularReferenceIsPrimary: true,
                     excessOutputNextRecipeCircularReference: excessOutputNextRecipe,
                     excessInputNextRecipeCircularReference: excessInputNextRecipe,
-                    recipeQuantity: recipeQuantityOutputExcess
+                    recipeQuantity: biggestRecipeQuantityForExcess
+                }
+                return detectedCircularReference;
+            }
+        }
+        distanceChecked++;
+    }
+    // Secondary Circular Reference
+    distanceChecked = 0;
+    for (let i = currentRecipeCallStackSize - 1; i > 0 && distanceChecked < distanceOfCircularReferenceCheck; i--) {
+        for (let j = 0; j < recipes[recipeStack[i].recipeIndex].output.length; j++) {
+            if (materialIndexToCalc == recipes[recipeStack[i].recipeIndex].output[j] && recipeStack[i].outputIndexToCalc != j) {
+                console.log("Found secondary Output in a recipe before: " + materialIndexToCalc + " " + materials[materialIndexToCalc].name + " in recipe output of " + recipeStack[i].recipeIndex + " " + recipes[recipeStack[i].recipeIndex].name);
+                var excessOutputNextRecipe = [];
+                var excessInputNextRecipe = lookUpRecipeStackOutputInputOverlapBetween1And2(i, currentRecipeCallStackSize, addToEnergyRecipeStack);
+                // The primary Output is irelevant for the secondary output loop
+                for (let k = 0; k < excessInputNextRecipe.length; k++) {
+                    if (recipes[recipeStack[i].recipeIndex].output[recipeStack[i].outputIndexToCalc] == excessInputNextRecipe[k].materialIndex) {
+                        excessInputNextRecipe.splice(k, 1);
+                        break;
+                    }
+                }
+                // The recipeQuantity is the biggest ratio of excess to the next recipes In/Outputs, so it can be calculated back to a full recipe in another methode
+                var biggestRecipeQuantityForExcess = 0; // Dummy value
+                for (let k = 0; k < excessInputNextRecipe.length; k++) {
+                    for (let l = 0; l < recipes[recipeStack[i].recipeIndex].outputQuantity.length; l++) {
+                        if (excessInputNextRecipe[k].materialIndex == recipes[recipeStack[i].recipeIndex].output[l]) {
+                            var kRecipeQuantity = excessInputNextRecipe[k].quantity / recipes[recipeStack[i].recipeIndex].outputQuantity[l];
+                            if (biggestRecipeQuantityForExcess < kRecipeQuantity) {
+                                biggestRecipeQuantityForExcess = kRecipeQuantity;
+                            }
+                        }
+                    }
+                }
+                var detectedCircularReference = {
+                    recipeStackDistance: i - 1,
+                    circularReferenceIsPrimary: false,
+                    excessOutputNextRecipeCircularReference: excessOutputNextRecipe,
+                    excessInputNextRecipeCircularReference: excessInputNextRecipe,
+                    recipeQuantity: biggestRecipeQuantityForExcess
                 }
                 return detectedCircularReference;
             }
@@ -297,6 +325,7 @@ function calculateResourceCostPerMaterial({ materialIndexToCalc, calculatePowerC
         quantity: outputQuantityPerRecipe
     }];
     outputPerRecipe = subtractCosts(outputPerRecipe, excessInputNextRecipeCircularReference);
+    //
     // circular reference that has no output like (un)packaging
     if (outputPerRecipe.length == 0 || outputPerRecipe[0].quantity == 0) {
         console.log("No output from loop detected");
@@ -403,20 +432,24 @@ function getRecipeIndexFor(materialIndex, calculatePowerCost, addToEnergyRecipeS
     var potentialRecipes = [];
     for (let i = 0; i < recipes.length; i++) {
         // secondary Output disabled because of circular reference complexity
-        /*for (let j = 0; j < recipes[i].output.length; j++) {
-            if (recipes[i].output[j] == materialIndex && recipes[i].tier <= unlockedTiers) {
+        if (recipes[i].secondaryOutputAllowed && false) {
+            for (let j = 0; j < recipes[i].output.length; j++) {
+                if (recipes[i].output[j] == materialIndex && recipes[i].tier <= unlockedTiers) {
+                    potentialRecipes.push({
+                        index: i,
+                        name: recipes[i].name
+                    });
+                    break;
+                }
+            }
+        }
+        else {
+            if (recipes[i].output[0] == materialIndex && recipes[i].tier <= unlockedTiers) {
                 potentialRecipes.push({
                     index: i,
                     name: recipes[i].name
                 });
-                break;
             }
-        }*/
-        if (recipes[i].output[0] == materialIndex && recipes[i].tier <= unlockedTiers) {
-            potentialRecipes.push({
-                index: i,
-                name: recipes[i].name
-            });
         }
     }
     if (potentialRecipes.length < 1) {
@@ -485,7 +518,7 @@ function getRecipeIndexFor(materialIndex, calculatePowerCost, addToEnergyRecipeS
     return chosenRecipeIndex;
 }
 
-function calculateResourceCostPerRecipe(recipeIndex, calculatePowerCost, excessOutputNextRecipeCircularReference, addToEnergyRecipeStack, materialQuantityToCalc) {
+function calculateResourceCostPerRecipe(recipeIndex, calculatePowerCost, excessOutputNextRecipeCircularReference, addToEnergyRecipeStack, materialQuantityToCalc, materialIndexToCalc) {
     if (!(materialQuantityToCalc > 0)) {
         console.log("Error: materialQuantityToCalc missing");
     }
@@ -533,8 +566,14 @@ function calculateResourceCostPerRecipe(recipeIndex, calculatePowerCost, excessO
         }
         // Material if product
         else {
-            addRecipeIndexToRecipeStack(recipeIndex, addToEnergyRecipeStack, materialQuantityToCalc);
-            var iInputQuantityPerMaterialQuantityToCalc = iInputQuantity * materialQuantityToCalc / recipes[recipeIndex].outputQuantity[0];
+            addRecipeIndexToRecipeStack(recipeIndex, addToEnergyRecipeStack, materialQuantityToCalc, materialIndexToCalc);
+            var primaryOutputIndex = 0;
+            for (let j = 0; j < recipes[recipeIndex].output.length; j++) {
+                if (materialIndexToCalc == recipes[recipeIndex].output[j]) {
+                    primaryOutputIndex = j;
+                }
+            }
+            var iInputQuantityPerMaterialQuantityToCalc = iInputQuantity * materialQuantityToCalc / recipes[recipeIndex].outputQuantity[primaryOutputIndex];
             var costToAdd = calculateResourceCostPerMaterial({ materialIndexToCalc: iInputMaterialIndex, calculatePowerCost: calculatePowerCost, addToEnergyRecipeStack: addToEnergyRecipeStack, materialQuantityToCalc: iInputQuantityPerMaterialQuantityToCalc });
             for (let j = 0; j < costToAdd.length; j++) {
                 costToAdd[j].quantity *= iInputQuantity;
@@ -587,7 +626,7 @@ function calculateResourceCostPerMaterialForRecipe(materialIndex, recipeIndex, c
         console.log("Error: materialQuantityToCalc missing");
     }
     // Cost for whole recipe
-    costArray = calculateResourceCostPerRecipe(recipeIndex, calculatePowerCost, [], addToEnergyRecipeStack, materialQuantityToCalc); // inputToRemove <= []
+    costArray = calculateResourceCostPerRecipe(recipeIndex, calculatePowerCost, [], addToEnergyRecipeStack, materialQuantityToCalc, materialIndex); // inputToRemove <= []
     // Material output
     var outputPerRecipe;
     for (let i = 0; i < recipes[recipeIndex].output.length; i++) {

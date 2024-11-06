@@ -27,7 +27,8 @@ const recipes =
 			input: [getMaterialIndexByName("Iron Ore")],
 			inputQuantity: [1],
 			machine: getMachineIndexbyName("Smeltery"),
-			craftingTime_s: 2
+			craftingTime_s: 2,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Basic Iron Ingot",
@@ -37,7 +38,8 @@ const recipes =
 			input: [getMaterialIndexByName("Iron Ore"), getMaterialIndexByName("Limestone")],
 			inputQuantity: [5, 8],
 			machine: getMachineIndexbyName("Smeltery"),
-			craftingTime_s: 12
+			craftingTime_s: 12,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Iron Alloy Ingot",
@@ -47,7 +49,8 @@ const recipes =
 			input: [getMaterialIndexByName("Iron Ore"), getMaterialIndexByName("Copper Ore")],
 			inputQuantity: [8, 2],
 			machine: getMachineIndexbyName("Foundry"),
-			craftingTime_s: 12
+			craftingTime_s: 12,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Leached Iron Ingot",
@@ -57,7 +60,8 @@ const recipes =
 			input: [getMaterialIndexByName("Iron Ore"), getMaterialIndexByName("Sulfuric Acid")],
 			inputQuantity: [5, 1],
 			machine: getMachineIndexbyName("Refinery"),
-			craftingTime_s: 6
+			craftingTime_s: 6,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Pure Iron Ingot",
@@ -67,7 +71,8 @@ const recipes =
 			input: [getMaterialIndexByName("Iron Ore"), getMaterialIndexByName("Water")],
 			inputQuantity: [7, 4],
 			machine: getMachineIndexbyName("Refinery"),
-			craftingTime_s: 12
+			craftingTime_s: 12,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Copper Ingot",
@@ -77,7 +82,8 @@ const recipes =
 			input: [getMaterialIndexByName("Copper Ore")],
 			inputQuantity: [1],
 			machine: getMachineIndexbyName("Smeltery"),
-			craftingTime_s: 2
+			craftingTime_s: 2,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Copper Alloy Ingot",
@@ -87,7 +93,8 @@ const recipes =
 			input: [getMaterialIndexByName("Copper Ore"), getMaterialIndexByName("Iron Ore")],
 			inputQuantity: [5, 5],
 			machine: getMachineIndexbyName("Foundry"),
-			craftingTime_s: 6
+			craftingTime_s: 6,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Leached Copper Ingot",
@@ -97,7 +104,8 @@ const recipes =
 			input: [getMaterialIndexByName("Copper Ore"), getMaterialIndexByName("Sulfuric Acid")],
 			inputQuantity: [9, 5],
 			machine: getMachineIndexbyName("Refinery"),
-			craftingTime_s: 12
+			craftingTime_s: 12,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Pure Copper Ingot",
@@ -107,7 +115,8 @@ const recipes =
 			input: [getMaterialIndexByName("Copper Ore"), getMaterialIndexByName("Water")],
 			inputQuantity: [6, 4],
 			machine: getMachineIndexbyName("Refinery"),
-			craftingTime_s: 24
+			craftingTime_s: 24,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Tempered Copper Ingot",
@@ -117,7 +126,8 @@ const recipes =
 			input: [getMaterialIndexByName("Copper Ore"), getMaterialIndexByName("Petroleum Coke")],
 			inputQuantity: [5, 8],
 			machine: getMachineIndexbyName("Foundry"),
-			craftingTime_s: 6
+			craftingTime_s: 6,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Caterium Ingot",
@@ -127,7 +137,8 @@ const recipes =
 			input: [getMaterialIndexByName("Caterium Ore")],
 			inputQuantity: [3],
 			machine: getMachineIndexbyName("Smeltery"),
-			craftingTime_s: 4
+			craftingTime_s: 4,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Leached Caterium Ingot",
@@ -137,7 +148,8 @@ const recipes =
 			input: [getMaterialIndexByName("Caterium Ore"), getMaterialIndexByName("Sulfuric Acid")],
 			inputQuantity: [9, 5],
 			machine: getMachineIndexbyName("Refinery"),
-			craftingTime_s: 10
+			craftingTime_s: 10,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Pure Caterium Ingot",
@@ -147,7 +159,8 @@ const recipes =
 			input: [getMaterialIndexByName("Caterium Ore"), getMaterialIndexByName("Water")],
 			inputQuantity: [2, 2],
 			machine: getMachineIndexbyName("Refinery"),
-			craftingTime_s: 5
+			craftingTime_s: 5,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Tempered Caterium Ingot",
@@ -157,7 +170,8 @@ const recipes =
 			input: [getMaterialIndexByName("Caterium Ore"), getMaterialIndexByName("Petroleum Coke")],
 			inputQuantity: [6, 2],
 			machine: getMachineIndexbyName("Foundry"),
-			craftingTime_s: 8
+			craftingTime_s: 8,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Steel Ingot",
@@ -167,7 +181,8 @@ const recipes =
 			input: [getMaterialIndexByName("Iron Ore"), getMaterialIndexByName("Coal")],
 			inputQuantity: [3, 3],
 			machine: getMachineIndexbyName("Foundry"),
-			craftingTime_s: 4
+			craftingTime_s: 4,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Compacted Steel Ingot",
@@ -177,7 +192,8 @@ const recipes =
 			input: [getMaterialIndexByName("Iron Ore"), getMaterialIndexByName("Compacted Coal")],
 			inputQuantity: [2, 1],
 			machine: getMachineIndexbyName("Foundry"),
-			craftingTime_s: 24
+			craftingTime_s: 24,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Solid Steel Ingot",
@@ -187,7 +203,8 @@ const recipes =
 			input: [getMaterialIndexByName("Iron Ingot"), getMaterialIndexByName("Coal")],
 			inputQuantity: [2, 2],
 			machine: getMachineIndexbyName("Foundry"),
-			craftingTime_s: 3
+			craftingTime_s: 3,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Coke Steel Ingot",
@@ -197,7 +214,8 @@ const recipes =
 			input: [getMaterialIndexByName("Iron Ore"), getMaterialIndexByName("Petroleum Coke")],
 			inputQuantity: [15, 15],
 			machine: getMachineIndexbyName("Foundry"),
-			craftingTime_s: 12
+			craftingTime_s: 12,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Aluminum Ingot",
@@ -207,7 +225,8 @@ const recipes =
 			input: [getMaterialIndexByName("Aluminum Scrap"), getMaterialIndexByName("Silica")],
 			inputQuantity: [6, 5],
 			machine: getMachineIndexbyName("Foundry"),
-			craftingTime_s: 4
+			craftingTime_s: 4,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Pure Aluminum Ingot",
@@ -217,7 +236,8 @@ const recipes =
 			input: [getMaterialIndexByName("Aluminum Scrap")],
 			inputQuantity: [2],
 			machine: getMachineIndexbyName("Smeltery"),
-			craftingTime_s: 2
+			craftingTime_s: 2,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Ficsite Ingot (al)",
@@ -227,7 +247,8 @@ const recipes =
 			input: [getMaterialIndexByName("Reanimated SAM"), getMaterialIndexByName("Aluminum Ingot")],
 			inputQuantity: [2, 4],
 			machine: getMachineIndexbyName("Converter"),
-			craftingTime_s: 2
+			craftingTime_s: 2,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Ficsite Ingot (cat)",
@@ -237,7 +258,8 @@ const recipes =
 			input: [getMaterialIndexByName("Reanimated SAM"), getMaterialIndexByName("Caterium Ingot")],
 			inputQuantity: [3, 4],
 			machine: getMachineIndexbyName("Converter"),
-			craftingTime_s: 4
+			craftingTime_s: 4,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Ficsite Ingot (ir)",
@@ -247,7 +269,8 @@ const recipes =
 			input: [getMaterialIndexByName("Reanimated SAM"), getMaterialIndexByName("Iron Ingot")],
 			inputQuantity: [4, 24],
 			machine: getMachineIndexbyName("Converter"),
-			craftingTime_s: 6
+			craftingTime_s: 6,
+			secondaryOutputAllowed: true
 		},
 		// Minerals
 		{
@@ -258,7 +281,8 @@ const recipes =
 			input: [getMaterialIndexByName("Limestone")],
 			inputQuantity: [3],
 			machine: getMachineIndexbyName("Constructor"),
-			craftingTime_s: 4
+			craftingTime_s: 4,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Fine Concrete",
@@ -268,7 +292,8 @@ const recipes =
 			input: [getMaterialIndexByName("Limestone"), getMaterialIndexByName("Silica")],
 			inputQuantity: [12, 3],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 12
+			craftingTime_s: 12,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Wet Concrete",
@@ -278,7 +303,8 @@ const recipes =
 			input: [getMaterialIndexByName("Limestone"), getMaterialIndexByName("Water")],
 			inputQuantity: [6, 5],
 			machine: getMachineIndexbyName("Refinery"),
-			craftingTime_s: 3
+			craftingTime_s: 3,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Rubber Concrete",
@@ -288,7 +314,8 @@ const recipes =
 			input: [getMaterialIndexByName("Limestone"), getMaterialIndexByName("Rubber")],
 			inputQuantity: [10, 2],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 6
+			craftingTime_s: 6,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Quartz Crystal",
@@ -298,7 +325,8 @@ const recipes =
 			input: [getMaterialIndexByName("Raw Quartz")],
 			inputQuantity: [5],
 			machine: getMachineIndexbyName("Constructor"),
-			craftingTime_s: 8
+			craftingTime_s: 8,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Fused Quartz Crystal",
@@ -308,7 +336,8 @@ const recipes =
 			input: [getMaterialIndexByName("Raw Quartz"), getMaterialIndexByName("Coal")],
 			inputQuantity: [25, 12],
 			machine: getMachineIndexbyName("Foundry"),
-			craftingTime_s: 20
+			craftingTime_s: 20,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Pure Quartz Crystal",
@@ -318,7 +347,8 @@ const recipes =
 			input: [getMaterialIndexByName("Raw Quartz"), getMaterialIndexByName("Water")],
 			inputQuantity: [9, 5],
 			machine: getMachineIndexbyName("Refinery"),
-			craftingTime_s: 8
+			craftingTime_s: 8,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Quartz Purification",
@@ -328,7 +358,8 @@ const recipes =
 			input: [getMaterialIndexByName("Raw Quartz"), getMaterialIndexByName("Nitric Acid")],
 			inputQuantity: [24, 2],
 			machine: getMachineIndexbyName("Refinery"),
-			craftingTime_s: 12
+			craftingTime_s: 12,
+			secondaryOutputAllowed: true
 		},
 		// switched Output order because getrecipeForMaterial() only searches for the first output
 		{
@@ -339,7 +370,8 @@ const recipes =
 			input: [getMaterialIndexByName("Raw Quartz"), getMaterialIndexByName("Nitric Acid")],
 			inputQuantity: [24, 2],
 			machine: getMachineIndexbyName("Refinery"),
-			craftingTime_s: 12
+			craftingTime_s: 12,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Silica",
@@ -349,7 +381,8 @@ const recipes =
 			input: [getMaterialIndexByName("Raw Quartz")],
 			inputQuantity: [3],
 			machine: getMachineIndexbyName("Constructor"),
-			craftingTime_s: 8
+			craftingTime_s: 8,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Cheap Silica",
@@ -359,7 +392,8 @@ const recipes =
 			input: [getMaterialIndexByName("Raw Quartz"), getMaterialIndexByName("Limestone")],
 			inputQuantity: [3, 5],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 8
+			craftingTime_s: 8,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Distilled Silica",
@@ -369,7 +403,8 @@ const recipes =
 			input: [getMaterialIndexByName("Dissolved Silica"), getMaterialIndexByName("Limestone"), getMaterialIndexByName("Water")],
 			inputQuantity: [12, 5, 10],
 			machine: getMachineIndexbyName("Blender"),
-			craftingTime_s: 6
+			craftingTime_s: 6,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Copper Powder",
@@ -379,7 +414,8 @@ const recipes =
 			input: [getMaterialIndexByName("Copper Ingot")],
 			inputQuantity: [30],
 			machine: getMachineIndexbyName("Constructor"),
-			craftingTime_s: 6
+			craftingTime_s: 6,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Polymer Resin",
@@ -389,7 +425,8 @@ const recipes =
 			input: [getMaterialIndexByName("Crude Oil")],
 			inputQuantity: [6],
 			machine: getMachineIndexbyName("Refinery"),
-			craftingTime_s: 6
+			craftingTime_s: 6,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Petroleum Coke",
@@ -399,7 +436,8 @@ const recipes =
 			input: [getMaterialIndexByName("Heavy Oil Residue")],
 			inputQuantity: [4],
 			machine: getMachineIndexbyName("Refinery"),
-			craftingTime_s: 6
+			craftingTime_s: 6,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Aluminum Scrap",
@@ -409,7 +447,8 @@ const recipes =
 			input: [getMaterialIndexByName("Alumina Solution"), getMaterialIndexByName("Coal")],
 			inputQuantity: [4, 2],
 			machine: getMachineIndexbyName("Refinery"),
-			craftingTime_s: 1
+			craftingTime_s: 1,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Electrode Aluminum Scrap",
@@ -419,7 +458,8 @@ const recipes =
 			input: [getMaterialIndexByName("Alumina Solution"), getMaterialIndexByName("Petroleum Coke")],
 			inputQuantity: [12, 4],
 			machine: getMachineIndexbyName("Refinery"),
-			craftingTime_s: 4
+			craftingTime_s: 4,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Instant Scrap",
@@ -429,7 +469,8 @@ const recipes =
 			input: [getMaterialIndexByName("Bauxite"), getMaterialIndexByName("Coal"), getMaterialIndexByName("Sulfuric Acid"), getMaterialIndexByName("Water")],
 			inputQuantity: [15, 10, 5, 6],
 			machine: getMachineIndexbyName("Blender"),
-			craftingTime_s: 6
+			craftingTime_s: 6,
+			secondaryOutputAllowed: true
 		},
 		// (Un)packaging liquids need to be at the top for circular reference detection
 		// Containers 
@@ -442,7 +483,8 @@ const recipes =
 			input: [getMaterialIndexByName("Plastic")],
 			inputQuantity: [1],
 			machine: getMachineIndexbyName("Constructor"),
-			craftingTime_s: 2
+			craftingTime_s: 2,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Empty Fluid Tank",
@@ -452,7 +494,8 @@ const recipes =
 			input: [getMaterialIndexByName("Aluminum Ingot")],
 			inputQuantity: [1],
 			machine: getMachineIndexbyName("Constructor"),
-			craftingTime_s: 1
+			craftingTime_s: 1,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Pressure Conversion Cube",
@@ -462,7 +505,8 @@ const recipes =
 			input: [getMaterialIndexByName("Fused Modular Frame"), getMaterialIndexByName("Radio Control Unit")],
 			inputQuantity: [1, 2],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 60
+			craftingTime_s: 60,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Packaged Water",
@@ -472,7 +516,8 @@ const recipes =
 			input: [getMaterialIndexByName("Water"), getMaterialIndexByName("Empty Canister")],
 			inputQuantity: [2, 2],
 			machine: getMachineIndexbyName("Packager"),
-			craftingTime_s: 2
+			craftingTime_s: 2,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Unpackage Water",
@@ -482,7 +527,8 @@ const recipes =
 			input: [getMaterialIndexByName("Packaged Water")],
 			inputQuantity: [2],
 			machine: getMachineIndexbyName("Packager"),
-			craftingTime_s: 2
+			craftingTime_s: 2,
+			secondaryOutputAllowed: false
 		},
 		{
 			name: "Packaged Oil",
@@ -492,7 +538,8 @@ const recipes =
 			input: [getMaterialIndexByName("Crude Oil"), getMaterialIndexByName("Empty Canister")],
 			inputQuantity: [2, 2],
 			machine: getMachineIndexbyName("Packager"),
-			craftingTime_s: 4
+			craftingTime_s: 4,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Unpackage Oil",
@@ -502,7 +549,8 @@ const recipes =
 			input: [getMaterialIndexByName("Packaged Oil")],
 			inputQuantity: [2],
 			machine: getMachineIndexbyName("Packager"),
-			craftingTime_s: 4
+			craftingTime_s: 4,
+			secondaryOutputAllowed: false
 		},
 		{
 			name: "Packaged Heavy Oil Residue",
@@ -512,7 +560,8 @@ const recipes =
 			input: [getMaterialIndexByName("Heavy Oil Residue"), getMaterialIndexByName("Empty Canister")],
 			inputQuantity: [2, 2],
 			machine: getMachineIndexbyName("Packager"),
-			craftingTime_s: 4
+			craftingTime_s: 4,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Unpackage Heavy Oil Residue",
@@ -522,7 +571,8 @@ const recipes =
 			input: [getMaterialIndexByName("Packaged Heavy Oil Residue")],
 			inputQuantity: [2],
 			machine: getMachineIndexbyName("Packager"),
-			craftingTime_s: 4
+			craftingTime_s: 4,
+			secondaryOutputAllowed: false
 		},
 		{
 			name: "Packaged Fuel",
@@ -532,7 +582,8 @@ const recipes =
 			input: [getMaterialIndexByName("Fuel"), getMaterialIndexByName("Empty Canister")],
 			inputQuantity: [2, 2],
 			machine: getMachineIndexbyName("Packager"),
-			craftingTime_s: 3
+			craftingTime_s: 3,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Unpackage Fuel",
@@ -542,7 +593,8 @@ const recipes =
 			input: [getMaterialIndexByName("Packaged Fuel")],
 			inputQuantity: [2],
 			machine: getMachineIndexbyName("Packager"),
-			craftingTime_s: 3
+			craftingTime_s: 3,
+			secondaryOutputAllowed: false
 		},
 		{
 			name: "Packaged Liquid Biofuel",
@@ -552,7 +604,8 @@ const recipes =
 			input: [getMaterialIndexByName("Liquid Biofuel"), getMaterialIndexByName("Empty Canister")],
 			inputQuantity: [2, 2],
 			machine: getMachineIndexbyName("Packager"),
-			craftingTime_s: 3
+			craftingTime_s: 3,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Unpackage Liquid Biofuel",
@@ -562,7 +615,8 @@ const recipes =
 			input: [getMaterialIndexByName("Packaged Liquid Biofuel")],
 			inputQuantity: [2],
 			machine: getMachineIndexbyName("Packager"),
-			craftingTime_s: 3
+			craftingTime_s: 3,
+			secondaryOutputAllowed: false
 		},
 		{
 			name: "Packaged Turbofuel",
@@ -572,7 +626,8 @@ const recipes =
 			input: [getMaterialIndexByName("Turbofuel"), getMaterialIndexByName("Empty Canister")],
 			inputQuantity: [2, 2],
 			machine: getMachineIndexbyName("Packager"),
-			craftingTime_s: 6
+			craftingTime_s: 6,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Unpackage Turbofuel",
@@ -582,7 +637,8 @@ const recipes =
 			input: [getMaterialIndexByName("Packaged Turbofuel")],
 			inputQuantity: [2],
 			machine: getMachineIndexbyName("Packager"),
-			craftingTime_s: 6
+			craftingTime_s: 6,
+			secondaryOutputAllowed: false
 		},
 		{
 			name: "Packaged Alumina Solution",
@@ -592,7 +648,8 @@ const recipes =
 			input: [getMaterialIndexByName("Alumina Solution"), getMaterialIndexByName("Empty Canister")],
 			inputQuantity: [2, 2],
 			machine: getMachineIndexbyName("Packager"),
-			craftingTime_s: 1
+			craftingTime_s: 1,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Unpackage Alumina Solution",
@@ -602,7 +659,8 @@ const recipes =
 			input: [getMaterialIndexByName("Packaged Alumina Solution")],
 			inputQuantity: [2],
 			machine: getMachineIndexbyName("Packager"),
-			craftingTime_s: 1
+			craftingTime_s: 1,
+			secondaryOutputAllowed: false
 		},
 		{
 			name: "Packaged Sulfuric Acid",
@@ -612,7 +670,8 @@ const recipes =
 			input: [getMaterialIndexByName("Sulfuric Acid"), getMaterialIndexByName("Empty Canister")],
 			inputQuantity: [2, 2],
 			machine: getMachineIndexbyName("Packager"),
-			craftingTime_s: 3
+			craftingTime_s: 3,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Unpackage Sulfuric Acid",
@@ -622,7 +681,8 @@ const recipes =
 			input: [getMaterialIndexByName("Packaged Sulfuric Acid")],
 			inputQuantity: [2],
 			machine: getMachineIndexbyName("Packager"),
-			craftingTime_s: 3
+			craftingTime_s: 3,
+			secondaryOutputAllowed: false
 		},
 		{
 			name: "Packaged Nitric Acid",
@@ -632,7 +692,8 @@ const recipes =
 			input: [getMaterialIndexByName("Nitric Acid"), getMaterialIndexByName("Empty Fluid Tank")],
 			inputQuantity: [1, 1],
 			machine: getMachineIndexbyName("Packager"),
-			craftingTime_s: 2
+			craftingTime_s: 2,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Unpackage Nitric Acid",
@@ -642,7 +703,8 @@ const recipes =
 			input: [getMaterialIndexByName("Packaged Nitric Acid")],
 			inputQuantity: [1],
 			machine: getMachineIndexbyName("Packager"),
-			craftingTime_s: 2
+			craftingTime_s: 2,
+			secondaryOutputAllowed: false
 		},
 		{
 			name: "Packaged Nitrogen Gas",
@@ -652,7 +714,8 @@ const recipes =
 			input: [getMaterialIndexByName("Nitrogen Gas"), getMaterialIndexByName("Empty Fluid Tank")],
 			inputQuantity: [4, 1],
 			machine: getMachineIndexbyName("Packager"),
-			craftingTime_s: 1
+			craftingTime_s: 1,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Unpackage Nitrogen Gas",
@@ -662,7 +725,8 @@ const recipes =
 			input: [getMaterialIndexByName("Packaged Nitrogen Gas")],
 			inputQuantity: [1],
 			machine: getMachineIndexbyName("Packager"),
-			craftingTime_s: 1
+			craftingTime_s: 1,
+			secondaryOutputAllowed: false
 		},
 		{
 			name: "Packaged Rocket Fuel",
@@ -672,7 +736,8 @@ const recipes =
 			input: [getMaterialIndexByName("Rocket Fuel"), getMaterialIndexByName("Empty Fluid Tank")],
 			inputQuantity: [4, 1],
 			machine: getMachineIndexbyName("Packager"),
-			craftingTime_s: 1
+			craftingTime_s: 1,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Unpackage Rocket Fuel",
@@ -682,7 +747,8 @@ const recipes =
 			input: [getMaterialIndexByName("Packaged Rocket Fuel")],
 			inputQuantity: [1],
 			machine: getMachineIndexbyName("Packager"),
-			craftingTime_s: 1
+			craftingTime_s: 1,
+			secondaryOutputAllowed: false
 		},
 		{
 			name: "Packaged Ionized Fuel",
@@ -692,7 +758,8 @@ const recipes =
 			input: [getMaterialIndexByName("Ionized Fuel"), getMaterialIndexByName("Empty Fluid Tank")],
 			inputQuantity: [4, 1],
 			machine: getMachineIndexbyName("Packager"),
-			craftingTime_s: 1
+			craftingTime_s: 1,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Unpackage Ionized Fuel",
@@ -702,7 +769,8 @@ const recipes =
 			input: [getMaterialIndexByName("Packaged Ionized Fuel")],
 			inputQuantity: [1],
 			machine: getMachineIndexbyName("Packager"),
-			craftingTime_s: 1
+			craftingTime_s: 1,
+			secondaryOutputAllowed: false
 		},
 		{
 			name: "Packaged Dark Matter Residue",
@@ -712,7 +780,8 @@ const recipes =
 			input: [getMaterialIndexByName("Dark Matter Residue"), getMaterialIndexByName("Empty Fluid Tank")],
 			inputQuantity: [4, 1],
 			machine: getMachineIndexbyName("Packager"),
-			craftingTime_s: 1
+			craftingTime_s: 1,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Unpackage Dark Matter Residue",
@@ -722,7 +791,8 @@ const recipes =
 			input: [getMaterialIndexByName("Packaged Dark Matter Residue")],
 			inputQuantity: [1],
 			machine: getMachineIndexbyName("Packager"),
-			craftingTime_s: 1
+			craftingTime_s: 1,
+			secondaryOutputAllowed: false
 		},
 		{
 			name: "Packaged Excited Photonic Matter",
@@ -732,7 +802,8 @@ const recipes =
 			input: [getMaterialIndexByName("Excited Photonic Matter"), getMaterialIndexByName("Empty Fluid Tank")],
 			inputQuantity: [4, 1],
 			machine: getMachineIndexbyName("Packager"),
-			craftingTime_s: 1
+			craftingTime_s: 1,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Unpackage Excited Photonic Matter",
@@ -742,7 +813,8 @@ const recipes =
 			input: [getMaterialIndexByName("Packaged Excited Photonic Matter")],
 			inputQuantity: [1],
 			machine: getMachineIndexbyName("Packager"),
-			craftingTime_s: 1
+			craftingTime_s: 1,
+			secondaryOutputAllowed: false
 		},
 		// Liquids
 		{
@@ -753,7 +825,8 @@ const recipes =
 			input: [getMaterialIndexByName("Crude Oil")],
 			inputQuantity: [3],
 			machine: getMachineIndexbyName("Refinery"),
-			craftingTime_s: 6
+			craftingTime_s: 6,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Fuel",
@@ -763,7 +836,8 @@ const recipes =
 			input: [getMaterialIndexByName("Crude Oil")],
 			inputQuantity: [6],
 			machine: getMachineIndexbyName("Refinery"),
-			craftingTime_s: 6
+			craftingTime_s: 6,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Residual Fuel",
@@ -773,7 +847,8 @@ const recipes =
 			input: [getMaterialIndexByName("Heavy Oil Residue")],
 			inputQuantity: [6],
 			machine: getMachineIndexbyName("Refinery"),
-			craftingTime_s: 6
+			craftingTime_s: 6,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Diluted Fuel",
@@ -783,7 +858,8 @@ const recipes =
 			input: [getMaterialIndexByName("Heavy Oil Residue"), getMaterialIndexByName("Water")],
 			inputQuantity: [5, 10],
 			machine: getMachineIndexbyName("Blender"),
-			craftingTime_s: 6
+			craftingTime_s: 6,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Liquid Biofuel",
@@ -793,7 +869,8 @@ const recipes =
 			input: [getMaterialIndexByName("Solid Biofuel"), getMaterialIndexByName("Water")],
 			inputQuantity: [6, 3],
 			machine: getMachineIndexbyName("Refinery"),
-			craftingTime_s: 4
+			craftingTime_s: 4,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Turbofuel",
@@ -803,7 +880,8 @@ const recipes =
 			input: [getMaterialIndexByName("Fuel"), getMaterialIndexByName("Compacted Coal")],
 			inputQuantity: [6, 4],
 			machine: getMachineIndexbyName("Refinery"),
-			craftingTime_s: 16
+			craftingTime_s: 16,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Alumina Solution",
@@ -813,7 +891,8 @@ const recipes =
 			input: [getMaterialIndexByName("Bauxite"), getMaterialIndexByName("Water")],
 			inputQuantity: [12, 18],
 			machine: getMachineIndexbyName("Refinery"),
-			craftingTime_s: 6
+			craftingTime_s: 6,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Sloppy Alumina",
@@ -823,7 +902,8 @@ const recipes =
 			input: [getMaterialIndexByName("Bauxite"), getMaterialIndexByName("Water")],
 			inputQuantity: [10, 10],
 			machine: getMachineIndexbyName("Refinery"),
-			craftingTime_s: 3
+			craftingTime_s: 3,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Sulfuric Acid",
@@ -833,7 +913,8 @@ const recipes =
 			input: [getMaterialIndexByName("Sulfur"), getMaterialIndexByName("Water")],
 			inputQuantity: [5, 5],
 			machine: getMachineIndexbyName("Refinery"),
-			craftingTime_s: 6
+			craftingTime_s: 6,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Nitric Acid",
@@ -843,7 +924,8 @@ const recipes =
 			input: [getMaterialIndexByName("Nitrogen Gas"), getMaterialIndexByName("Water"), getMaterialIndexByName("Iron Plate")],
 			inputQuantity: [12, 3, 1],
 			machine: getMachineIndexbyName("Blender"),
-			craftingTime_s: 6
+			craftingTime_s: 6,
+			secondaryOutputAllowed: true
 		},
 		// Gas
 		{
@@ -854,7 +936,8 @@ const recipes =
 			input: [getMaterialIndexByName("Turbofuel"), getMaterialIndexByName("Nitric Acid")],
 			inputQuantity: [6, 1],
 			machine: getMachineIndexbyName("Blender"),
-			craftingTime_s: 6
+			craftingTime_s: 6,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Nitro Rocket Fuel",
@@ -864,7 +947,8 @@ const recipes =
 			input: [getMaterialIndexByName("Fuel"), getMaterialIndexByName("Nitrogen Gas"), getMaterialIndexByName("Sulfur"), getMaterialIndexByName("Coal")],
 			inputQuantity: [4, 3, 4, 2],
 			machine: getMachineIndexbyName("Blender"),
-			craftingTime_s: 2.4
+			craftingTime_s: 2.4,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Ionized Fuel",
@@ -874,7 +958,8 @@ const recipes =
 			input: [getMaterialIndexByName("Rocket Fuel"), getMaterialIndexByName("Power Shard")],
 			inputQuantity: [16, 1],
 			machine: getMachineIndexbyName("Blender"),
-			craftingTime_s: 24
+			craftingTime_s: 24,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Dark-Ion Fuel",
@@ -884,7 +969,8 @@ const recipes =
 			input: [getMaterialIndexByName("Packaged Rocket Fuel"), getMaterialIndexByName("Dark Matter Crystal")],
 			inputQuantity: [12, 4],
 			machine: getMachineIndexbyName("Converter"),
-			craftingTime_s: 3
+			craftingTime_s: 3,
+			secondaryOutputAllowed: true
 		},
 		// Standard Parts
 		{
@@ -895,7 +981,8 @@ const recipes =
 			input: [getMaterialIndexByName("Iron Ingot")],
 			inputQuantity: [1],
 			machine: getMachineIndexbyName("Constructor"),
-			craftingTime_s: 4
+			craftingTime_s: 4,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Steel Rod",
@@ -905,7 +992,8 @@ const recipes =
 			input: [getMaterialIndexByName("Steel Ingot")],
 			inputQuantity: [1],
 			machine: getMachineIndexbyName("Constructor"),
-			craftingTime_s: 5
+			craftingTime_s: 5,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Aluminum Rod",
@@ -915,7 +1003,8 @@ const recipes =
 			input: [getMaterialIndexByName("Aluminum Ingot")],
 			inputQuantity: [1],
 			machine: getMachineIndexbyName("Constructor"),
-			craftingTime_s: 8
+			craftingTime_s: 8,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Screw",
@@ -925,7 +1014,8 @@ const recipes =
 			input: [getMaterialIndexByName("Iron Rod")],
 			inputQuantity: [1],
 			machine: getMachineIndexbyName("Constructor"),
-			craftingTime_s: 6
+			craftingTime_s: 6,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Cast Screw",
@@ -935,7 +1025,8 @@ const recipes =
 			input: [getMaterialIndexByName("Iron Ingot")],
 			inputQuantity: [5],
 			machine: getMachineIndexbyName("Constructor"),
-			craftingTime_s: 24
+			craftingTime_s: 24,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Steel Screw",
@@ -945,7 +1036,8 @@ const recipes =
 			input: [getMaterialIndexByName("Steel Beam")],
 			inputQuantity: [1],
 			machine: getMachineIndexbyName("Constructor"),
-			craftingTime_s: 12
+			craftingTime_s: 12,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Iron Plate",
@@ -955,7 +1047,8 @@ const recipes =
 			input: [getMaterialIndexByName("Iron Ingot")],
 			inputQuantity: [3],
 			machine: getMachineIndexbyName("Constructor"),
-			craftingTime_s: 6
+			craftingTime_s: 6,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Steel Cast Plate",
@@ -965,7 +1058,8 @@ const recipes =
 			input: [getMaterialIndexByName("Iron Ingot"), getMaterialIndexByName("Steel Ingot")],
 			inputQuantity: [1, 1],
 			machine: getMachineIndexbyName("Foundry"),
-			craftingTime_s: 4
+			craftingTime_s: 4,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Coated Iron Plate",
@@ -975,7 +1069,8 @@ const recipes =
 			input: [getMaterialIndexByName("Iron Ingot"), getMaterialIndexByName("Plastic")],
 			inputQuantity: [5, 1],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 8
+			craftingTime_s: 8,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Reinforced Iron Plate",
@@ -985,7 +1080,8 @@ const recipes =
 			input: [getMaterialIndexByName("Iron Plate"), getMaterialIndexByName("Screw")],
 			inputQuantity: [6, 12],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 12
+			craftingTime_s: 12,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Adhered Iron Plate",
@@ -995,7 +1091,8 @@ const recipes =
 			input: [getMaterialIndexByName("Iron Plate"), getMaterialIndexByName("Rubber")],
 			inputQuantity: [3, 1],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 16
+			craftingTime_s: 16,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Stiched Iron Plate",
@@ -1005,7 +1102,8 @@ const recipes =
 			input: [getMaterialIndexByName("Iron Plate"), getMaterialIndexByName("Wire")],
 			inputQuantity: [10, 20],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 32
+			craftingTime_s: 32,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Bolted Iron Plate",
@@ -1015,7 +1113,8 @@ const recipes =
 			input: [getMaterialIndexByName("Iron Plate"), getMaterialIndexByName("Screw")],
 			inputQuantity: [18, 50],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 12
+			craftingTime_s: 12,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Copper Sheet",
@@ -1025,7 +1124,8 @@ const recipes =
 			input: [getMaterialIndexByName("Copper Ingot")],
 			inputQuantity: [2],
 			machine: getMachineIndexbyName("Constructor"),
-			craftingTime_s: 6
+			craftingTime_s: 6,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Steamed Copper Sheet",
@@ -1035,7 +1135,8 @@ const recipes =
 			input: [getMaterialIndexByName("Copper Ingot"), getMaterialIndexByName("Water")],
 			inputQuantity: [3, 3],
 			machine: getMachineIndexbyName("Refinery"),
-			craftingTime_s: 8
+			craftingTime_s: 8,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Alclad Aluminum Sheet",
@@ -1045,7 +1146,8 @@ const recipes =
 			input: [getMaterialIndexByName("Aluminum Ingot"), getMaterialIndexByName("Copper Ingot")],
 			inputQuantity: [3, 1],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 6
+			craftingTime_s: 6,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Aluminum Casing",
@@ -1055,7 +1157,8 @@ const recipes =
 			input: [getMaterialIndexByName("Aluminum Ingot")],
 			inputQuantity: [3],
 			machine: getMachineIndexbyName("Constructor"),
-			craftingTime_s: 2
+			craftingTime_s: 2,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Alclad Casing",
@@ -1065,7 +1168,8 @@ const recipes =
 			input: [getMaterialIndexByName("Aluminum Ingot"), getMaterialIndexByName("Copper Ingot")],
 			inputQuantity: [20, 10],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 8
+			craftingTime_s: 8,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Steel Pipe",
@@ -1075,7 +1179,8 @@ const recipes =
 			input: [getMaterialIndexByName("Steel Ingot")],
 			inputQuantity: [3],
 			machine: getMachineIndexbyName("Constructor"),
-			craftingTime_s: 6
+			craftingTime_s: 6,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Iron Pipe",
@@ -1085,7 +1190,8 @@ const recipes =
 			input: [getMaterialIndexByName("Iron Ingot")],
 			inputQuantity: [20],
 			machine: getMachineIndexbyName("Constructor"),
-			craftingTime_s: 12
+			craftingTime_s: 12,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Molded Steel Pipe",
@@ -1095,7 +1201,8 @@ const recipes =
 			input: [getMaterialIndexByName("Steel Ingot"), getMaterialIndexByName("Concrete")],
 			inputQuantity: [5, 3],
 			machine: getMachineIndexbyName("Foundry"),
-			craftingTime_s: 6
+			craftingTime_s: 6,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Steel Beam",
@@ -1105,7 +1212,8 @@ const recipes =
 			input: [getMaterialIndexByName("Steel Ingot")],
 			inputQuantity: [4],
 			machine: getMachineIndexbyName("Constructor"),
-			craftingTime_s: 4
+			craftingTime_s: 4,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Aluminum Beam",
@@ -1115,7 +1223,8 @@ const recipes =
 			input: [getMaterialIndexByName("Aluminum Ingot")],
 			inputQuantity: [3],
 			machine: getMachineIndexbyName("Constructor"),
-			craftingTime_s: 8
+			craftingTime_s: 8,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Molded Beam",
@@ -1125,7 +1234,8 @@ const recipes =
 			input: [getMaterialIndexByName("Steel Ingot"), getMaterialIndexByName("Concrete")],
 			inputQuantity: [24, 16],
 			machine: getMachineIndexbyName("Foundry"),
-			craftingTime_s: 12
+			craftingTime_s: 12,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Encased Industrial Beam",
@@ -1135,7 +1245,8 @@ const recipes =
 			input: [getMaterialIndexByName("Steel Beam"), getMaterialIndexByName("Concrete")],
 			inputQuantity: [3, 6],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 10
+			craftingTime_s: 10,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Encased Industrial Pipe",
@@ -1145,7 +1256,8 @@ const recipes =
 			input: [getMaterialIndexByName("Steel Pipe"), getMaterialIndexByName("Concrete")],
 			inputQuantity: [6, 5],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 15
+			craftingTime_s: 15,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Modular Frame",
@@ -1155,7 +1267,8 @@ const recipes =
 			input: [getMaterialIndexByName("Reinforced Iron Plate"), getMaterialIndexByName("Iron Rod")],
 			inputQuantity: [3, 12],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 60
+			craftingTime_s: 60,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Bolted Frame",
@@ -1165,7 +1278,8 @@ const recipes =
 			input: [getMaterialIndexByName("Reinforced Iron Plate"), getMaterialIndexByName("Screw")],
 			inputQuantity: [3, 56],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 24
+			craftingTime_s: 24,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Steeled Frame",
@@ -1175,7 +1289,8 @@ const recipes =
 			input: [getMaterialIndexByName("Reinforced Iron Plate"), getMaterialIndexByName("Steel Pipe")],
 			inputQuantity: [2, 10],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 60
+			craftingTime_s: 60,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Heavy Modular Frame",
@@ -1185,7 +1300,8 @@ const recipes =
 			input: [getMaterialIndexByName("Modular Frame"), getMaterialIndexByName("Steel Pipe"), getMaterialIndexByName("Encased Industrial Beam"), getMaterialIndexByName("Screw")],
 			inputQuantity: [5, 20, 5, 120],
 			machine: getMachineIndexbyName("Manufacturer"),
-			craftingTime_s: 30
+			craftingTime_s: 30,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Heavy Encased Frame",
@@ -1195,7 +1311,8 @@ const recipes =
 			input: [getMaterialIndexByName("Modular Frame"), getMaterialIndexByName("Steel Pipe"), getMaterialIndexByName("Encased Industrial Beam"), getMaterialIndexByName("Concrete")],
 			inputQuantity: [8, 36, 10, 22],
 			machine: getMachineIndexbyName("Manufacturer"),
-			craftingTime_s: 64
+			craftingTime_s: 64,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Heavy Flexible Frame",
@@ -1205,7 +1322,8 @@ const recipes =
 			input: [getMaterialIndexByName("Modular Frame"), getMaterialIndexByName("Rubber"), getMaterialIndexByName("Encased Industrial Beam"), getMaterialIndexByName("Screw")],
 			inputQuantity: [5, 20, 3, 104],
 			machine: getMachineIndexbyName("Manufacturer"),
-			craftingTime_s: 16
+			craftingTime_s: 16,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Fused Modular Frame",
@@ -1215,7 +1333,8 @@ const recipes =
 			input: [getMaterialIndexByName("Heavy Modular Frame"), getMaterialIndexByName("Aluminum Casing"), getMaterialIndexByName("Nitrogen Gas")],
 			inputQuantity: [1, 50, 25],
 			machine: getMachineIndexbyName("Blender"),
-			craftingTime_s: 40
+			craftingTime_s: 40,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Heat-Fused Frame",
@@ -1225,7 +1344,8 @@ const recipes =
 			input: [getMaterialIndexByName("Heavy Modular Frame"), getMaterialIndexByName("Aluminum Ingot"), getMaterialIndexByName("Nitric Acid"), getMaterialIndexByName("Fuel")],
 			inputQuantity: [1, 50, 8, 10],
 			machine: getMachineIndexbyName("Blender"),
-			craftingTime_s: 20
+			craftingTime_s: 20,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Ficsite Trigon",
@@ -1235,7 +1355,8 @@ const recipes =
 			input: [getMaterialIndexByName("Heavy Modular Frame")],
 			inputQuantity: [1],
 			machine: getMachineIndexbyName("Constructor"),
-			craftingTime_s: 6
+			craftingTime_s: 6,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Fabric",
@@ -1245,7 +1366,8 @@ const recipes =
 			input: [getMaterialIndexByName("Mycelia"), getMaterialIndexByName("Biomass")],
 			inputQuantity: [1, 5],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 4
+			craftingTime_s: 4,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Polyester Fabric",
@@ -1255,7 +1377,8 @@ const recipes =
 			input: [getMaterialIndexByName("Polymer Resin"), getMaterialIndexByName("Water")],
 			inputQuantity: [1, 1],
 			machine: getMachineIndexbyName("Refinery"),
-			craftingTime_s: 2
+			craftingTime_s: 2,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Plastic",
@@ -1265,7 +1388,8 @@ const recipes =
 			input: [getMaterialIndexByName("Crude Oil")],
 			inputQuantity: [3],
 			machine: getMachineIndexbyName("Refinery"),
-			craftingTime_s: 6
+			craftingTime_s: 6,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Recycled Plastic",
@@ -1275,7 +1399,8 @@ const recipes =
 			input: [getMaterialIndexByName("Rubber"), getMaterialIndexByName("Fuel")],
 			inputQuantity: [6, 6],
 			machine: getMachineIndexbyName("Refinery"),
-			craftingTime_s: 12
+			craftingTime_s: 12,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Residual Plastic",
@@ -1285,7 +1410,8 @@ const recipes =
 			input: [getMaterialIndexByName("Polymer Resin"), getMaterialIndexByName("Water")],
 			inputQuantity: [6, 2],
 			machine: getMachineIndexbyName("Refinery"),
-			craftingTime_s: 6
+			craftingTime_s: 6,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Rubber",
@@ -1295,7 +1421,8 @@ const recipes =
 			input: [getMaterialIndexByName("Crude Oil")],
 			inputQuantity: [3],
 			machine: getMachineIndexbyName("Refinery"),
-			craftingTime_s: 6
+			craftingTime_s: 6,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Recycled Rubber",
@@ -1305,7 +1432,8 @@ const recipes =
 			input: [getMaterialIndexByName("Plastic"), getMaterialIndexByName("Fuel")],
 			inputQuantity: [6, 6],
 			machine: getMachineIndexbyName("Refinery"),
-			craftingTime_s: 12
+			craftingTime_s: 12,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Residual Rubber",
@@ -1315,7 +1443,8 @@ const recipes =
 			input: [getMaterialIndexByName("Polymer Resin"), getMaterialIndexByName("Water")],
 			inputQuantity: [4, 4],
 			machine: getMachineIndexbyName("Refinery"),
-			craftingTime_s: 6
+			craftingTime_s: 6,
+			secondaryOutputAllowed: true
 		},
 		// Industrial Parts
 		{
@@ -1326,7 +1455,8 @@ const recipes =
 			input: [getMaterialIndexByName("Iron Rod"), getMaterialIndexByName("Screw")],
 			inputQuantity: [5, 25],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 15
+			craftingTime_s: 15,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Copper Rotor",
@@ -1336,7 +1466,8 @@ const recipes =
 			input: [getMaterialIndexByName("Copper Sheet"), getMaterialIndexByName("Screw")],
 			inputQuantity: [6, 52],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 16
+			craftingTime_s: 16,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Steel Rotor",
@@ -1346,7 +1477,8 @@ const recipes =
 			input: [getMaterialIndexByName("Steel Pipe"), getMaterialIndexByName("Wire")],
 			inputQuantity: [2, 6],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 12
+			craftingTime_s: 12,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Stator",
@@ -1356,7 +1488,8 @@ const recipes =
 			input: [getMaterialIndexByName("Steel Pipe"), getMaterialIndexByName("Wire")],
 			inputQuantity: [3, 8],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 12
+			craftingTime_s: 12,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Quickwire Stator",
@@ -1366,7 +1499,8 @@ const recipes =
 			input: [getMaterialIndexByName("Steel Pipe"), getMaterialIndexByName("Quickwire")],
 			inputQuantity: [4, 15],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 15
+			craftingTime_s: 15,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Battery",
@@ -1376,7 +1510,8 @@ const recipes =
 			input: [getMaterialIndexByName("Sulfuric Acid"), getMaterialIndexByName("Alumina Solution"), getMaterialIndexByName("Aluminum Casing")],
 			inputQuantity: [2.5, 2, 1],
 			machine: getMachineIndexbyName("Blender"),
-			craftingTime_s: 3
+			craftingTime_s: 3,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Classic Battery",
@@ -1386,7 +1521,8 @@ const recipes =
 			input: [getMaterialIndexByName("Sulfur"), getMaterialIndexByName("Alclad Aluminum Sheet"), getMaterialIndexByName("Plastic"), getMaterialIndexByName("Wire")],
 			inputQuantity: [6, 7, 8, 12],
 			machine: getMachineIndexbyName("Manufacturer"),
-			craftingTime_s: 8
+			craftingTime_s: 8,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Motor",
@@ -1396,7 +1532,8 @@ const recipes =
 			input: [getMaterialIndexByName("Rotor"), getMaterialIndexByName("Stator")],
 			inputQuantity: [2, 2],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 12
+			craftingTime_s: 12,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Rigour Motor",
@@ -1406,7 +1543,8 @@ const recipes =
 			input: [getMaterialIndexByName("Rotor"), getMaterialIndexByName("Stator"), getMaterialIndexByName("Crystal Oscillator")],
 			inputQuantity: [3, 3, 1],
 			machine: getMachineIndexbyName("Manufacturer"),
-			craftingTime_s: 48
+			craftingTime_s: 48,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Electric Motor",
@@ -1416,7 +1554,8 @@ const recipes =
 			input: [getMaterialIndexByName("Electromagnetic Control Rod"), getMaterialIndexByName("Rotor")],
 			inputQuantity: [1, 2],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 16
+			craftingTime_s: 16,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Heat Sink",
@@ -1426,7 +1565,8 @@ const recipes =
 			input: [getMaterialIndexByName("Alclad Aluminum Sheet"), getMaterialIndexByName("Copper Sheet")],
 			inputQuantity: [5, 3],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 8
+			craftingTime_s: 8,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Heat Exchanger",
@@ -1436,7 +1576,8 @@ const recipes =
 			input: [getMaterialIndexByName("Aluminum Casing"), getMaterialIndexByName("Rubber")],
 			inputQuantity: [3, 3],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 6
+			craftingTime_s: 6,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Cooling System",
@@ -1446,7 +1587,8 @@ const recipes =
 			input: [getMaterialIndexByName("Heat Sink"), getMaterialIndexByName("Rubber"), getMaterialIndexByName("Water"), getMaterialIndexByName("Nitrogen Gas")],
 			inputQuantity: [2, 2, 5, 25],
 			machine: getMachineIndexbyName("Blender"),
-			craftingTime_s: 10
+			craftingTime_s: 10,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Cooling Device",
@@ -1456,7 +1598,8 @@ const recipes =
 			input: [getMaterialIndexByName("Heat Sink"), getMaterialIndexByName("Motor"), getMaterialIndexByName("Nitrogen Gas")],
 			inputQuantity: [4, 1, 24],
 			machine: getMachineIndexbyName("Blender"),
-			craftingTime_s: 24
+			craftingTime_s: 24,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Turbo Motor",
@@ -1466,7 +1609,8 @@ const recipes =
 			input: [getMaterialIndexByName("Cooling System"), getMaterialIndexByName("Radio Control Unit"), getMaterialIndexByName("Motor"), getMaterialIndexByName("Rubber")],
 			inputQuantity: [4, 2, 4, 24],
 			machine: getMachineIndexbyName("Manufacturer"),
-			craftingTime_s: 32
+			craftingTime_s: 32,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Turbo Electric Motor",
@@ -1476,7 +1620,8 @@ const recipes =
 			input: [getMaterialIndexByName("Motor"), getMaterialIndexByName("Radio Control Unit"), getMaterialIndexByName("Electromagnetic Control Rod"), getMaterialIndexByName("Rotor")],
 			inputQuantity: [7, 9, 5, 7],
 			machine: getMachineIndexbyName("Manufacturer"),
-			craftingTime_s: 64
+			craftingTime_s: 64,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Turbo Pressure Motor",
@@ -1486,7 +1631,8 @@ const recipes =
 			input: [getMaterialIndexByName("Motor"), getMaterialIndexByName("Pressure Conversion Cube"), getMaterialIndexByName("Packaged Nitrogen Gas"), getMaterialIndexByName("Stator")],
 			inputQuantity: [4, 1, 24, 8],
 			machine: getMachineIndexbyName("Manufacturer"),
-			craftingTime_s: 32
+			craftingTime_s: 32,
+			secondaryOutputAllowed: true
 		},
 		// Electronics
 		{
@@ -1497,7 +1643,8 @@ const recipes =
 			input: [getMaterialIndexByName("Copper Ingot")],
 			inputQuantity: [1],
 			machine: getMachineIndexbyName("Constructor"),
-			craftingTime_s: 4
+			craftingTime_s: 4,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Iron Wire",
@@ -1507,7 +1654,8 @@ const recipes =
 			input: [getMaterialIndexByName("Iron Ingot")],
 			inputQuantity: [5],
 			machine: getMachineIndexbyName("Constructor"),
-			craftingTime_s: 24
+			craftingTime_s: 24,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Caterium Wire",
@@ -1517,7 +1665,8 @@ const recipes =
 			input: [getMaterialIndexByName("Caterium Ingot")],
 			inputQuantity: [1],
 			machine: getMachineIndexbyName("Constructor"),
-			craftingTime_s: 4
+			craftingTime_s: 4,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Fused Wire",
@@ -1527,7 +1676,8 @@ const recipes =
 			input: [getMaterialIndexByName("Copper Ingot"), getMaterialIndexByName("Caterium Ingot")],
 			inputQuantity: [4, 1],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 20
+			craftingTime_s: 20,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Cable",
@@ -1537,7 +1687,8 @@ const recipes =
 			input: [getMaterialIndexByName("Wire")],
 			inputQuantity: [2],
 			machine: getMachineIndexbyName("Constructor"),
-			craftingTime_s: 2
+			craftingTime_s: 2,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Coated Cable",
@@ -1547,7 +1698,8 @@ const recipes =
 			input: [getMaterialIndexByName("Wire"), getMaterialIndexByName("Heavy Oil Residue")],
 			inputQuantity: [5, 2],
 			machine: getMachineIndexbyName("Refinery"),
-			craftingTime_s: 8
+			craftingTime_s: 8,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Insulated Cable",
@@ -1557,7 +1709,8 @@ const recipes =
 			input: [getMaterialIndexByName("Wire"), getMaterialIndexByName("Rubber")],
 			inputQuantity: [9, 6],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 12
+			craftingTime_s: 12,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Quickwire Cable",
@@ -1567,7 +1720,8 @@ const recipes =
 			input: [getMaterialIndexByName("Quickwire"), getMaterialIndexByName("Rubber")],
 			inputQuantity: [3, 2],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 24
+			craftingTime_s: 24,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Quickwire",
@@ -1577,7 +1731,8 @@ const recipes =
 			input: [getMaterialIndexByName("Caterium Ingot")],
 			inputQuantity: [1],
 			machine: getMachineIndexbyName("Constructor"),
-			craftingTime_s: 5
+			craftingTime_s: 5,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Fused Quickwire",
@@ -1587,7 +1742,8 @@ const recipes =
 			input: [getMaterialIndexByName("Caterium Ingot"), getMaterialIndexByName("Copper Ingot")],
 			inputQuantity: [1, 5],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 8
+			craftingTime_s: 8,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Circuit Board",
@@ -1597,7 +1753,8 @@ const recipes =
 			input: [getMaterialIndexByName("Copper Sheet"), getMaterialIndexByName("Plastic")],
 			inputQuantity: [2, 4],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 8
+			craftingTime_s: 8,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Caterium Circuit Board",
@@ -1607,7 +1764,8 @@ const recipes =
 			input: [getMaterialIndexByName("Quickwire"), getMaterialIndexByName("Plastic")],
 			inputQuantity: [30, 10],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 48
+			craftingTime_s: 48,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Electrode Circuit Board",
@@ -1617,7 +1775,8 @@ const recipes =
 			input: [getMaterialIndexByName("Rubber"), getMaterialIndexByName("Petroleum Coke")],
 			inputQuantity: [4, 8],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 12
+			craftingTime_s: 12,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Silicon Circuit Board",
@@ -1627,7 +1786,8 @@ const recipes =
 			input: [getMaterialIndexByName("Copper Sheet"), getMaterialIndexByName("Silica")],
 			inputQuantity: [11, 11],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 24
+			craftingTime_s: 24,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "AI Limiter",
@@ -1637,7 +1797,8 @@ const recipes =
 			input: [getMaterialIndexByName("Copper Sheet"), getMaterialIndexByName("Quickwire")],
 			inputQuantity: [5, 20],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 12
+			craftingTime_s: 12,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Plastic AI Limiter",
@@ -1647,7 +1808,8 @@ const recipes =
 			input: [getMaterialIndexByName("Quickwire"), getMaterialIndexByName("Plastic")],
 			inputQuantity: [30, 7],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 15
+			craftingTime_s: 15,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "High-Speed Connector",
@@ -1657,7 +1819,8 @@ const recipes =
 			input: [getMaterialIndexByName("Quickwire"), getMaterialIndexByName("Cable"), getMaterialIndexByName("Circuit Board")],
 			inputQuantity: [56, 10, 1],
 			machine: getMachineIndexbyName("Manufacturer"),
-			craftingTime_s: 16
+			craftingTime_s: 16,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Silicon High-Speed Connector",
@@ -1667,7 +1830,8 @@ const recipes =
 			input: [getMaterialIndexByName("Quickwire"), getMaterialIndexByName("Silica"), getMaterialIndexByName("Circuit Board")],
 			inputQuantity: [60, 25, 2],
 			machine: getMachineIndexbyName("Manufacturer"),
-			craftingTime_s: 40
+			craftingTime_s: 40,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Reanimated SAM",
@@ -1677,7 +1841,8 @@ const recipes =
 			input: [getMaterialIndexByName("SAM")],
 			inputQuantity: [4],
 			machine: getMachineIndexbyName("Constructor"),
-			craftingTime_s: 2
+			craftingTime_s: 2,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "SAM Fluctuator",
@@ -1687,7 +1852,8 @@ const recipes =
 			input: [getMaterialIndexByName("Reanimated SAM"), getMaterialIndexByName("Wire"), getMaterialIndexByName("Steel Pipe")],
 			inputQuantity: [6, 5, 3],
 			machine: getMachineIndexbyName("Manufacturer"),
-			craftingTime_s: 6
+			craftingTime_s: 6,
+			secondaryOutputAllowed: true
 		},
 		// Communications
 		{
@@ -1698,7 +1864,8 @@ const recipes =
 			input: [getMaterialIndexByName("Circuit Board"), getMaterialIndexByName("Cable"), getMaterialIndexByName("Plastic")],
 			inputQuantity: [4, 8, 16],
 			machine: getMachineIndexbyName("Manufacturer"),
-			craftingTime_s: 24
+			craftingTime_s: 24,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Caterium Computer",
@@ -1708,7 +1875,8 @@ const recipes =
 			input: [getMaterialIndexByName("Circuit Board"), getMaterialIndexByName("Quickwire"), getMaterialIndexByName("Rubber")],
 			inputQuantity: [4, 14, 6],
 			machine: getMachineIndexbyName("Manufacturer"),
-			craftingTime_s: 16
+			craftingTime_s: 16,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Crystal Computer",
@@ -1718,7 +1886,8 @@ const recipes =
 			input: [getMaterialIndexByName("Circuit Board"), getMaterialIndexByName("Crystal Oscillator")],
 			inputQuantity: [3, 1],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 36
+			craftingTime_s: 36,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Supercomputer",
@@ -1728,7 +1897,8 @@ const recipes =
 			input: [getMaterialIndexByName("Computer"), getMaterialIndexByName("AI Limiter"), getMaterialIndexByName("High-Speed Connector"), getMaterialIndexByName("Plastic")],
 			inputQuantity: [4, 2, 3, 28],
 			machine: getMachineIndexbyName("Manufacturer"),
-			craftingTime_s: 32
+			craftingTime_s: 32,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "OC Supercomputer",
@@ -1738,7 +1908,8 @@ const recipes =
 			input: [getMaterialIndexByName("Radio Control Unit"), getMaterialIndexByName("Cooling System")],
 			inputQuantity: [2, 2],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 20
+			craftingTime_s: 20,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Super-State Computer",
@@ -1748,7 +1919,8 @@ const recipes =
 			input: [getMaterialIndexByName("Computer"), getMaterialIndexByName("Electromagnetic Control Rod"), getMaterialIndexByName("Battery"), getMaterialIndexByName("Wire")],
 			inputQuantity: [3, 1, 10, 25],
 			machine: getMachineIndexbyName("Manufacturer"),
-			craftingTime_s: 25
+			craftingTime_s: 25,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Radio Control Unit",
@@ -1758,7 +1930,8 @@ const recipes =
 			input: [getMaterialIndexByName("Aluminum Casing"), getMaterialIndexByName("Crystal Oscillator"), getMaterialIndexByName("Computer")],
 			inputQuantity: [32, 1, 2],
 			machine: getMachineIndexbyName("Manufacturer"),
-			craftingTime_s: 48
+			craftingTime_s: 48,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Radio Connection Unit",
@@ -1768,7 +1941,8 @@ const recipes =
 			input: [getMaterialIndexByName("Heat Sink"), getMaterialIndexByName("High-Speed Connector"), getMaterialIndexByName("Quartz Crystal")],
 			inputQuantity: [4, 2, 12],
 			machine: getMachineIndexbyName("Manufacturer"),
-			craftingTime_s: 16
+			craftingTime_s: 16,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Radio Control System",
@@ -1778,7 +1952,8 @@ const recipes =
 			input: [getMaterialIndexByName("Crystal Oscillator"), getMaterialIndexByName("Circuit Board"), getMaterialIndexByName("Aluminum Casing"), getMaterialIndexByName("Rubber")],
 			inputQuantity: [1, 10, 60, 30],
 			machine: getMachineIndexbyName("Manufacturer"),
-			craftingTime_s: 40
+			craftingTime_s: 40,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Crystal Oscillator",
@@ -1788,7 +1963,8 @@ const recipes =
 			input: [getMaterialIndexByName("Quartz Crystal"), getMaterialIndexByName("Cable"), getMaterialIndexByName("Reinforced Iron Plate")],
 			inputQuantity: [36, 28, 5],
 			machine: getMachineIndexbyName("Manufacturer"),
-			craftingTime_s: 120
+			craftingTime_s: 120,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Insulated Crystal Oscillator",
@@ -1798,7 +1974,8 @@ const recipes =
 			input: [getMaterialIndexByName("Quartz Crystal"), getMaterialIndexByName("Rubber"), getMaterialIndexByName("AI Limiter")],
 			inputQuantity: [10, 7, 1],
 			machine: getMachineIndexbyName("Manufacturer"),
-			craftingTime_s: 32
+			craftingTime_s: 32,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Superposition Oscillator",
@@ -1808,18 +1985,8 @@ const recipes =
 			input: [getMaterialIndexByName("Dark Matter Crystal"), getMaterialIndexByName("Crystal Oscillator"), getMaterialIndexByName("Alclad Aluminum Sheet"), getMaterialIndexByName("Excited Photonic Matter")],
 			inputQuantity: [6, 1, 9, 25],
 			machine: getMachineIndexbyName("Quantum Encoder"),
-			craftingTime_s: 12
-		},
-		// Dummy for dark matter residue
-		{
-			name: "Superposition Oscillator",
-			tier: 9,
-			output: [getMaterialIndexByName("Dark Matter Residue"), getMaterialIndexByName("Superposition Oscillator")],
-			outputQuantity: [25, 1],
-			input: [getMaterialIndexByName("Dark Matter Crystal"), getMaterialIndexByName("Crystal Oscillator"), getMaterialIndexByName("Alclad Aluminum Sheet"), getMaterialIndexByName("Excited Photonic Matter")],
-			inputQuantity: [6, 1, 9, 25],
-			machine: getMachineIndexbyName("Quantum Encoder"),
-			craftingTime_s: 12
+			craftingTime_s: 12,
+			secondaryOutputAllowed: true
 		},
 		// Quantum Technology
 		{
@@ -1830,7 +1997,8 @@ const recipes =
 			input: [getMaterialIndexByName("Coal")],
 			inputQuantity: [20],
 			machine: getMachineIndexbyName("Particle Accelerator (low-energy)"),
-			craftingTime_s: 2
+			craftingTime_s: 2,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Cloudy Diamonds",
@@ -1840,7 +2008,8 @@ const recipes =
 			input: [getMaterialIndexByName("Coal"), getMaterialIndexByName("Limestone")],
 			inputQuantity: [12, 24],
 			machine: getMachineIndexbyName("Particle Accelerator (low-energy)"),
-			craftingTime_s: 3
+			craftingTime_s: 3,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Oil-Based Diamonds",
@@ -1850,7 +2019,8 @@ const recipes =
 			input: [getMaterialIndexByName("Coal")],
 			inputQuantity: [10],
 			machine: getMachineIndexbyName("Particle Accelerator (low-energy)"),
-			craftingTime_s: 3
+			craftingTime_s: 3,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Petroleum Diamonds",
@@ -1860,7 +2030,8 @@ const recipes =
 			input: [getMaterialIndexByName("Petroleum Coke")],
 			inputQuantity: [24],
 			machine: getMachineIndexbyName("Particle Accelerator (low-energy)"),
-			craftingTime_s: 2
+			craftingTime_s: 2,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Pink Diamonds",
@@ -1870,7 +2041,8 @@ const recipes =
 			input: [getMaterialIndexByName("Coal"), getMaterialIndexByName("Quartz Crystal")],
 			inputQuantity: [8, 3],
 			machine: getMachineIndexbyName("Converter"),
-			craftingTime_s: 4
+			craftingTime_s: 4,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Turbo Diamonds",
@@ -1880,7 +2052,8 @@ const recipes =
 			input: [getMaterialIndexByName("Coal"), getMaterialIndexByName("Packaged Turbofuel")],
 			inputQuantity: [30, 2],
 			machine: getMachineIndexbyName("Particle Accelerator (low-energy)"),
-			craftingTime_s: 3
+			craftingTime_s: 3,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Time Crystal",
@@ -1890,7 +2063,8 @@ const recipes =
 			input: [getMaterialIndexByName("Diamonds")],
 			inputQuantity: [2],
 			machine: getMachineIndexbyName("Converter"),
-			craftingTime_s: 10
+			craftingTime_s: 10,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Dark Matter Crystal",
@@ -1900,7 +2074,8 @@ const recipes =
 			input: [getMaterialIndexByName("Diamonds"), getMaterialIndexByName("Dark Matter Residue")],
 			inputQuantity: [1, 5],
 			machine: getMachineIndexbyName("Particle Accelerator (high-energy)"),
-			craftingTime_s: 2
+			craftingTime_s: 2,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Dark Matter Crystallization",
@@ -1910,7 +2085,8 @@ const recipes =
 			input: [getMaterialIndexByName("Dark Matter Residue")],
 			inputQuantity: [10],
 			machine: getMachineIndexbyName("Particle Accelerator (high-energy)"),
-			craftingTime_s: 3
+			craftingTime_s: 3,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Dark Matter Trap",
@@ -1920,7 +2096,8 @@ const recipes =
 			input: [getMaterialIndexByName("Time Crystal"), getMaterialIndexByName("Dark Matter Residue")],
 			inputQuantity: [1, 5],
 			machine: getMachineIndexbyName("Particle Accelerator (high-energy)"),
-			craftingTime_s: 2
+			craftingTime_s: 2,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Singularity Cell",
@@ -1930,7 +2107,8 @@ const recipes =
 			input: [getMaterialIndexByName("Nuclear Pasta"), getMaterialIndexByName("Dark Matter Crystal"), getMaterialIndexByName("Iron Plate"), getMaterialIndexByName("Concrete")],
 			inputQuantity: [1, 20, 100, 200],
 			machine: getMachineIndexbyName("Manufacturer"),
-			craftingTime_s: 60
+			craftingTime_s: 60,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Neural-Quantum Processor",
@@ -1940,7 +2118,8 @@ const recipes =
 			input: [getMaterialIndexByName("Time Crystal"), getMaterialIndexByName("Supercomputer"), getMaterialIndexByName("Ficsite Trigon"), getMaterialIndexByName("Excited Photonic Matter")],
 			inputQuantity: [5, 1, 15, 25],
 			machine: getMachineIndexbyName("Quantum Encoder"),
-			craftingTime_s: 20
+			craftingTime_s: 20,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Alien Power Matrix",
@@ -1950,7 +2129,8 @@ const recipes =
 			input: [getMaterialIndexByName("SAM Fluctuator"), getMaterialIndexByName("Power Shard"), getMaterialIndexByName("Superposition Oscillator"), getMaterialIndexByName("Excited Photonic Matter")],
 			inputQuantity: [5, 3, 3, 24],
 			machine: getMachineIndexbyName("Quantum Encoder"),
-			craftingTime_s: 24
+			craftingTime_s: 24,
+			secondaryOutputAllowed: true
 		},
 		// Fuels
 		{
@@ -1961,7 +2141,8 @@ const recipes =
 			input: [getMaterialIndexByName("Leaves")],
 			inputQuantity: [10],
 			machine: getMachineIndexbyName("Constructor"),
-			craftingTime_s: 5
+			craftingTime_s: 5,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Biomass (Mycelia)",
@@ -1971,7 +2152,8 @@ const recipes =
 			input: [getMaterialIndexByName("Mycelia")],
 			inputQuantity: [1],
 			machine: getMachineIndexbyName("Constructor"),
-			craftingTime_s: 4
+			craftingTime_s: 4,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Biomass (Wood)",
@@ -1981,7 +2163,8 @@ const recipes =
 			input: [getMaterialIndexByName("Wood")],
 			inputQuantity: [4],
 			machine: getMachineIndexbyName("Constructor"),
-			craftingTime_s: 4
+			craftingTime_s: 4,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Compacted Coal",
@@ -1991,7 +2174,8 @@ const recipes =
 			input: [getMaterialIndexByName("Coal"), getMaterialIndexByName("Sulfur")],
 			inputQuantity: [5, 5],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 12
+			craftingTime_s: 12,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Solid Biofuel",
@@ -2001,7 +2185,8 @@ const recipes =
 			input: [getMaterialIndexByName("Biomass")],
 			inputQuantity: [8],
 			machine: getMachineIndexbyName("Constructor"),
-			craftingTime_s: 4
+			craftingTime_s: 4,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Diluted Packaged Fuel",
@@ -2011,7 +2196,8 @@ const recipes =
 			input: [getMaterialIndexByName("Heavy Oil Residue"), getMaterialIndexByName("Packaged Water")],
 			inputQuantity: [1, 2],
 			machine: getMachineIndexbyName("Refinery"),
-			craftingTime_s: 2
+			craftingTime_s: 2,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Uranium Fuel Rod",
@@ -2021,7 +2207,8 @@ const recipes =
 			input: [getMaterialIndexByName("Encased Uranium Cell"), getMaterialIndexByName("Encased Industrial Beam"), getMaterialIndexByName("Electromagnetic Control Rod")],
 			inputQuantity: [50, 3, 5],
 			machine: getMachineIndexbyName("Manufacturer"),
-			craftingTime_s: 150
+			craftingTime_s: 150,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Uranium Fuel Unit",
@@ -2031,7 +2218,8 @@ const recipes =
 			input: [getMaterialIndexByName("Encased Uranium Cell"), getMaterialIndexByName("Electromagnetic Control Rod"), getMaterialIndexByName("Crystal Oscillator"), getMaterialIndexByName("Beacon")],
 			inputQuantity: [100, 10, 3, 6],
 			machine: getMachineIndexbyName("Manufacturer"),
-			craftingTime_s: 300
+			craftingTime_s: 300,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Plutonium Fuel Rod",
@@ -2041,7 +2229,8 @@ const recipes =
 			input: [getMaterialIndexByName("Encased Plutonium Cell"), getMaterialIndexByName("Steel Beam"), getMaterialIndexByName("Electromagnetic Control Rod"), getMaterialIndexByName("Heat Sink")],
 			inputQuantity: [30, 18, 6, 10],
 			machine: getMachineIndexbyName("Manufacturer"),
-			craftingTime_s: 240
+			craftingTime_s: 240,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Plutonium Fuel Unit",
@@ -2051,7 +2240,8 @@ const recipes =
 			input: [getMaterialIndexByName("Encased Plutonium Cell"), getMaterialIndexByName("Pressure Conversion Cube")],
 			inputQuantity: [20, 1],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 120
+			craftingTime_s: 120,
+			secondaryOutputAllowed: true
 		},
 		// Consumed
 		{
@@ -2062,7 +2252,8 @@ const recipes =
 			input: [getMaterialIndexByName("Coal"), getMaterialIndexByName("Sulfur")],
 			inputQuantity: [1, 1],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 4
+			craftingTime_s: 4,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Fine Black Powder",
@@ -2072,7 +2263,8 @@ const recipes =
 			input: [getMaterialIndexByName("Sulfur"), getMaterialIndexByName("Compacted Coal")],
 			inputQuantity: [1, 2],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 8
+			craftingTime_s: 8,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Smokeless Powder",
@@ -2082,7 +2274,8 @@ const recipes =
 			input: [getMaterialIndexByName("Black Powder"), getMaterialIndexByName("Heavy Oil Residue")],
 			inputQuantity: [2, 1],
 			machine: getMachineIndexbyName("Refinery"),
-			craftingTime_s: 6
+			craftingTime_s: 6,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Gas Filter",
@@ -2092,7 +2285,8 @@ const recipes =
 			input: [getMaterialIndexByName("Coal"), getMaterialIndexByName("Iron Plate"), getMaterialIndexByName("Fabric")],
 			inputQuantity: [4, 2, 2],
 			machine: getMachineIndexbyName("Manufacturer"),
-			craftingTime_s: 8
+			craftingTime_s: 8,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Color Cartridge",
@@ -2102,7 +2296,8 @@ const recipes =
 			input: [getMaterialIndexByName("Flower Petals")],
 			inputQuantity: [5],
 			machine: getMachineIndexbyName("Constructor"),
-			craftingTime_s: 6
+			craftingTime_s: 6,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Beacon",
@@ -2112,7 +2307,8 @@ const recipes =
 			input: [getMaterialIndexByName("Iron Plate"), getMaterialIndexByName("Iron Rod"), getMaterialIndexByName("Wire"), getMaterialIndexByName("Cable")],
 			inputQuantity: [3, 1, 15, 2],
 			machine: getMachineIndexbyName("Manufacturer"),
-			craftingTime_s: 8
+			craftingTime_s: 8,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Crystal Beacon",
@@ -2122,7 +2318,8 @@ const recipes =
 			input: [getMaterialIndexByName("Steel Beam"), getMaterialIndexByName("Steel Pipe"), getMaterialIndexByName("Crystal Oscillator")],
 			inputQuantity: [4, 16, 1],
 			machine: getMachineIndexbyName("Manufacturer"),
-			craftingTime_s: 120
+			craftingTime_s: 120,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Iodine Infused Filter",
@@ -2132,7 +2329,8 @@ const recipes =
 			input: [getMaterialIndexByName("Gas Filter"), getMaterialIndexByName("Quickwire"), getMaterialIndexByName("Aluminum Casing")],
 			inputQuantity: [1, 8, 1],
 			machine: getMachineIndexbyName("Manufacturer"),
-			craftingTime_s: 16
+			craftingTime_s: 16,
+			secondaryOutputAllowed: true
 		},
 		// Ammos
 		{
@@ -2143,7 +2341,8 @@ const recipes =
 			input: [getMaterialIndexByName("Iron Rod")],
 			inputQuantity: [1],
 			machine: getMachineIndexbyName("Constructor"),
-			craftingTime_s: 4
+			craftingTime_s: 4,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Stun Rebar",
@@ -2153,7 +2352,8 @@ const recipes =
 			input: [getMaterialIndexByName("Iron Rebar"), getMaterialIndexByName("Quickwire")],
 			inputQuantity: [1, 5],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 6
+			craftingTime_s: 6,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Shatter Rebar",
@@ -2163,7 +2363,8 @@ const recipes =
 			input: [getMaterialIndexByName("Iron Rebar"), getMaterialIndexByName("Quartz Crystal")],
 			inputQuantity: [2, 3],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 12
+			craftingTime_s: 12,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Explosive Rebar",
@@ -2173,7 +2374,8 @@ const recipes =
 			input: [getMaterialIndexByName("Iron Rebar"), getMaterialIndexByName("Smokeless Powder"), getMaterialIndexByName("Steel Pipe")],
 			inputQuantity: [2, 2, 2],
 			machine: getMachineIndexbyName("Manufacturer"),
-			craftingTime_s: 12
+			craftingTime_s: 12,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Rifle Ammo",
@@ -2183,7 +2385,8 @@ const recipes =
 			input: [getMaterialIndexByName("Copper Sheet"), getMaterialIndexByName("Smokeless Powder")],
 			inputQuantity: [3, 2],
 			machine: getMachineIndexbyName("Manufacturer"),
-			craftingTime_s: 12
+			craftingTime_s: 12,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Homing Rifle Ammo",
@@ -2193,7 +2396,8 @@ const recipes =
 			input: [getMaterialIndexByName("Rifle Ammo"), getMaterialIndexByName("High-Speed Connector")],
 			inputQuantity: [20, 1],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 24
+			craftingTime_s: 24,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Turbo Rifle Ammo",
@@ -2203,7 +2407,8 @@ const recipes =
 			input: [getMaterialIndexByName("Rifle Ammo"), getMaterialIndexByName("Aluminum Casing"), getMaterialIndexByName("Packaged Turbofuel")],
 			inputQuantity: [25, 3, 3],
 			machine: getMachineIndexbyName("Manufacturer"),
-			craftingTime_s: 12
+			craftingTime_s: 12,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Turbo Rifle Ammo",
@@ -2213,7 +2418,8 @@ const recipes =
 			input: [getMaterialIndexByName("Rifle Ammo"), getMaterialIndexByName("Aluminum Casing"), getMaterialIndexByName("Turbofuel")],
 			inputQuantity: [25, 3, 3],
 			machine: getMachineIndexbyName("Blender"),
-			craftingTime_s: 12
+			craftingTime_s: 12,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Nobelisk",
@@ -2223,7 +2429,8 @@ const recipes =
 			input: [getMaterialIndexByName("Black Powder"), getMaterialIndexByName("Steel Pipe")],
 			inputQuantity: [2, 2],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 6
+			craftingTime_s: 6,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Gas Nobelisk",
@@ -2233,7 +2440,8 @@ const recipes =
 			input: [getMaterialIndexByName("Nobelisk"), getMaterialIndexByName("Biomass")],
 			inputQuantity: [1, 10],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 12
+			craftingTime_s: 12,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Pulse Nobelisk",
@@ -2243,7 +2451,8 @@ const recipes =
 			input: [getMaterialIndexByName("Nobelisk"), getMaterialIndexByName("Crystal Oscillator")],
 			inputQuantity: [5, 1],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 60
+			craftingTime_s: 60,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Cluster Nobelisk",
@@ -2253,7 +2462,8 @@ const recipes =
 			input: [getMaterialIndexByName("Nobelisk"), getMaterialIndexByName("Smokeless Powder")],
 			inputQuantity: [3, 4],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 60
+			craftingTime_s: 60,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Nuke Nobelisk",
@@ -2263,7 +2473,8 @@ const recipes =
 			input: [getMaterialIndexByName("Nobelisk"), getMaterialIndexByName("Encased Uranium Cell"), getMaterialIndexByName("Smokeless Powder"), getMaterialIndexByName("AI Limiter")],
 			inputQuantity: [5, 20, 10, 6],
 			machine: getMachineIndexbyName("Manufacturer"),
-			craftingTime_s: 120
+			craftingTime_s: 120,
+			secondaryOutputAllowed: true
 		},
 		// Nuclear
 		{
@@ -2274,7 +2485,8 @@ const recipes =
 			input: [getMaterialIndexByName("Stator"), getMaterialIndexByName("AI Limiter")],
 			inputQuantity: [3, 2],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 30
+			craftingTime_s: 30,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Electromagnetic Connection Rod",
@@ -2284,7 +2496,8 @@ const recipes =
 			input: [getMaterialIndexByName("Stator"), getMaterialIndexByName("High-Speed Connector")],
 			inputQuantity: [2, 1],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 15
+			craftingTime_s: 15,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Encased Uranium Cell",
@@ -2294,7 +2507,8 @@ const recipes =
 			input: [getMaterialIndexByName("Sulfuric Acid"), getMaterialIndexByName("Uranium"), getMaterialIndexByName("Concrete")],
 			inputQuantity: [/*8,*/6, 10, 3],
 			machine: getMachineIndexbyName("Blender"),
-			craftingTime_s: 12
+			craftingTime_s: 12,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Infused Uranium Cell",
@@ -2304,7 +2518,8 @@ const recipes =
 			input: [getMaterialIndexByName("Uranium"), getMaterialIndexByName("Silica"), getMaterialIndexByName("Sulfur"), getMaterialIndexByName("Quickwire")],
 			inputQuantity: [5, 3, 5, 15],
 			machine: getMachineIndexbyName("Manufacturer"),
-			craftingTime_s: 12
+			craftingTime_s: 12,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Non-fissile Uranium",
@@ -2314,7 +2529,8 @@ const recipes =
 			input: [getMaterialIndexByName("Uranium Waste"), getMaterialIndexByName("Silica"), getMaterialIndexByName("Nitric Acid"), getMaterialIndexByName("Sulfuric Acid")],
 			inputQuantity: [15, 10, 6, 6],
 			machine: getMachineIndexbyName("Blender"),
-			craftingTime_s: 24
+			craftingTime_s: 24,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Fertile Uranium",
@@ -2324,7 +2540,8 @@ const recipes =
 			input: [getMaterialIndexByName("Uranium"), getMaterialIndexByName("Uranium Waste"), getMaterialIndexByName("Nitric Acid"), getMaterialIndexByName("Sulfuric Acid")],
 			inputQuantity: [5, 5, 3, 5],
 			machine: getMachineIndexbyName("Blender"),
-			craftingTime_s: 12
+			craftingTime_s: 12,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Plutonium Pellet",
@@ -2334,7 +2551,8 @@ const recipes =
 			input: [getMaterialIndexByName("Non-fissile Uranium"), getMaterialIndexByName("Uranium Waste")],
 			inputQuantity: [100, 25],
 			machine: getMachineIndexbyName("Particle Accelerator (low-energy)"),
-			craftingTime_s: 60
+			craftingTime_s: 60,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Encased Plutonium Cell",
@@ -2344,7 +2562,8 @@ const recipes =
 			input: [getMaterialIndexByName("Plutonium Pellet"), getMaterialIndexByName("Concrete")],
 			inputQuantity: [2, 4],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 12
+			craftingTime_s: 12,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Instant Plutonium Cell",
@@ -2354,7 +2573,8 @@ const recipes =
 			input: [getMaterialIndexByName("Non-fissile Uranium"), getMaterialIndexByName("Aluminum Casing")],
 			inputQuantity: [150, 20],
 			machine: getMachineIndexbyName("Particle Accelerator (low-energy)"),
-			craftingTime_s: 120
+			craftingTime_s: 120,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Ficsonium",
@@ -2364,7 +2584,8 @@ const recipes =
 			input: [getMaterialIndexByName("Plutonium Waste"), getMaterialIndexByName("Singularity Cell"), getMaterialIndexByName("Dark Matter Residue")],
 			inputQuantity: [1, 1, 20],
 			machine: getMachineIndexbyName("Particle Accelerator (high-energy)"),
-			craftingTime_s: 6
+			craftingTime_s: 6,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Ficsonium Fuel Rod",
@@ -2374,7 +2595,8 @@ const recipes =
 			input: [getMaterialIndexByName("Ficsonium"), getMaterialIndexByName("Electromagnetic Control Rod"), getMaterialIndexByName("Ficsite Trigon"), getMaterialIndexByName("Excited Photonic Matter")],
 			inputQuantity: [2, 2, 40, 20],
 			machine: getMachineIndexbyName("Quantum Encoder"),
-			craftingTime_s: 6
+			craftingTime_s: 6,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Uranium Fuel Rod Power",
@@ -2384,7 +2606,8 @@ const recipes =
 			input: [getMaterialIndexByName("Uranium Fuel Rod"), getMaterialIndexByName("Water")],
 			inputQuantity: [1, 1200],
 			machine: getMachineIndexbyName("Nuclear Power Plant"),
-			craftingTime_s: 300
+			craftingTime_s: 300,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Plutonium Fuel Rod Power",
@@ -2394,7 +2617,8 @@ const recipes =
 			input: [getMaterialIndexByName("Plutonium Fuel Rod"), getMaterialIndexByName("Water")],
 			inputQuantity: [1, 2880],
 			machine: getMachineIndexbyName("Nuclear Power Plant"),
-			craftingTime_s: 720
+			craftingTime_s: 720,
+			secondaryOutputAllowed: true
 		},
 		// Special
 		{
@@ -2405,7 +2629,8 @@ const recipes =
 			input: [getMaterialIndexByName("Blue Power Slug")],
 			inputQuantity: [1],
 			machine: getMachineIndexbyName("Constructor"),
-			craftingTime_s: 8
+			craftingTime_s: 8,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Power Shard (2)",
@@ -2415,7 +2640,8 @@ const recipes =
 			input: [getMaterialIndexByName("Yellow Power Slug")],
 			inputQuantity: [1],
 			machine: getMachineIndexbyName("Constructor"),
-			craftingTime_s: 12
+			craftingTime_s: 12,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Power Shard (3)",
@@ -2425,7 +2651,8 @@ const recipes =
 			input: [getMaterialIndexByName("Purple Power Slug")],
 			inputQuantity: [1],
 			machine: getMachineIndexbyName("Constructor"),
-			craftingTime_s: 24
+			craftingTime_s: 24,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Smart Plating",
@@ -2435,7 +2662,8 @@ const recipes =
 			input: [getMaterialIndexByName("Reinforced Iron Plate"), getMaterialIndexByName("Rotor")],
 			inputQuantity: [1, 1],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 30
+			craftingTime_s: 30,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Plastic Smart Plating",
@@ -2445,7 +2673,8 @@ const recipes =
 			input: [getMaterialIndexByName("Reinforced Iron Plate"), getMaterialIndexByName("Rotor"), getMaterialIndexByName("Plastic")],
 			inputQuantity: [1, 1, 3],
 			machine: getMachineIndexbyName("Manufacturer"),
-			craftingTime_s: 24
+			craftingTime_s: 24,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Versatile Framework",
@@ -2455,7 +2684,8 @@ const recipes =
 			input: [getMaterialIndexByName("Modular Frame"), getMaterialIndexByName("Steel Beam")],
 			inputQuantity: [1, 12],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 24
+			craftingTime_s: 24,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Flexible Framework",
@@ -2465,7 +2695,8 @@ const recipes =
 			input: [getMaterialIndexByName("Modular Frame"), getMaterialIndexByName("Steel Beam"), getMaterialIndexByName("Rubber")],
 			inputQuantity: [1, 6, 8],
 			machine: getMachineIndexbyName("Manufacturer"),
-			craftingTime_s: 16
+			craftingTime_s: 16,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Automated Wiring",
@@ -2475,7 +2706,8 @@ const recipes =
 			input: [getMaterialIndexByName("Stator"), getMaterialIndexByName("Cable")],
 			inputQuantity: [1, 20],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 24
+			craftingTime_s: 24,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Automated Speed Wiring",
@@ -2485,7 +2717,8 @@ const recipes =
 			input: [getMaterialIndexByName("Stator"), getMaterialIndexByName("Wire"), getMaterialIndexByName("High-Speed Connector")],
 			inputQuantity: [2, 40, 1],
 			machine: getMachineIndexbyName("Manufacturer"),
-			craftingTime_s: 32
+			craftingTime_s: 32,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Modular Engine",
@@ -2495,7 +2728,8 @@ const recipes =
 			input: [getMaterialIndexByName("Motor"), getMaterialIndexByName("Rubber"), getMaterialIndexByName("Smart Plating")],
 			inputQuantity: [2, 15, 2],
 			machine: getMachineIndexbyName("Manufacturer"),
-			craftingTime_s: 60
+			craftingTime_s: 60,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Adaptive Control Unit",
@@ -2505,7 +2739,8 @@ const recipes =
 			input: [getMaterialIndexByName("Automated Wiring"), getMaterialIndexByName("Circuit Board"), getMaterialIndexByName("Heavy Modular Frame"), getMaterialIndexByName("Computer")],
 			inputQuantity: [5, 5, 1, 2],
 			machine: getMachineIndexbyName("Manufacturer"),
-			craftingTime_s: 60
+			craftingTime_s: 60,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Assembly Director System",
@@ -2515,7 +2750,8 @@ const recipes =
 			input: [getMaterialIndexByName("Adaptive Control Unit"), getMaterialIndexByName("Supercomputer")],
 			inputQuantity: [2, 1],
 			machine: getMachineIndexbyName("Assembler"),
-			craftingTime_s: 80
+			craftingTime_s: 80,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Magnetic Field Generator",
@@ -2525,7 +2761,8 @@ const recipes =
 			input: [getMaterialIndexByName("Versatile Framework"), getMaterialIndexByName("Electromagnetic Control Rod")],
 			inputQuantity: [5, 2],
 			machine: getMachineIndexbyName("Manufacturer"),
-			craftingTime_s: 120
+			craftingTime_s: 120,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Thermal Propulsion Rocket",
@@ -2535,7 +2772,8 @@ const recipes =
 			input: [getMaterialIndexByName("Modular Engine"), getMaterialIndexByName("Turbo Motor"), getMaterialIndexByName("Cooling System"), getMaterialIndexByName("Fused Modular Frame")],
 			inputQuantity: [5, 2, 6, 2],
 			machine: getMachineIndexbyName("Manufacturer"),
-			craftingTime_s: 120
+			craftingTime_s: 120,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Nuclear Pasta",
@@ -2545,7 +2783,8 @@ const recipes =
 			input: [getMaterialIndexByName("Copper Powder"), getMaterialIndexByName("Pressure Conversion Cube")],
 			inputQuantity: [200, 1],
 			machine: getMachineIndexbyName("Particle Accelerator (high-energy)"),
-			craftingTime_s: 120
+			craftingTime_s: 120,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Biochemical Sculptor",
@@ -2555,7 +2794,8 @@ const recipes =
 			input: [getMaterialIndexByName("Assembly Director System"), getMaterialIndexByName("Ficsite Trigon"), getMaterialIndexByName("Water")],
 			inputQuantity: [1, 80, 20],
 			machine: getMachineIndexbyName("Blender"),
-			craftingTime_s: 120
+			craftingTime_s: 120,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "Ballistic Warp Drive",
@@ -2565,7 +2805,8 @@ const recipes =
 			input: [getMaterialIndexByName("Thermal Propulsion Rocket"), getMaterialIndexByName("Singularity Cell"), getMaterialIndexByName("Superposition Oscillator"), getMaterialIndexByName("Dark Matter Crystal")],
 			inputQuantity: [1, 5, 2, 40],
 			machine: getMachineIndexbyName("Manufacturer"),
-			craftingTime_s: 60
+			craftingTime_s: 60,
+			secondaryOutputAllowed: true
 		},
 		{
 			name: "AI Expansion Server",
@@ -2575,6 +2816,7 @@ const recipes =
 			input: [getMaterialIndexByName("Magnetic Field Generator"), getMaterialIndexByName("Neural-Quantum Processor"), getMaterialIndexByName("Superposition Oscillator"), getMaterialIndexByName("Excited Photonic Matter")],
 			inputQuantity: [1, 1, 1, 25],
 			machine: getMachineIndexbyName("Quantum Encoder"),
-			craftingTime_s: 15
+			craftingTime_s: 15,
+			secondaryOutputAllowed: true
 		}
 	];
