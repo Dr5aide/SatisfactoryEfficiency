@@ -927,6 +927,17 @@ const recipes =
 			craftingTime_s: 6,
 			secondaryOutputAllowed: true
 		},
+		{
+			name: "Dark Matter Residue",
+			tier: 9,
+			output: [getMaterialIndexByName("Dark Matter Residue")],
+			outputQuantity: [10],
+			input: [getMaterialIndexByName("Reanimated SAM")],
+			inputQuantity: [5],
+			machine: getMachineIndexbyName("Converter"),
+			craftingTime_s: 6,
+			secondaryOutputAllowed: true
+		},
 		// Gas
 		{
 			name: "Rocket Fuel",
@@ -1352,7 +1363,7 @@ const recipes =
 			tier: 9,
 			output: [getMaterialIndexByName("Ficsite Trigon")],
 			outputQuantity: [3],
-			input: [getMaterialIndexByName("Heavy Modular Frame")],
+			input: [getMaterialIndexByName("Ficsite Ingot")],
 			inputQuantity: [1],
 			machine: getMachineIndexbyName("Constructor"),
 			craftingTime_s: 6,
