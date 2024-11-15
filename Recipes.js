@@ -2027,7 +2027,7 @@ const recipes =
 			tier: 9,
 			output: [getMaterialIndexByName("Diamonds")],
 			outputQuantity: [2],
-			input: [getMaterialIndexByName("Coal")],
+			input: [getMaterialIndexByName("Crude Oil")],
 			inputQuantity: [10],
 			machine: getMachineIndexbyName("Particle Accelerator (low-energy)"),
 			craftingTime_s: 3,
@@ -2655,12 +2655,23 @@ const recipes =
 			secondaryOutputAllowed: true
 		},
 		{
-			name: "Power Shard (3)",
+			name: "Power Shard (5)",
 			tier: 0,
 			output: [getMaterialIndexByName("Power Shard")],
 			outputQuantity: [5],
 			input: [getMaterialIndexByName("Purple Power Slug")],
 			inputQuantity: [1],
+			machine: getMachineIndexbyName("Constructor"),
+			craftingTime_s: 24,
+			secondaryOutputAllowed: true
+		},
+		{
+			name: "Synthetic Power Shard",
+			tier: 0,
+			output: [getMaterialIndexByName("Power Shard"), getMaterialIndexByName("Dark Matter Residue")],
+			outputQuantity: [1, 12],
+			input: [getMaterialIndexByName("Time Crystal"), getMaterialIndexByName("Dark Matter Crystal"), getMaterialIndexByName("Quartz Crystal"), getMaterialIndexByName("Excited Photonic Matter")],
+			inputQuantity: [2, 2, 12, 12],
 			machine: getMachineIndexbyName("Constructor"),
 			craftingTime_s: 24,
 			secondaryOutputAllowed: true
