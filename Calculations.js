@@ -432,7 +432,7 @@ function getRecipeIndexFor(materialIndex, calculatePowerCost, addToEnergyRecipeS
     var potentialRecipes = [];
     for (let i = 0; i < recipes.length; i++) {
         // secondary Output disabled because of circular reference complexity
-        if (recipes[i].secondaryOutputAllowed) {
+        if (recipes[i].secondaryOutputAllowed && considerByproductAsInput) {
             for (let j = 0; j < recipes[i].output.length; j++) {
                 if (recipes[i].output[j] == materialIndex && recipes[i].tier <= unlockedTiers) {
                     potentialRecipes.push({

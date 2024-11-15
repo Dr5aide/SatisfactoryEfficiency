@@ -18,6 +18,7 @@ var selectedDefaultRecipeEfficiencyLevel = 1;
 const selectableDefaultRecipeEfficiencies = [1, 2, 3];
 //
 var keepInLineWithFollowingCraftingSteps = false;
+var considerByproductAsInput = false;
 var maxCraftingTreeColumn = 0;
 
 function updateUnlockedTiers() {
@@ -45,6 +46,8 @@ function updateVariablesFromInput() {
     console.log('Updating Input');
     wantedMaterial = parseInt(document.getElementById("wantedMaterial").value);
     amountOfWantedMaterialPerMinute = parseInt(document.getElementById("wantedMaterialAmount").value);
+    considerByproductAsInput = document.getElementById("considerByproductAsInput").checked;
+    console.log(considerByproductAsInput);
     //
     var table = document.getElementById("resourceValueTable");
     for (let i = 0; i < availableResources.length; i++) {
