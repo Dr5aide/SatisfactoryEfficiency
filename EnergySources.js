@@ -143,4 +143,16 @@ const energySources =
             // energyOutput (1500000) / powerOutput (2500)
             burnTime: 600
         },
+        // Tier 9
+        {
+            name: "Nuclear (Ficsonium Fuel Rod)",
+            tier: 10, //currently disabled, because makes no sense
+            output: [getMaterialIndexByName("MJ of Power"), getMaterialIndexByName("Plutonium Waste")],
+            outputQuantity: [150000, 10],
+            input: [getMaterialIndexByName("Plutonium Fuel Rod"), getMaterialIndexByName("Water")],
+            inputQuantity: [1, 2400],
+            machine: getMachineIndexbyName("Nuclear Power Plant"),
+            // energyOutput (1500000) / powerOutput (2500)
+            burnTime: 600
+        },
     ]
