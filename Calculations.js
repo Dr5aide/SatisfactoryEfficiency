@@ -699,6 +699,10 @@ function calculateEnergyResourceCost(megaJoule) {
 function calculateEnergyCost(megaJoule) {
     var cost = []
     //
+    if (!considerPowerCost) {
+        return cost;
+    }
+    //
     var MJPerBurn = energySources[selectedEnergySourceIndex].outputQuantity[0];
     //
     for (let i = 0; i < energySources[selectedEnergySourceIndex].input.length; i++) {
