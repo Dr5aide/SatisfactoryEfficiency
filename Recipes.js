@@ -474,7 +474,7 @@ const recipes =
 		},
 		// (Un)packaging liquids need to be at the top for circular reference detection
 		// Containers 
-		// The empty container recipes is halfed, because circular references with (un)packaging are fiddely
+		// The empty container recipes is halfed, because circular references with (un)packaging are fiddly
 		{
 			name: "Empty Canister",
 			tier: 5,
@@ -699,7 +699,7 @@ const recipes =
 			name: "Unpackage Nitric Acid",
 			tier: 8,
 			output: [getMaterialIndexByName("Nitric Acid"), getMaterialIndexByName("Empty Fluid Tank")],
-			outputQuantity: [1, 2],
+			outputQuantity: [1, 1],
 			input: [getMaterialIndexByName("Packaged Nitric Acid")],
 			inputQuantity: [1],
 			machine: getMachineIndexbyName("Packager"),
@@ -1106,7 +1106,7 @@ const recipes =
 			secondaryOutputAllowed: true
 		},
 		{
-			name: "Stiched Iron Plate",
+			name: "Stitched Iron Plate",
 			tier: 2,
 			output: [getMaterialIndexByName("Reinforced Iron Plate")],
 			outputQuantity: [3],
